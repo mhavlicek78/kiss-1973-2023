@@ -1,4 +1,4 @@
-import { rewards, rewardCard, getStore, saveStore, connectStore, syncMode, onStore, tiltCard } from './game.js';
+import { rewards, rewardCard, getStore, saveStore, connectStore, syncMode, syncText, onStore, tiltCard } from './game.js';
 
 /* ===== Světelná cedule: hlavolam se žárovkami, karty 25–32 ===== */
 
@@ -70,7 +70,7 @@ function lHome() {
   lRoot.innerHTML = '<header class="section-head"><p class="eyebrow">Hra</p><h1>Světelná cedule</h1>'
     + '<p class="lede">Rozbitá cedule po koncertu. Ťuknutí na žárovku přepne ji i čtyři sousední, rozsvícené zhasnou a zhasnuté se rozsvítí. Rozsviť celou ceduli. Kdo to zvládne bez nápovědy a v limitu tahů, získá lesklou edici karty.</p></header>'
     + '<div class="g-stats"><div><b>' + done + '</b><span>z 8 karet</span></div>'
-    + '<p class="g-sync">' + (syncMode() === 'cloud' ? 'Sbírka se ukládá do tvého účtu a je stejná na všech zařízeních.' : 'Sbírka se ukládá v tomto prohlížeči.') + '</p></div>'
+    + '<p class="g-sync">' + syncText() + '</p></div>'
     + (next ? '<button type="button" class="button primary" data-llevel="' + next.n + '">' + (done ? 'Pokračovat: level ' + next.n : 'Rozsvítit první ceduli') + ' <span aria-hidden="true">→</span></button>'
             : '<p class="g-all">Všech osm cedulí svítí. Každá nová hra je jinak rozbitá.</p>')
     + '<h2 class="g-h2">Levely</h2><ol class="g-levels">' + lLevels.map((l) => {

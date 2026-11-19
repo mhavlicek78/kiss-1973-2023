@@ -802,3 +802,17 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*) { animation-duration:0s !important; }
 }
 .g-zoom::after,.g-reveal:not(.fresh)::after { content:"Ťukni na kartu a otoč ji"; display:block; margin-top:.8rem; font-size:.8rem; color:#8d9096; text-align:center; }
+.hub-sync { margin:1.2rem 0 0; padding:1.1rem 1.2rem; border:1px solid #3a3a3d; background:linear-gradient(160deg,#ffffff0d,#0000 50%),#0e0e10; }
+.hub-sync.is-on { display:flex; flex-wrap:wrap; gap:.8rem 1.4rem; align-items:center; justify-content:space-between; border-color:#5a6b5e; }
+.hub-sync .eyebrow { margin:0 0 .4rem; }
+.hub-lede { margin:0 0 .8rem; color:#a9abb0; font-size:.92rem; line-height:1.5; max-width:62ch; }
+.hub-form { display:flex; flex-wrap:wrap; gap:.5rem; }
+.hub-form input { flex:1 1 220px; min-height:44px; padding:.5rem .8rem; font:inherit; font-size:1rem; color:#f1f1f2; background:#060607; border:1px solid #5a5c60; letter-spacing:.04em; }
+.hub-form input:focus { outline:none; border-color:#e9ebee; box-shadow:0 0 0 3px #ffffff22; }
+.hub-keep { display:flex; gap:.5rem; align-items:center; margin:.7rem 0 0; font-size:.85rem; color:#a9abb0; }
+.hub-err { margin:.5rem 0 0; min-height:1.2em; font-size:.85rem; color:#ff8a7a; }
+.hub-err:empty { display:none; }
+.hub-code { margin:0; font:700 1.25rem/1.2 var(--compact); letter-spacing:.12em; color:#fff; word-break:break-all; }
+.hub-state { margin:.3rem 0 0; font-size:.85rem; color:#9fd8ae; }
+.hub-synctext { margin:1rem 0 0; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }

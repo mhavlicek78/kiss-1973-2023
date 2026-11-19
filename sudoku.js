@@ -1,4 +1,4 @@
-import { rewards, rewardCard, getStore, saveStore, connectStore, syncMode, onStore, tiltCard } from './game.js';
+import { rewards, rewardCard, getStore, saveStore, connectStore, syncMode, syncText, onStore, tiltCard } from './game.js';
 
 /* ===== Čtyři tváře: sudoku se symboly masek, karty 17–24 ===== */
 
@@ -94,7 +94,7 @@ function sHome() {
   sRoot.innerHTML = '<header class="section-head"><p class="eyebrow">Hra</p><h1>Čtyři tváře</h1>'
     + '<p class="lede">Doplň symboly masek tak, aby v každém řádku, sloupci a orámovaném bloku byl každý právě jednou. Od levelu 4 se k původní čtveřici přidá liška Erica Carra a ankh Vinnieho Vincenta. Vyřešený level odemkne kartu, vyřešený bez nápovědy její lesklou edici.</p></header>'
     + '<div class="g-stats"><div><b>' + done + '</b><span>z 8 karet</span></div>'
-    + '<p class="g-sync">' + (syncMode() === 'cloud' ? 'Sbírka se ukládá do tvého účtu a je stejná na všech zařízeních.' : 'Sbírka se ukládá v tomto prohlížeči.') + '</p></div>'
+    + '<p class="g-sync">' + syncText() + '</p></div>'
     + (next ? '<button type="button" class="button primary" data-slevel="' + next.n + '">' + (done ? 'Pokračovat: level ' + next.n : 'Začít hrát') + ' <span aria-hidden="true">→</span></button>'
             : '<p class="g-all">Všech osm hádanek vyřešeno. Každá nová hra vygeneruje jinou mřížku.</p>')
     + '<h2 class="g-h2">Levely</h2><ol class="g-levels">' + sLevels.map((l) => {

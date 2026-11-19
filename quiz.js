@@ -1,6 +1,6 @@
 import { albums, covers } from './albums.js';
 import { members } from './data.js';
-import { rewards, rewardCard, getStore, saveStore, connectStore, syncMode, onStore, tiltCard } from './game.js';
+import { rewards, rewardCard, getStore, saveStore, connectStore, syncMode, syncText, onStore, tiltCard } from './game.js';
 
 /* ===== KISS Kvíz: 8 turné × 10 otázek, karty 9–16 ===== */
 
@@ -119,7 +119,7 @@ function qHome() {
   qRoot.innerHTML = '<header class="section-head"><p class="eyebrow">Hra</p><h1>Kvíz</h1>'
     + '<p class="lede">Osm turné, na každém deset otázek o KISS. Odpovídej rychle, čas na otázku se s každým turné zkracuje. Když dáš dost správných odpovědí, získáš novou kartu, a za všech deset správně její lesklou edici.</p></header>'
     + '<div class="g-stats"><div><b>' + done + '</b><span>z 8 karet</span></div>'
-    + '<p class="g-sync">' + (syncMode() === 'cloud' ? 'Sbírka se ukládá do tvého účtu a je stejná na všech zařízeních.' : 'Sbírka se ukládá v tomto prohlížeči.') + '</p></div>'
+    + '<p class="g-sync">' + syncText() + '</p></div>'
     + (next ? '<button type="button" class="button primary q-go" data-tour="' + next.n + '">' + (done ? 'Pokračovat: ' : 'Vyrazit na ') + qEsc(next.name) + ' <span aria-hidden="true">→</span></button>'
             : '<p class="g-all">Projel jsi všech osm turné. Turné můžeš hrát znovu a překonávat své skóre.</p>')
     + '<h2 class="g-h2">Turné</h2><ol class="q-tours">' + tours.map((t) => {

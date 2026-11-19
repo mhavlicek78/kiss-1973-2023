@@ -5,7 +5,7 @@ import { gamePage, mountGame } from './game.js';
 import { quizPage, mountQuiz } from './quiz.js';
 import { sudokuPage, mountSudoku } from './sudoku.js';
 import { lightsPage, mountLights } from './lights.js';
-import { rewards, rewardCard, getStore, connectStore, onStore, tiltCard } from './game.js';
+import { rewards, rewardCard, getStore, connectStore, onStore, tiltCard, syncText, syncAvailable, syncCode, syncStatus, suggestCode, connectCode, disconnectCode } from './game.js';
 
 const hubGames = [
   {href:'#/pexeso', name:'Pexeso', sym:'star', from:0, text:'Najdi dvojice karet a odpověz na otázku ke každé z nich. Osm levelů, některé s časovým limitem.'},
@@ -15,26 +15,61 @@ const hubGames = [
 ];
 let hubHooked = false;
 function hubPage() { return '<div class="shell page hub-page" id="hub-root"></div>'; }
+function hubSync() {
+  if (!syncAvailable()) return '<p class="g-sync hub-synctext">' + syncText() + '</p>';
+  const code = syncCode(), st = syncStatus();
+  if (code) {
+    const when = st.at ? new Date(st.at).toLocaleTimeString('cs-CZ', {hour:'2-digit', minute:'2-digit'}) : '';
+    return '<section class="hub-sync is-on"><div><p class="eyebrow">Synchronizace zapnutá</p><p class="hub-code">' + code.replace(/[&<>"']/g, '') + '</p>'
+      + '<p class="hub-state">' + (st.state === 'offline' ? 'Teď bez připojení. Pokrok se odešle, až bude internet.' : st.state === 'connecting' ? 'Propojuji…' : 'Synchronizováno' + (when ? ' v ' + when : '') + '. Stejný kód zadej na dalším zařízení.') + '</p></div>'
+      + '<button type="button" class="button secondary" data-hsync-off>Odpojit toto zařízení</button></section>';
+  }
+  return '<section class="hub-sync"><p class="eyebrow">Synchronizace sbírky</p>'
+    + '<p class="hub-lede">Zvol si vlastní kód sbírky a zadej ho na každém svém zařízení. Kdo má jiný kód, má vlastní sbírku. Kód si zapiš, bez něj sbírku na jiném zařízení neobnovíš.</p>'
+    + '<form class="hub-form" data-hsync-form autocomplete="off"><label class="sr-only" for="hub-code">Kód sbírky</label>'
+    + '<input id="hub-code" name="code" type="text" inputmode="text" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="demon-raketa-4271" required minlength="10">'
+    + '<button type="button" class="button secondary" data-hsync-new>Vymyslet kód</button><button type="submit" class="button primary">Propojit</button></form>'
+    + '<label class="hub-keep"><input type="checkbox" name="keep" checked data-hsync-keep> Přidat do sbírky i karty, které už mám na tomto zařízení</label>'
+    + '<p class="hub-err" data-hsync-err role="alert"></p></section>';
+}
 function hubRender() {
   const root = document.getElementById('hub-root');
   if (!root) return;
+  const typed = root.querySelector('#hub-code')?.value || '';
+  if (root.querySelector('#hub-code') === document.activeElement) return;
   const st = getStore();
   const total = rewards.filter((r) => st.done[r.no]).length;
   root.innerHTML = '<header class="section-head"><p class="eyebrow">Hry</p><h1>Hry a sbírka karet</h1>'
     + '<p class="lede">Čtyři hry, každá s osmi levely a osmi sběratelskými kartami. Celkem ' + total + ' z 32 karet ve sbírce.</p></header>'
+    + hubSync()
     + '<div class="hub-grid">' + hubGames.map((g) => {
         const got = rewards.slice(g.from, g.from + 8).filter((r) => st.done[r.no]).length;
         return '<a class="hub-tile" href="' + g.href + '">' + sym(g.sym, 'hub-sym') + '<h2>' + g.name + '</h2><p>' + g.text + '</p>'
           + '<span class="hub-bar"><i style="width:' + (got / 8 * 100) + '%"></i></span><span class="hub-meta">' + got + ' / 8 karet <b aria-hidden="true">→</b></span></a>';
       }).join('') + '</div>'
     + '<h2 class="g-h2">Celá sbírka</h2><div class="g-collection">' + rewards.map((r) => rewardCard(r)).join('') + '</div><div class="g-modal" hidden></div>';
+  const inp = root.querySelector('#hub-code'); if (inp && typed) inp.value = typed;
 }
 function mountHub() {
   const root = document.getElementById('hub-root');
   if (!root) return;
   root.addEventListener('pointermove', tiltCard);
+  root.addEventListener('submit', async (e) => {
+    const f = e.target.closest('[data-hsync-form]'); if (!f) return;
+    e.preventDefault();
+    const err = root.querySelector('[data-hsync-err]'), keep = root.querySelector('[data-hsync-keep]')?.checked !== false;
+    const btn = f.querySelector('[type=submit]'); btn.disabled = true; err.textContent = ''; document.activeElement?.blur();
+    try { await connectCode(f.querySelector('#hub-code').value, keep); hubRender(); }
+    catch (x) { err.textContent = x.message || 'Propojení se nepovedlo. Zkus to znovu.'; btn.disabled = false; }
+  });
+  root.addEventListener('input', (e) => { if (e.target.id === 'hub-code') { const err = root.querySelector('[data-hsync-err]'); if (err) err.textContent = ''; } });
   root.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
+    if (b.hasAttribute('data-hsync-new')) { const i = root.querySelector('#hub-code'); i.value = suggestCode(); i.focus(); return; }
+    if (b.hasAttribute('data-hsync-off')) {
+      if (b.dataset.confirm) { disconnectCode(); hubRender(); return; }
+      b.dataset.confirm = '1'; b.textContent = 'Opravdu odpojit? Karty z tohoto zařízení zmizí, v kódu zůstanou.'; return;
+    }
     const m = root.querySelector('.g-modal');
     if (b.dataset.zoom && !b.closest('.g-modal')) {
       m.innerHTML = '<div class="g-dialog" role="dialog" aria-modal="true"><div class="g-zoom">' + rewardCard(rewards[+b.dataset.zoom - 1]) + '</div><div class="g-actions"><button type="button" class="button secondary" data-hclose>Zavřít</button></div></div>';

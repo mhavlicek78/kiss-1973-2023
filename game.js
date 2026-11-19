@@ -90,6 +90,80 @@ export const getStore = () => gState;
 export const saveStore = () => gPersist();
 export const connectStore = () => gConnect();
 export const syncMode = () => gSync;
+export const syncText = () => gSync === 'cloud' ? 'Sbírka se ukládá do tvého účtu a je stejná na všech zařízeních.'
+  : gSync === 'code' ? 'Sbírka se synchronizuje přes tvůj kód sbírky na všech zařízeních.'
+  : 'Sbírka se ukládá jen v tomto prohlížeči. Propojit ji s dalšími zařízeními můžeš v sekci Hry.';
+
+/* ---------- kód sbírky: synchronizace webové verze přes Cloudflare ---------- */
+const G_SYNC_URL = 'https://kiss-sbirka.complex-evidence-1ef350b1.workers.dev';
+const G_CODE_KEY = 'kiss-sbirka-kod';
+const gCodeWords = ['hvezda','netopyr','blesk','kocour','demon','liska','ankh','kytara','jazyk','ohen','raketa','koruna','palicky','zarovka','cedule','maska','boty','trsatko','reflektor','destroyer','alive','legenda'];
+let gCodeStatus = {state:'off', at:0};
+let gCodeTimer = 0;
+export const syncAvailable = () => !!G_SYNC_URL && !window.claude && gSync !== 'cloud' && !!(window.crypto && crypto.subtle);
+export const syncCode = () => { try { return JSON.parse(localStorage.getItem(G_CODE_KEY))?.code || null; } catch { return null; } };
+export const syncStatus = () => gCodeStatus;
+export const suggestCode = () => { const pick = () => gCodeWords[Math.floor(Math.random() * gCodeWords.length)]; let a = pick(), b = pick(); while (b === a) b = pick(); return a + '-' + b + '-' + (1000 + Math.floor(Math.random() * 9000)); };
+const gNormCode = (c) => String(c || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+async function gCodeId(code) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('kiss-sbirka:' + code));
+  return [...new Uint8Array(buf)].map((x) => x.toString(16).padStart(2, '0')).join('');
+}
+function gCodeNotify(state) { gCodeStatus = {state, at:Date.now()}; gListeners.forEach((fn) => { try { fn(); } catch {} }); }
+async function gCodeCall(id, body) {
+  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 10000);
+  try {
+    const res = await fetch(G_SYNC_URL + '/s/' + id, body ? {method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), signal:ctl.signal} : {signal:ctl.signal});
+    if (!res.ok) throw new Error('http ' + res.status);
+    return (await res.json()).data;
+  } finally { clearTimeout(t); }
+}
+function gCodeRemote(id) {
+  return {
+    set(body) {
+      clearTimeout(gCodeTimer);
+      gCodeTimer = setTimeout(async () => {
+        try {
+          const merged = await gCodeCall(id, JSON.parse(JSON.stringify(gState)));
+          if (merged) { const before = JSON.stringify(gState); gState = gMerge(gState, merged); gSaveLocal(); if (JSON.stringify(gState) !== before && gView.screen === 'home') gRefresh(); }
+          gCodeNotify('ok');
+        } catch { gCodeNotify('offline'); }
+      }, 700);
+      return Promise.resolve();
+    }
+  };
+}
+async function gCodeStart(code) {
+  const id = await gCodeId(code);
+  gRemote = gCodeRemote(id);
+  gSync = 'code';
+  try {
+    const remote = await gCodeCall(id);
+    gState = gMerge(gState, remote || {});
+    gSaveLocal();
+    gCodeNotify('ok');
+  } catch { gCodeNotify('offline'); }
+  gPersist();
+  if (gView.screen === 'home') gRefresh();
+  gListeners.forEach((fn) => { try { fn(); } catch {} });
+}
+export async function connectCode(raw, keepLocal = true) {
+  const code = gNormCode(raw);
+  if (code.length < 10) throw new Error('Kód musí mít aspoň 10 znaků, třeba demon-raketa-4271.');
+  if (!keepLocal) { gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}}; }
+  try { localStorage.setItem(G_CODE_KEY, JSON.stringify({code})); } catch {}
+  gCodeNotify('connecting');
+  await gCodeStart(code);
+  return code;
+}
+export function disconnectCode() {
+  try { localStorage.removeItem(G_CODE_KEY); } catch {}
+  clearTimeout(gCodeTimer);
+  gRemote = null; gSync = 'local';
+  gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}};
+  gSaveLocal();
+  gCodeNotify('off');
+}
 let gRemote = null;
 let gSync = 'local';
 let gWriting = Promise.resolve();
@@ -130,7 +204,11 @@ function gPersist() {
 function gConnect() {
   if (gConnecting) return gConnecting;
   gConnecting = (async () => {
-    if (!window.claude || typeof window.claude.use !== 'function') return;
+    if (!window.claude || typeof window.claude.use !== 'function') {
+      const code = syncCode();
+      if (code && G_SYNC_URL && window.crypto && crypto.subtle) await gCodeStart(code);
+      return;
+    }
     const timeout = new Promise((r) => setTimeout(() => r(null), 10000));
     const work = (async () => {
       const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
@@ -272,7 +350,7 @@ function gHome() {
   return '<header class="section-head"><p class="eyebrow">Hra</p><h1>Pexeso</h1>'
     + '<p class="lede">Najdi dvojice obalů a tváří. Každý level odemkne sběratelskou kartu a správná odpověď na bonusovou otázku z ní udělá lesklou edici.</p></header>'
     + '<div class="g-stats"><div><b>' + doneCount + '</b><span>z 8 karet</span></div><div><b>' + foilCount + '</b><span>lesklých edic</span></div>'
-    + '<p class="g-sync">' + (gSync === 'cloud' ? 'Sbírka se ukládá do tvého účtu a je stejná na všech zařízeních.' : 'Sbírka se ukládá v tomto prohlížeči.') + '</p></div>'
+    + '<p class="g-sync">' + syncText() + '</p></div>'
     + (nl ? '<button type="button" class="button primary g-go" data-play="' + nl + '">' + (doneCount ? 'Pokračovat: level ' + nl : 'Začít hrát') + ' <span aria-hidden="true">→</span></button>'
           : '<p class="g-all">Máš všech osm karet. Legenda! Levely můžeš hrát znovu a sbírat lesklé edice.</p>')
     + '<h2 class="g-h2">Levely</h2><ol class="g-levels">' + gameLevels.map((l) => {
