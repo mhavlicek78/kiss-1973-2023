@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "KISS 1973–2023",
+  "short_name": "KISS",
+  "description": "Kariéra, členové a alba KISS",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "lang": "cs",
+  "background_color": "#11100f",
+  "theme_color": "#11100f",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
