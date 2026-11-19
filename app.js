@@ -5,13 +5,15 @@ import { gamePage, mountGame } from './game.js';
 import { quizPage, mountQuiz } from './quiz.js';
 import { sudokuPage, mountSudoku } from './sudoku.js';
 import { lightsPage, mountLights } from './lights.js';
+import { mysteryPage, mountMystery } from './mystery.js';
 import { rewards, rewardCard, getStore, connectStore, onStore, tiltCard, syncText, syncAvailable, syncCode, syncStatus, suggestCode, connectCode, disconnectCode } from './game.js';
 
 const hubGames = [
   {href:'#/pexeso', name:'Pexeso', sym:'star', from:0, text:'Najdi dvojice karet a odpověz na otázku ke každé z nich. Osm levelů, některé s časovým limitem.'},
   {href:'#/kviz', name:'Kvíz', sym:'bat', from:8, text:'Osm turné po deseti otázkách. Čím dál, tím méně času na odpověď.'},
   {href:'#/ctyri-tvare', name:'Čtyři tváře', sym:'claw', from:16, text:'Sudoku se symboly masek. Každý symbol jednou v řádku, sloupci i bloku. Od levelu 4 přibude liška a ankh.'},
-  {href:'#/cedule', name:'Světelná cedule', sym:'bolt', from:24, text:'Ťukni na žárovku a přepneš i sousední. Rozsviť celou ceduli, hvězdu, blesk i netopýra.'}
+  {href:'#/cedule', name:'Světelná cedule', sym:'bolt', from:24, text:'Ťukni na žárovku a přepneš i sousední. Rozsviť celou ceduli, hvězdu, blesk i netopýra.'},
+  {href:'#/zakulisi', name:'Backstage Mystery', sym:'burst', from:32, text:'Detektivní případy ze zákulisí. Z indicií zjisti, kdo co odnesl, kam a kdy. Někdy je to žertík samotné kapely.'}
 ];
 /* ===== Znělka na úvodní stránce: pustí se při prvním ťuknutí (prohlížeče nedovolí dřív) ===== */
 const INTRO_KEY = 'kiss-zvuk';
@@ -96,7 +98,7 @@ function hubRender() {
   const st = getStore();
   const total = rewards.filter((r) => st.done[r.no]).length;
   root.innerHTML = '<header class="section-head"><p class="eyebrow">Hry</p><h1>Hry a sbírka karet</h1>'
-    + '<p class="lede">Čtyři hry, každá s osmi levely a osmi sběratelskými kartami. Celkem ' + total + ' z 32 karet ve sbírce.</p></header>'
+    + '<p class="lede">Pět her, každá s osmi levely a osmi sběratelskými kartami. Celkem ' + total + ' z ' + rewards.length + ' karet ve sbírce.</p></header>'
     + hubSync()
     + '<div class="hub-grid">' + hubGames.map((g) => {
         const got = rewards.slice(g.from, g.from + 8).filter((r) => st.done[r.no]).length;
@@ -494,6 +496,7 @@ function route() {
     case 'kviz': return {section:'quiz', html:quizPage(), title:'Kvíz', mount:mountQuiz};
     case 'ctyri-tvare': return {section:'sudoku', html:sudokuPage(), title:'Čtyři tváře', mount:mountSudoku};
     case 'cedule': return {section:'lights', html:lightsPage(), title:'Světelná cedule', mount:mountLights};
+    case 'zakulisi': return {section:'mystery', html:mysteryPage(), title:'Backstage Mystery', mount:mountMystery};
     case 'hry': return {section:'games', html:hubPage(), title:'Hry', mount:mountHub};
   }
   return {section:'', title:'Stránka nenalezena', html:'<div class="shell page">' + sectionHead('KISS','Stránka nenalezena') + back('#/','Zpět na úvod') + '</div>'};
@@ -515,7 +518,7 @@ function render(isFirst = false) {
   introArm(page.section === 'home');
   main.dataset.member = page.member || '';
   if (page.mount) page.mount();
-  const navSection = ['game', 'quiz', 'sudoku', 'lights', 'games'].includes(page.section) ? 'games' : page.section;
+  const navSection = ['game', 'quiz', 'sudoku', 'lights', 'mystery', 'games'].includes(page.section) ? 'games' : page.section;
   for (const item of document.querySelectorAll('.header nav [data-section]')) {
     if (item.dataset.section === navSection) item.setAttribute('aria-current','page');
     else item.removeAttribute('aria-current');

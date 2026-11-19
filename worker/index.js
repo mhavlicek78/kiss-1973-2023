@@ -6,7 +6,7 @@ const MAX = 32 * 1024;
 function merge(a, b) {
   a = a || {}; b = b || {};
   const out = {done:{...(a.done || {})}, foil:{...(a.foil || {})}, best:{...(a.best || {})}, qbest:{...(a.qbest || {})}};
-  for (const key of ['sbest', 'lbest', 'got']) {
+  for (const key of ['sbest', 'lbest', 'mbest', 'got']) {
     out[key] = {...(a[key] || {})};
     for (const k in (b[key] || {})) { const x = b[key][k]; if (typeof x === 'number' && (out[key][k] == null || x < out[key][k])) out[key][k] = x; }
   }

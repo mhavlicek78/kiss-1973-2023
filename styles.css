@@ -829,3 +829,41 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
 @keyframes ib-pulse { 50% { box-shadow:0 8px 18px -6px #000,inset 0 1px 0 #ffffff33,0 0 0 8px #ffffff14; } }
 @keyframes ib-wave { to { opacity:.35; } }
 @media (prefers-reduced-motion:reduce) { .intro-btn { animation:none !important; } .intro-btn .ib-on { animation:none !important; } }
+/* ===== Backstage Mystery ===== */
+.m-play { display:flex; flex-direction:column; gap:.4rem; }
+.m-case { position:relative; padding:1.1rem 1.2rem; border:1px solid #3a3a3d; background:repeating-linear-gradient(0deg,#ffffff05 0 1px,transparent 1px 26px),linear-gradient(180deg,#17161a,#0d0c0e); box-shadow:inset 0 0 40px #000; }
+.m-case::before { content:"PŘÍSNĚ TAJNÉ"; position:absolute; top:.7rem; right:-.2rem; transform:rotate(8deg); padding:.2rem .5rem; border:2px solid #b3272a; color:#d9454a; font:700 .7rem/1 var(--compact); letter-spacing:.2em; opacity:.75; }
+.m-item { margin:0 0 .5rem; padding-right:7.5rem; font:700 .75rem/1.2 var(--compact); letter-spacing:.16em; text-transform:uppercase; color:#c9a24a; }
+.m-item b { color:#f1d58a; }
+.m-story { margin:0 0 .7rem; line-height:1.6; color:#d9d6d0; max-width:70ch; }
+.m-found { margin:0; padding:.6rem .8rem; border-left:3px solid #c9a24a; background:#c9a24a14; color:#f1e3bd; font-size:.92rem; line-height:1.5; }
+.g-h2 small { display:block; margin-top:.25rem; font:400 .78rem/1.3 var(--body); letter-spacing:0; text-transform:none; color:#8d9096; }
+.m-clues { margin:0; padding:0; list-style:none; counter-reset:clue; display:grid; gap:.45rem; }
+.m-clues li { counter-increment:clue; }
+.m-clues button { position:relative; width:100%; min-height:44px; padding:.55rem .8rem .55rem 2.6rem; text-align:left; font:inherit; font-size:.93rem; line-height:1.45; color:#e9e9ea; background:#121214; border:1px solid #3a3a3d; cursor:pointer; }
+.m-clues button::before { content:counter(clue); position:absolute; left:.7rem; top:.55rem; width:1.4rem; height:1.4rem; display:grid; place-items:center; border-radius:50%; background:#2a2a2e; font:700 .75rem/1 var(--compact); color:#c9ccd1; }
+.m-clues button.used { color:#6d6f73; text-decoration:line-through; text-decoration-color:#c9a24a99; background:#0b0b0c; }
+.m-clues button.used::before { content:"✓"; background:#c9a24a; color:#111; }
+.m-grids { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:1rem; }
+.mg-sub { padding:.7rem; border:1px solid #3a3a3d; background:#0e0e10; }
+.mg-title { margin:0 0 .5rem; font:700 .75rem/1 var(--compact); letter-spacing:.18em; text-transform:uppercase; color:#c9ccd1; }
+.mg-grid { width:100%; border-collapse:collapse; table-layout:fixed; }
+.mg-grid th { font-weight:600; font-size:.72rem; line-height:1.15; color:#c9ccd1; padding:.25rem .15rem; word-break:break-word; hyphens:auto; }
+.mg-grid thead th { vertical-align:bottom; text-align:center; height:2.6rem; }
+.mg-grid thead th:first-child,.mg-grid tbody th { width:30%; text-align:left; }
+.mg-grid tbody th small { display:block; font-weight:400; font-size:.64rem; color:#8d9096; }
+.mg-grid td { padding:0; border:1px solid #2f2f33; }
+.mg-cell { display:grid; place-items:center; width:100%; aspect-ratio:1; min-height:40px; padding:0; border:0; background:#141416; color:#c9ccd1; font-size:1.05rem; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; transition:background .12s; }
+.mg-cell:hover { background:#1d1d21; }
+.mg-cell.no { color:#d06a5e; background:#1a1213; }
+.mg-cell.auto { color:#4a3a3b; }
+.mg-cell.dot { color:#f1c84a; background:radial-gradient(circle,#3a2c0a,#141416 70%); font-size:1.25rem; text-shadow:0 0 10px #f1c84a; }
+.mg-cell.hint-bad { animation:mg-bad 1.2s; } .mg-cell.hint-ok { animation:mg-ok 1.4s; }
+@keyframes mg-bad { 0%,40% { box-shadow:inset 0 0 0 3px #ff5a4a; } }
+@keyframes mg-ok { 0%,50% { box-shadow:inset 0 0 0 3px #f1c84a; } }
+.m-grids.solved .mg-cell.dot { animation:mg-ok 1s; }
+.m-msg { min-height:1.4em; margin:.4rem 0 0; font-size:.92rem; }
+.m-msg.bad { color:#ff9a8a; } .m-msg.ok { color:#f1d58a; }
+.m-verdict { margin:-.2rem 0 .6rem; font:700 .85rem/1.2 var(--compact); letter-spacing:.16em; text-transform:uppercase; color:#c9a24a; }
+.m-punch { margin:0 auto 1rem; max-width:46ch; line-height:1.55; color:#d9d6d0; }
+@media (prefers-reduced-motion:reduce) { .mg-cell { animation:none !important; } }

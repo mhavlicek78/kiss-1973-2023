@@ -42,6 +42,14 @@ const art = {
   rays:'<circle cx="50" cy="50" r="14"/><path class="ln2" style="stroke:#e9ebee;stroke-width:5;opacity:.9" d="M50 4v24M50 72v24M4 50h24M72 50h24M17 17l17 17M66 66l17 17M83 17 66 34M34 66 17 83"/>',
   board:'<rect x="4" y="16" width="92" height="68" rx="6"/><g class="hole"><circle cx="20" cy="32" r="7"/><circle cx="40" cy="32" r="7"/><circle cx="60" cy="32" r="7"/><circle cx="80" cy="32" r="7"/><circle cx="20" cy="52" r="7"/><circle cx="60" cy="52" r="7"/><circle cx="80" cy="52" r="7"/><circle cx="20" cy="70" r="7"/><circle cx="40" cy="70" r="7"/><circle cx="80" cy="70" r="7"/></g>',
   finale:'<use href="#sym-burst" x="22" y="0" width="56" height="56"/><use href="#sym-burst" x="0" y="44" width="44" height="44"/><use href="#sym-burst" x="56" y="44" width="44" height="44"/>',
+  lupa:'<circle cx="40" cy="40" r="28"/><circle class="hole" cx="40" cy="40" r="19"/><path class="ln2" style="stroke:#fff8;stroke-width:3" d="M28 32a14 14 0 0 1 10-8"/><rect x="58" y="62" width="14" height="36" rx="5" transform="rotate(-45 65 80)"/>',
+  pass:'<rect x="14" y="10" width="72" height="86" rx="8"/><rect class="hole" x="38" y="16" width="24" height="6" rx="3"/><rect class="hole" x="22" y="30" width="56" height="12"/><use href="#sym-star" x="34" y="48" width="32" height="32"/><rect class="hole" x="22" y="84" width="56" height="4"/>',
+  key:'<circle cx="30" cy="50" r="22"/><circle class="hole" cx="30" cy="50" r="9"/><path d="M48 44h46v12h-8v12h-10V56h-8v10h-10V56H48z"/>',
+  list:'<path d="M20 6h50l12 12v76H20z"/><path class="hole" d="M70 6v12h12"/><g class="hole"><rect x="30" y="28" width="40" height="5"/><rect x="30" y="41" width="34" height="5"/><rect x="30" y="54" width="40" height="5"/><rect x="30" y="67" width="28" height="5"/><rect x="30" y="80" width="36" height="5"/></g>',
+  case:'<rect x="6" y="26" width="88" height="62" rx="8"/><path d="M36 26V14h28v12h-7v-6H43v6z"/><rect class="hole" x="6" y="50" width="88" height="5"/><rect x="42" y="45" width="16" height="16" rx="3"/>',
+  print:'<g fill="none" stroke-width="5" stroke-linecap="round" style="stroke:currentColor"><path d="M50 10c-20 0-34 16-34 36"/><path d="M50 22c-13 0-22 11-22 24 0 16 4 28 10 40"/><path d="M50 34c-7 0-11 6-11 12 0 18 5 30 12 42"/><path d="M50 46c0 16 4 30 13 44"/><path d="M62 40c2 18 7 32 16 42"/><path d="M60 14c13 4 22 16 24 32"/></g>',
+  badge:'<path d="M50 4l12 10 16-2 2 16 12 10-8 14 4 16-15 6-6 15-17-4-17 4-6-15-15-6 4-16-8-14 12-10 2-16 16 2z"/><circle class="hole" cx="50" cy="52" r="24"/><use href="#sym-star" x="32" y="34" width="36" height="36"/>',
+  master:'<circle cx="40" cy="40" r="28"/><circle class="hole" cx="40" cy="40" r="20"/><use href="#sym-star" x="26" y="26" width="28" height="28"/><rect x="58" y="62" width="14" height="36" rx="5" transform="rotate(-45 65 80)"/>',
   smoke:'<path class="ln2" style="stroke:#fff9;stroke-width:2.5" d="M58 0c-6-4 4-8-2-12"/>'
 };
 
@@ -77,13 +85,21 @@ export const rewards = [
   {no:29, name:'Platinová pyrotechnika', rarity:'platinum', sym:'burst', who:'Cedule', text:'Výbuch přesně na první úder refrénu.'},
   {no:30, name:'Platinová laserová show', rarity:'platinum', art:'rays', who:'Cedule', text:'Paprsky, které protnou dým nad celou halou.'},
   {no:31, name:'Diamantová cedule', rarity:'diamond', art:'board', who:'Cedule', text:'Každá žárovka na svém místě. Rozsvítil jsi ji ty.'},
-  {no:32, name:'Velké finále', rarity:'legend', art:'finale', who:'KISS', text:'Ohňostroj, konfety a „Rock and Roll All Nite“. Dobrou noc!'}
+  {no:32, name:'Velké finále', rarity:'legend', art:'finale', who:'KISS', text:'Ohňostroj, konfety a „Rock and Roll All Nite“. Dobrou noc!'},
+  {no:33, name:'Stříbrná lupa', rarity:'silver', art:'lupa', who:'Zákulisí', text:'S ní uvidíš i stopu, kterou nechal roadie v rozlitém kafi.'},
+  {no:34, name:'Stříbrná propustka', rarity:'silver', art:'pass', who:'Zákulisí', text:'All Access. Otevře každé dveře kromě Geneovy šatny.'},
+  {no:35, name:'Zlatý klíč od šatny', rarity:'gold', art:'key', who:'Zákulisí', text:'Kdo ho má, ví o každém žertíku dřív než kapela.'},
+  {no:36, name:'Zlatý setlist', rarity:'gold', art:'list', who:'KISS', text:'Pořadí písní na jeden večer, s mastným otiskem pizzy.'},
+  {no:37, name:'Platinový kufr', rarity:'platinum', art:'case', who:'Zákulisí', text:'Stříbrný kufr, který viděl víc měst než většina pilotů.'},
+  {no:38, name:'Platinový otisk prstu', rarity:'platinum', art:'print', who:'Zákulisí', text:'Na struně, na paličce, na lahvi limonády. Pachatel se neschová.'},
+  {no:39, name:'Diamantový odznak detektiva', rarity:'diamond', art:'badge', who:'Zákulisí', text:'Udělen za vyřešení případu, u kterého by i Sherlock potřeboval přídavek.'},
+  {no:40, name:'Mistr zákulisí', rarity:'legend', art:'master', who:'KISS Army', text:'Všech osm záhad vyřešeno. Zákulisí před tebou nemá tajemství.'}
 ];
 
-const cardSource = (no) => no <= 8 ? 'Dokonči level ' + no + ' pexesa' : no <= 16 ? 'Dokonči turné ' + (no - 8) : no <= 24 ? 'Vyřeš level ' + (no - 16) + ' Čtyř tváří' : 'Rozsviť level ' + (no - 24) + ' cedule';
+const cardSource = (no) => no <= 8 ? 'Dokonči level ' + no + ' pexesa' : no <= 16 ? 'Dokonči turné ' + (no - 8) : no <= 24 ? 'Vyřeš level ' + (no - 16) + ' Čtyř tváří' : no <= 32 ? 'Rozsviť level ' + (no - 24) + ' cedule' : 'Vyřeš případ ' + (no - 32) + ' ze zákulisí';
 
 /* ---------- ukládání: účet Claude, jinak tento prohlížeč ---------- */
-let gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}};
+let gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, mbest:{}, got:{}};
 const gListeners = [];
 export const onStore = (fn) => gListeners.push(fn);
 export const getStore = () => gState;
@@ -150,7 +166,7 @@ async function gCodeStart(code) {
 export async function connectCode(raw, keepLocal = true) {
   const code = gNormCode(raw);
   if (code.length < 10) throw new Error('Kód musí mít aspoň 10 znaků, třeba demon-raketa-4271.');
-  if (!keepLocal) { gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}}; }
+  if (!keepLocal) { gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, mbest:{}, got:{}}; }
   try { localStorage.setItem(G_CODE_KEY, JSON.stringify({code})); } catch {}
   gCodeNotify('connecting');
   await gCodeStart(code);
@@ -160,7 +176,7 @@ export function disconnectCode() {
   try { localStorage.removeItem(G_CODE_KEY); } catch {}
   clearTimeout(gCodeTimer);
   gRemote = null; gSync = 'local';
-  gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}};
+  gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, mbest:{}, got:{}};
   gSaveLocal();
   gCodeNotify('off');
 }
@@ -173,7 +189,7 @@ function gLoadLocal() { try { return JSON.parse(localStorage.getItem(G_KEY)) || 
 function gSaveLocal() { try { localStorage.setItem(G_KEY, JSON.stringify(gState)); } catch {} }
 function gMerge(a, b) {
   const out = {done:{...a.done}, foil:{...a.foil}, best:{...a.best}, qbest:{...(a.qbest || {})}};
-  for (const key of ['sbest', 'lbest']) { out[key] = {...(a[key] || {})}; for (const k in (b?.[key] || {})) { const x = b[key][k]; if (typeof x === 'number' && (out[key][k] == null || x < out[key][k])) out[key][k] = x; } }
+  for (const key of ['sbest', 'lbest', 'mbest']) { out[key] = {...(a[key] || {})}; for (const k in (b?.[key] || {})) { const x = b[key][k]; if (typeof x === 'number' && (out[key][k] == null || x < out[key][k])) out[key][k] = x; } }
   for (const k in (b?.qbest || {})) { const x = b.qbest[k]; if (x && (!out.qbest[k] || x.score > out.qbest[k].score)) out.qbest[k] = {score:x.score, correct:x.correct}; }
   out.got = {...(a.got || {})};
   for (const k in (b?.got || {})) { const x = b.got[k]; if (typeof x === 'number' && (out.got[k] == null || x < out.got[k])) out.got[k] = x; }
@@ -223,7 +239,7 @@ function gConnect() {
     if (!res) return;
     gRemote = res.ref;
     gSync = 'cloud';
-    const remoteOnly = JSON.stringify(gMerge({done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}}, res.data || {}));
+    const remoteOnly = JSON.stringify(gMerge({done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, mbest:{}, got:{}}, res.data || {}));
     gState = gMerge(gState, res.data || {});
     if (!res.data || JSON.stringify(gState) !== remoteOnly) gPersist();
     else gSaveLocal();
@@ -250,9 +266,9 @@ function cardArt(r) {
 }
 
 const cardRoman = (n) => [['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]].reduce((s, [k, v]) => { while (n >= v) { s += k; n -= v; } return s; }, '');
-const cardOrigin = (no) => no <= 8 ? 'Pexeso · level ' + no : no <= 16 ? 'Kvíz · turné ' + (no - 8) : no <= 24 ? 'Čtyři tváře · level ' + (no - 16) : 'Světelná cedule · level ' + (no - 24);
+const cardOrigin = (no) => no <= 8 ? 'Pexeso · level ' + no : no <= 16 ? 'Kvíz · turné ' + (no - 8) : no <= 24 ? 'Čtyři tváře · level ' + (no - 16) : no <= 32 ? 'Světelná cedule · level ' + (no - 24) : 'Backstage Mystery · případ ' + (no - 32);
 const cardDate = (t) => { const d = new Date(t || Date.now()); return d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear(); };
-const cardNo = (no) => 'No. ' + String(no).padStart(2, '0') + ' / 32';
+const cardNo = (no) => 'No. ' + String(no).padStart(2, '0') + ' / ' + rewards.length;
 
 export function rewardCard(r, opts = {}) {
   const owned = opts.force || gState.done[r.no];
