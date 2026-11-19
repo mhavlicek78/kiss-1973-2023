@@ -1,0 +1,8 @@
+name = "kiss-sbirka"
+main = "index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "SBIRKA"
+id = "19833c10191942bcbdbde8bd588f603c"
