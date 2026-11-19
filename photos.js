@@ -110,14 +110,10 @@ export const photos = {
     "context": true
   },
   "mark-plain": {
-    "src": "assets/photos/unmasked-era.jpg",
-    "title": "Mark St. John (vpravo) v sestavě KISS, 1984",
-    "author": "Polygram Records",
-    "license": "Volné dílo (USA)",
-    "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Copyright_rules_by_territory/United_States",
-    "position": "50% 25%",
-    "page": "https://commons.wikimedia.org/wiki/File:Kiss_(1984).jpg",
-    "context": true
+    "src": "assets/photos/mark-plain.jpg",
+    "title": "Mark St. John · portrét, 1984",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 30%"
   },
   "bruce-plain": {
     "src": "assets/photos/bruce-plain.jpg",
