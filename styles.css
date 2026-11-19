@@ -622,6 +622,62 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
 .q-final { margin:-.4rem 0 1rem; color:#c9ccd1; } .q-final b { font:italic 700 2rem/1 var(--display); color:#fff; }
 @media (min-width:700px) { .q-opts:not(.two) { grid-template-columns:1fr 1fr; } }
 
+
+/* ===== Hry: rozcestník, Čtyři tváře, Světelná cedule ===== */
+.hub-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:1rem; margin:1.4rem 0 2.6rem; }
+.hub-tile { position:relative; display:flex; flex-direction:column; gap:.55rem; padding:1.3rem 1.2rem 1.1rem; color:#e9e9ea; text-decoration:none; background:linear-gradient(160deg,#ffffff12,#ffffff00 45%),#0e0e10; border:1px solid #3a3a3d; overflow:hidden; transition:border-color .2s,transform .2s,box-shadow .2s; }
+.hub-tile:hover { border-color:#c9ccd1; transform:translateY(-3px); box-shadow:0 0 30px -10px #ffffff66; }
+.hub-tile h2 { margin:0; font-size:1.35rem; letter-spacing:.04em; text-transform:uppercase; }
+.hub-tile p { margin:0; color:#a9abb0; font-size:.92rem; line-height:1.5; flex:1; }
+.hub-sym { position:absolute; right:-14px; top:-10px; width:96px; height:96px; opacity:.16; }
+.hub-bar { display:block; height:4px; background:#2a2a2d; }
+.hub-bar i { display:block; height:100%; background:linear-gradient(90deg,#8d9096,#f4f5f7); box-shadow:0 0 10px #fff8; }
+.hub-meta { display:flex; justify-content:space-between; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; color:#c9ccd1; }
+
+.sd-play,.lt-play { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+.sd-play .g-bar,.lt-play .g-bar { width:100%; }
+.sd-grid { --n:4; width:min(100%,460px); aspect-ratio:1; display:grid; grid-template-columns:repeat(var(--n),1fr); background:#0b0b0c; border:2px solid #b9bcc2; box-shadow:0 0 0 1px #000,0 18px 40px -14px #000,0 0 40px -18px #ffffff55; touch-action:manipulation; }
+.sd-cell { position:relative; display:grid; place-items:center; padding:0; border:0; border-right:1px solid #2f2f33; border-bottom:1px solid #2f2f33; background:#121214; cursor:pointer; color:inherit; -webkit-tap-highlight-color:transparent; transition:background .15s; }
+.sd-cell.br { border-right:2px solid #8d9096; } .sd-cell.bb { border-bottom:2px solid #8d9096; }
+.sd-cell.peer { background:#18181b; }
+.sd-cell.same { background:#1e1e22; }
+.sd-cell.sel { background:#26262b; box-shadow:inset 0 0 0 2px #e9ebee; }
+.sd-cell.given { background-image:linear-gradient(180deg,#ffffff0d,#0000); }
+.sd-cell.given .sd-glyph { fill:url(#chrome); filter:drop-shadow(0 1px 0 #000); }
+.sd-cell.bad { box-shadow:inset 0 0 0 2px #c9353a; }
+.sd-cell.bad .sd-glyph { animation:sd-shake .3s; }
+.sd-cell.hinted .sd-glyph { animation:sd-pop .5s; }
+.sd-cell.pop .sd-glyph { animation:sd-pop .25s; }
+.sd-glyph { width:62%; height:62%; fill:var(--tint); filter:drop-shadow(0 0 6px color-mix(in srgb,var(--tint) 60%,transparent)) drop-shadow(0 2px 1px #000); overflow:visible; }
+.s6 .sd-glyph { width:66%; height:66%; }
+.sd-grid.solved { animation:sd-win 1.2s ease-out; border-color:#fff; }
+.sd-grid.solved .sd-glyph { fill:url(#chrome); filter:drop-shadow(0 0 8px #fff); }
+.sd-pad { width:min(100%,460px); display:grid; grid-template-columns:repeat(5,1fr); gap:.5rem; }
+.sd-pad.s6 { grid-template-columns:repeat(7,1fr); gap:.35rem; }
+.sd-key { aspect-ratio:1; display:grid; place-items:center; padding:0; border:1px solid #3a3a3d; background:linear-gradient(180deg,#ffffff14,#0000 50%),#141416; color:#c9ccd1; font-size:1.3rem; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.sd-key:active { transform:scale(.94); border-color:#e9ebee; }
+.sd-key .sd-glyph { width:70%; height:70%; }
+.sd-tools { display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; justify-content:center; }
+.sd-note { color:#8d9096; font-size:.85rem; }
+@keyframes sd-pop { 0% { transform:scale(.4); } 70% { transform:scale(1.15); } 100% { transform:scale(1); } }
+@keyframes sd-shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-3px); } 75% { transform:translateX(3px); } }
+@keyframes sd-win { 0% { box-shadow:0 0 0 0 #fff0; } 30% { box-shadow:0 0 60px 10px #ffffff88; } 100% { box-shadow:0 0 40px -18px #ffffff55; } }
+
+.lt-board { --cols:5; --rows:5; width:min(100%, calc(var(--cols) * 64px)); display:grid; grid-template-columns:repeat(var(--cols),1fr); grid-auto-rows:1fr; gap:clamp(4px,1.4vw,9px); padding:clamp(12px,3vw,22px); background:url(assets/fx/steel.webp) center/cover,#151517; background-blend-mode:multiply; border:2px solid #6c6f75; box-shadow:inset 0 0 0 1px #000,inset 0 0 30px #000,0 18px 40px -14px #000; touch-action:manipulation; }
+.lt-bulb { aspect-ratio:1; padding:0; border:0; border-radius:50%; background:radial-gradient(circle at 50% 55%,#2b2b2e,#0c0c0d 70%); box-shadow:inset 0 2px 3px #000,0 1px 0 #ffffff22; cursor:pointer; display:grid; place-items:center; -webkit-tap-highlight-color:transparent; }
+.lt-bulb span { width:72%; height:72%; border-radius:50%; background:radial-gradient(circle at 38% 32%,#5a5550,#2a2724 60%,#151312); box-shadow:inset 0 0 4px #000; transition:background .2s,box-shadow .25s; }
+.lt-bulb.on span { background:radial-gradient(circle at 38% 32%,#fffdf2,#ffe9a6 35%,#f2b744 70%,#a86b12); box-shadow:0 0 10px 2px #ffd36a,0 0 26px 4px #ffb93055; }
+.lt-bulb.flick span { animation:lt-flick .35s; }
+.lt-bulb.hint { outline:2px dashed #e9ebee; outline-offset:2px; animation:lt-pulse 1s infinite; }
+.lt-board.lit { animation:lt-show 1.3s; border-color:#ffd36a; }
+.lt-board.lit .lt-bulb.on span { animation:lt-chase 1.3s; }
+.g-hud .warn { color:#ff8a7a; }
+@keyframes lt-flick { 0% { filter:brightness(1.8); } 40% { filter:brightness(.6); } 100% { filter:none; } }
+@keyframes lt-pulse { 50% { outline-color:#e9ebee44; } }
+@keyframes lt-chase { 0%,100% { filter:none; } 25% { filter:brightness(1.6); } 50% { filter:brightness(.7); } 75% { filter:brightness(1.4); } }
+@keyframes lt-show { 30% { box-shadow:inset 0 0 0 1px #000,0 0 70px 10px #ffd36a66; } }
+@media (prefers-reduced-motion:reduce) { .sd-grid.solved,.lt-board.lit,.lt-board.lit .lt-bulb.on span,.lt-bulb.flick span,.lt-bulb.hint,.sd-cell .sd-glyph { animation:none !important; } }
+
 @media (max-width:1000px) {
   .shell { width:calc(100% - 3rem); }
   .founder-grid { gap:.7rem; }

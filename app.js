@@ -3,6 +3,48 @@ import { eras, members, sources } from './data.js';
 import { photos } from './photos.js';
 import { gamePage, mountGame } from './game.js';
 import { quizPage, mountQuiz } from './quiz.js';
+import { sudokuPage, mountSudoku } from './sudoku.js';
+import { lightsPage, mountLights } from './lights.js';
+import { rewards, rewardCard, getStore, connectStore, onStore, tiltCard } from './game.js';
+
+const hubGames = [
+  {href:'#/pexeso', name:'Pexeso', sym:'star', from:0, text:'Najdi dvojice karet a odpověz na otázku ke každé z nich. Osm levelů, některé s časovým limitem.'},
+  {href:'#/kviz', name:'Kvíz', sym:'bat', from:8, text:'Osm turné po deseti otázkách. Čím dál, tím méně času na odpověď.'},
+  {href:'#/ctyri-tvare', name:'Čtyři tváře', sym:'claw', from:16, text:'Sudoku se symboly masek. Každý symbol jednou v řádku, sloupci i bloku. Od levelu 4 přibude liška a ankh.'},
+  {href:'#/cedule', name:'Světelná cedule', sym:'bolt', from:24, text:'Ťukni na žárovku a přepneš i sousední. Rozsviť celou ceduli, hvězdu, blesk i netopýra.'}
+];
+let hubHooked = false;
+function hubPage() { return '<div class="shell page hub-page" id="hub-root"></div>'; }
+function hubRender() {
+  const root = document.getElementById('hub-root');
+  if (!root) return;
+  const st = getStore();
+  const total = rewards.filter((r) => st.done[r.no]).length;
+  root.innerHTML = '<header class="section-head"><p class="eyebrow">Hry</p><h1>Hry a sbírka karet</h1>'
+    + '<p class="lede">Čtyři hry, každá s osmi levely a osmi sběratelskými kartami. Celkem ' + total + ' z 32 karet ve sbírce.</p></header>'
+    + '<div class="hub-grid">' + hubGames.map((g) => {
+        const got = rewards.slice(g.from, g.from + 8).filter((r) => st.done[r.no]).length;
+        return '<a class="hub-tile" href="' + g.href + '">' + sym(g.sym, 'hub-sym') + '<h2>' + g.name + '</h2><p>' + g.text + '</p>'
+          + '<span class="hub-bar"><i style="width:' + (got / 8 * 100) + '%"></i></span><span class="hub-meta">' + got + ' / 8 karet <b aria-hidden="true">→</b></span></a>';
+      }).join('') + '</div>'
+    + '<h2 class="g-h2">Celá sbírka</h2><div class="g-collection">' + rewards.map((r) => rewardCard(r)).join('') + '</div><div class="g-modal" hidden></div>';
+}
+function mountHub() {
+  const root = document.getElementById('hub-root');
+  if (!root) return;
+  root.addEventListener('pointermove', tiltCard);
+  root.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const m = root.querySelector('.g-modal');
+    if (b.dataset.zoom && !b.closest('.g-modal')) {
+      m.innerHTML = '<div class="g-dialog" role="dialog" aria-modal="true"><div class="g-zoom">' + rewardCard(rewards[+b.dataset.zoom - 1]) + '</div><div class="g-actions"><button type="button" class="button secondary" data-hclose>Zavřít</button></div></div>';
+      m.hidden = false;
+    } else if (b.hasAttribute('data-hclose')) { m.hidden = true; m.innerHTML = ''; }
+  });
+  if (!hubHooked) { hubHooked = true; onStore(hubRender); }
+  hubRender();
+  connectStore();
+}
 
 const main = document.querySelector('main');
 const founderList = members.slice(0, 4);
@@ -359,6 +401,9 @@ function route() {
     case 'hra':
     case 'pexeso': return {section:'game', html:gamePage(), title:'Pexeso', mount:mountGame};
     case 'kviz': return {section:'quiz', html:quizPage(), title:'Kvíz', mount:mountQuiz};
+    case 'ctyri-tvare': return {section:'sudoku', html:sudokuPage(), title:'Čtyři tváře', mount:mountSudoku};
+    case 'cedule': return {section:'lights', html:lightsPage(), title:'Světelná cedule', mount:mountLights};
+    case 'hry': return {section:'games', html:hubPage(), title:'Hry', mount:mountHub};
   }
   return {section:'', title:'Stránka nenalezena', html:'<div class="shell page">' + sectionHead('KISS','Stránka nenalezena') + back('#/','Zpět na úvod') + '</div>'};
 }
@@ -378,8 +423,9 @@ function render(isFirst = false) {
   main.dataset.section = page.section || 'none';
   main.dataset.member = page.member || '';
   if (page.mount) page.mount();
-  for (const item of document.querySelectorAll('[data-section]')) {
-    if (item.dataset.section === page.section) item.setAttribute('aria-current','page');
+  const navSection = ['game', 'quiz', 'sudoku', 'lights', 'games'].includes(page.section) ? 'games' : page.section;
+  for (const item of document.querySelectorAll('.header nav [data-section]')) {
+    if (item.dataset.section === navSection) item.setAttribute('aria-current','page');
     else item.removeAttribute('aria-current');
   }
   requestAnimationFrame(() => {

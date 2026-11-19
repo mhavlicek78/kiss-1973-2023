@@ -130,7 +130,7 @@ function qHome() {
           + '<span class="g-lmeta">' + t.time + ' s na otázku · potřebuješ ' + t.need + '/10' + (b ? ' · rekord ' + b.score : '') + '</span>'
           + '<span class="g-lstate">' + (tourDone(t.n) ? '✓' : open ? '▶' : '🔒') + '</span></button></li>';
       }).join('') + '</ol>'
-    + '<h2 class="g-h2">Sbírka z kvízu</h2><div class="g-collection">' + rewards.slice(8).map((r) => rewardCard(r)).join('') + '</div>'
+    + '<h2 class="g-h2">Sbírka z kvízu</h2><div class="g-collection">' + rewards.slice(8, 16).map((r) => rewardCard(r)).join('') + '</div>'
     + '<div class="g-modal" hidden></div>';
 }
 

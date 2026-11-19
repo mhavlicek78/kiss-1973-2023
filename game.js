@@ -31,6 +31,17 @@ const art = {
   drum:'<path d="M14 34h72v36c0 9-16 16-36 16S14 79 14 70z"/><ellipse class="hole" cx="50" cy="34" rx="36" ry="12"/><path class="ln2" d="M14 50l18 30M86 50 68 80M40 52l10 32M60 52 50 84"/><path d="M60 6 74 30l-4 2L56 8zM40 6 26 30l4 2L44 8z"/>',
   rocket:'<path d="M50 2c16 12 22 32 19 54l12 14-16 2-5 14H40l-5-14-16-2 12-14C28 34 34 14 50 2z"/><circle class="hole" cx="50" cy="40" r="9"/><path class="ln2" style="stroke:#ffb04acc;stroke-width:4" d="M44 92l-2 8M56 92l2 8M50 92v10"/>',
   shield:'<path d="M50 3 88 15v28c0 26-16 44-38 54C28 87 12 69 12 43V15z"/><polygon class="hole" points="50,22 56,40 75,40 60,51 66,69 50,58 34,69 40,51 25,40 44,40"/>',
+  axe:'<path d="M54 4h9v92h-9z"/><path d="M63 10c24 4 32 20 32 36S87 76 63 82z"/><path class="ln2" d="M70 30c8 4 12 10 12 16"/>',
+  pick:'<path d="M50 96C30 76 12 50 12 30 12 14 30 6 50 6s38 8 38 24c0 20-18 46-38 66z"/><polygon class="hole" points="50,24 54,36 67,36 57,44 61,57 50,49 39,57 43,44 33,36 46,36"/>',
+  vinyl:'<circle cx="50" cy="50" r="46"/><circle class="ln2" style="stroke:#0006;stroke-width:1.5" cx="50" cy="50" r="36"/><circle class="ln2" style="stroke:#0006;stroke-width:1.5" cx="50" cy="50" r="28"/><circle class="hole" cx="50" cy="50" r="15"/><circle cx="50" cy="50" r="3"/>',
+  amp:'<rect x="8" y="14" width="84" height="72" rx="6"/><rect class="hole" x="16" y="34" width="68" height="44" rx="3"/><circle class="hole" cx="24" cy="24" r="4"/><circle class="hole" cx="38" cy="24" r="4"/><circle class="hole" cx="52" cy="24" r="4"/><path class="ln2" style="stroke:#fff3" d="M20 46h60M20 56h60M20 66h60"/>',
+  mask:'<path d="M4 38c12-16 32-18 46-6 14-12 34-10 46 6-4 24-24 32-36 22L50 52l-10 8C28 70 8 62 4 38z"/><ellipse class="hole" cx="30" cy="40" rx="10" ry="7"/><ellipse class="hole" cx="70" cy="40" rx="10" ry="7"/>',
+  bulb:'<circle cx="50" cy="40" r="32"/><rect x="36" y="70" width="28" height="22" rx="4"/><path class="ln2" d="M36 77h28M36 85h28"/><path class="ln2" style="stroke:#fff9" d="M34 30c4-8 10-12 18-12"/>',
+  broken:'<path d="M18 40a32 32 0 0 1 64 0c0 12-6 20-14 26H32C24 60 18 52 18 40z"/><path class="hole" d="M38 10l8 14-8 8 10 12-6 10 14-12-8-10 8-10-6-12z"/><rect x="36" y="70" width="28" height="22" rx="4"/><path class="ln2" d="M36 77h28M36 85h28"/>',
+  spot:'<path d="M28 8h44l12 36H16z"/><ellipse class="hole" cx="50" cy="44" rx="34" ry="8"/><path d="M20 52h60L96 98H4z" style="opacity:.35"/><rect x="44" y="0" width="12" height="10"/>',
+  rays:'<circle cx="50" cy="50" r="14"/><path class="ln2" style="stroke:#e9ebee;stroke-width:5;opacity:.9" d="M50 4v24M50 72v24M4 50h24M72 50h24M17 17l17 17M66 66l17 17M83 17 66 34M34 66 17 83"/>',
+  board:'<rect x="4" y="16" width="92" height="68" rx="6"/><g class="hole"><circle cx="20" cy="32" r="7"/><circle cx="40" cy="32" r="7"/><circle cx="60" cy="32" r="7"/><circle cx="80" cy="32" r="7"/><circle cx="20" cy="52" r="7"/><circle cx="60" cy="52" r="7"/><circle cx="80" cy="52" r="7"/><circle cx="20" cy="70" r="7"/><circle cx="40" cy="70" r="7"/><circle cx="80" cy="70" r="7"/></g>',
+  finale:'<use href="#sym-burst" x="22" y="0" width="56" height="56"/><use href="#sym-burst" x="0" y="44" width="44" height="44"/><use href="#sym-burst" x="56" y="44" width="44" height="44"/>',
   smoke:'<path class="ln2" style="stroke:#fff9;stroke-width:2.5" d="M58 0c-6-4 4-8-2-12"/>'
 };
 
@@ -50,11 +61,29 @@ export const rewards = [
   {no:13, name:'Platinová stoupající bicí', rarity:'platinum', art:'drum', who:'Catman', text:'Souprava, která vyjede nad pódium i s bubeníkem.'},
   {no:14, name:'Platinová raketa', rarity:'platinum', art:'rocket', who:'Spaceman', text:'Vystřelená přímo z kytary, mířící ke světlům haly.'},
   {no:15, name:'Diamantová netopýří křídla', rarity:'diamond', sym:'bat', who:'The Demon', text:'Kostým, se kterým vzlétl ke stropu při „God of Thunder“.'},
-  {no:16, name:'Odznak KISS Army', rarity:'legend', art:'shield', who:'KISS Army', text:'Nejvěrnější armáda rocku. Teď nosíš její odznak.'}
+  {no:16, name:'Odznak KISS Army', rarity:'legend', art:'shield', who:'KISS Army', text:'Nejvěrnější armáda rocku. Teď nosíš její odznak.'},
+  {no:17, name:'Stříbrná liška', rarity:'silver', sym:'fox', who:'The Fox', text:'Eric Carr přišel v roce 1980 a dal kapele nový rytmus.'},
+  {no:18, name:'Stříbrný ankh', rarity:'silver', sym:'ankh', who:'Ankh Warrior', text:'Egyptský kříž na tváři Vinnieho Vincenta.'},
+  {no:19, name:'Zlatá baskytara sekera', rarity:'gold', art:'axe', who:'The Demon', text:'Baskytara ve tvaru sekery. Kdo jiný by na ni hrál?'},
+  {no:20, name:'Zlaté trsátko', rarity:'gold', art:'pick', who:'Starchild', text:'Letí do publika na konci každého koncertu.'},
+  {no:21, name:'Platinová deska', rarity:'platinum', art:'vinyl', who:'KISS', text:'Za miliony prodaných nosičů. Pověs ji nad gramofon.'},
+  {no:22, name:'Platinový aparát', rarity:'platinum', art:'amp', who:'KISS', text:'Zeď reproduktorů, která rozechvěje celou halu.'},
+  {no:23, name:'Diamantová maska', rarity:'diamond', art:'mask', who:'KISS', text:'Tvář, kterou svět bez líčení neviděl až do roku 1983.'},
+  {no:24, name:'Mistr čtyř tváří', rarity:'legend', crown:true, who:'KISS', text:'Každá tvář na svém místě. Logika hodná legendy.'},
+  {no:25, name:'Stříbrná žárovka', rarity:'silver', art:'bulb', who:'Cedule', text:'První, která se rozsvítí. Bez ní není show.'},
+  {no:26, name:'Rozbitá žárovka', rarity:'silver', art:'broken', who:'Cedule', text:'Prasklá při posledním přídavku. Suvenýr z pódia.'},
+  {no:27, name:'Zlatý reflektor', rarity:'gold', art:'spot', who:'Cedule', text:'Hledá hvězdu večera. Dnes našel tebe.'},
+  {no:28, name:'Zlatý neonový blesk', rarity:'gold', sym:'bolt', who:'Spaceman', text:'Bzučí, bliká a nikdy úplně nezhasne.'},
+  {no:29, name:'Platinová pyrotechnika', rarity:'platinum', sym:'burst', who:'Cedule', text:'Výbuch přesně na první úder refrénu.'},
+  {no:30, name:'Platinová laserová show', rarity:'platinum', art:'rays', who:'Cedule', text:'Paprsky, které protnou dým nad celou halou.'},
+  {no:31, name:'Diamantová cedule', rarity:'diamond', art:'board', who:'Cedule', text:'Každá žárovka na svém místě. Rozsvítil jsi ji ty.'},
+  {no:32, name:'Velké finále', rarity:'legend', art:'finale', who:'KISS', text:'Ohňostroj, konfety a „Rock and Roll All Nite“. Dobrou noc!'}
 ];
 
+const cardSource = (no) => no <= 8 ? 'Dokonči level ' + no + ' pexesa' : no <= 16 ? 'Dokonči turné ' + (no - 8) : no <= 24 ? 'Vyřeš level ' + (no - 16) + ' Čtyř tváří' : 'Rozsviť level ' + (no - 24) + ' cedule';
+
 /* ---------- ukládání: účet Claude, jinak tento prohlížeč ---------- */
-let gState = {done:{}, foil:{}, best:{}, qbest:{}};
+let gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}};
 const gListeners = [];
 export const onStore = (fn) => gListeners.push(fn);
 export const getStore = () => gState;
@@ -70,6 +99,7 @@ function gLoadLocal() { try { return JSON.parse(localStorage.getItem(G_KEY)) || 
 function gSaveLocal() { try { localStorage.setItem(G_KEY, JSON.stringify(gState)); } catch {} }
 function gMerge(a, b) {
   const out = {done:{...a.done}, foil:{...a.foil}, best:{...a.best}, qbest:{...(a.qbest || {})}};
+  for (const key of ['sbest', 'lbest']) { out[key] = {...(a[key] || {})}; for (const k in (b?.[key] || {})) { const x = b[key][k]; if (typeof x === 'number' && (out[key][k] == null || x < out[key][k])) out[key][k] = x; } }
   for (const k in (b?.qbest || {})) { const x = b.qbest[k]; if (x && (!out.qbest[k] || x.score > out.qbest[k].score)) out.qbest[k] = {score:x.score, correct:x.correct}; }
   for (const k in (b?.done || {})) if (b.done[k]) out.done[k] = true;
   for (const k in (b?.foil || {})) if (b.foil[k]) out.foil[k] = true;
@@ -107,7 +137,7 @@ function gConnect() {
     if (!res) return;
     gRemote = res.ref;
     gSync = 'cloud';
-    const remoteOnly = JSON.stringify(gMerge({done:{}, foil:{}, best:{}, qbest:{}}, res.data || {}));
+    const remoteOnly = JSON.stringify(gMerge({done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}}, res.data || {}));
     gState = gMerge(gState, res.data || {});
     if (!res.data || JSON.stringify(gState) !== remoteOnly) gPersist();
     else gSaveLocal();
@@ -137,13 +167,13 @@ export function rewardCard(r, opts = {}) {
   const owned = opts.force || gState.done[r.no];
   const foil = owned && gState.foil[r.no];
   if (!owned) {
-    return '<div class="rcard locked"><div class="rc-inner"><span class="rc-q">?</span><p class="rc-lock">' + (r.no > 8 ? 'Dokonči turné ' + (r.no - 8) : 'Dokonči level ' + r.no) + '</p><p class="rc-no">No. ' + String(r.no).padStart(2,'0') + ' / 16</p></div></div>';
+    return '<div class="rcard locked"><div class="rc-inner"><span class="rc-q">?</span><p class="rc-lock">' + cardSource(r.no) + '</p><p class="rc-no">No. ' + String(r.no).padStart(2,'0') + ' / 32</p></div></div>';
   }
   return '<button type="button" class="rcard r-' + r.rarity + (foil ? ' foil' : '') + '" data-zoom="' + r.no + '" aria-label="' + gEsc(r.name) + ', ' + rarityLabel[r.rarity] + ' karta">'
     + '<div class="rc-inner"><div class="rc-top"><span>' + rarityLabel[r.rarity] + '</span><span>' + gEsc(r.who) + '</span></div>'
     + '<div class="rc-art">' + cardArt(r) + '</div>'
     + '<h3 class="rc-name">' + gEsc(r.name) + '</h3><p class="rc-text">' + gEsc(r.text) + '</p>'
-    + '<p class="rc-no">No. ' + String(r.no).padStart(2,'0') + ' / 16' + (foil ? ' · Lesklá edice' : '') + '</p></div><span class="rc-shine"></span></button>';
+    + '<p class="rc-no">No. ' + String(r.no).padStart(2,'0') + ' / 32' + (foil ? ' · Lesklá edice' : '') + '</p></div><span class="rc-shine"></span></button>';
 }
 
 export function gamePage() {
