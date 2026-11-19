@@ -17,4 +17,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: worker
       - name: Adresa
-        run: echo "URL=${{ steps.wr.outputs.deployment-url }}" && echo "Worker: ${{ steps.wr.outputs.deployment-url }}" >> $GITHUB_STEP_SUMMARY
+        run: |
+          echo "URL=${{ steps.wr.outputs.deployment-url }}"
+          echo "Worker ${{ steps.wr.outputs.deployment-url }}" >> "$GITHUB_STEP_SUMMARY"
