@@ -99,15 +99,17 @@ export const photos = {
     "position": "50% 42%",
     "page": "https://ericcarr.com/contact-us/"
   },
+  "vinnie-mask": {
+    "src": "assets/photos/vinnie-mask.jpg",
+    "title": "Vinnie Vincent · Ankh Warrior",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 45%"
+  },
   "vinnie-plain": {
     "src": "assets/photos/vinnie-plain.jpg",
-    "title": "Vinnie Vincent (druhý zprava) s KISS na MTV, 18. 9. 1983",
-    "author": "Cash Box",
-    "license": "Volné dílo (USA)",
-    "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Copyright_rules_by_territory/United_States",
-    "position": "50% 50%",
-    "page": "https://commons.wikimedia.org/wiki/File:Kiss_(1983).png",
-    "context": true
+    "title": "Vinnie Vincent · bez masky",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 22%"
   },
   "mark-plain": {
     "src": "assets/photos/mark-plain.jpg",
