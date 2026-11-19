@@ -9,7 +9,7 @@ import { mysteryPage, mountMystery } from './mystery.js';
 import { timelinePage, mountTimeline } from './timeline.js';
 import { nonogramPage, mountNonogram } from './nonogram.js';
 import { rhythmPage, mountRhythm } from './rhythm.js';
-import { czPage } from './cz.js';
+import { czPage, czMount } from './cz.js';
 import { rewards, rewardCard, getStore, connectStore, onStore, tiltCard, syncText, syncAvailable, syncCode, syncStatus, suggestCode, connectCode, disconnectCode } from './game.js';
 
 const hubGames = [
@@ -507,7 +507,7 @@ function route() {
     case 'kariera': return {section:'timeline', html:timelinePage(), title:'Seřaď kariéru', mount:mountTimeline};
     case 'masky': return {section:'nonogram', html:nonogramPage(), title:'Malované masky', mount:mountNonogram};
     case 'rytmus': return {section:'rhythm', html:rhythmPage(), title:'Peterův rytmus', mount:mountRhythm};
-    case 'cesko': return {section:'cz', html:czPage(), title:'KISS v Česku'};
+    case 'cesko': return {section:'cz', html:czPage(), title:'KISS v Česku', mount:czMount};
     case 'hry': return {section:'games', html:hubPage(), title:'Hry', mount:mountHub};
   }
   return {section:'', title:'Stránka nenalezena', html:'<div class="shell page">' + sectionHead('KISS','Stránka nenalezena') + back('#/','Zpět na úvod') + '</div>'};
