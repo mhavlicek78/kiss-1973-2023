@@ -232,6 +232,7 @@ figcaption a:hover,.era-card-credit a:hover { text-decoration:underline; }
 .other-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
 .other-card { background:linear-gradient(180deg,#1b1919,#0f0e0e); border:1px solid #3e3c3c; box-shadow:0 1px 0 #ffffff14 inset; }
 .other-card .photo-frame { aspect-ratio:1.52; }
+.other-card .photo:not(.photo-context) .photo-frame > .photo-img { display:block; width:100%; height:100%; object-fit:cover; }
 .other-content { padding:1rem; }
 .other-content h3 { margin-bottom:.25rem; }
 .other-content .facts { display:grid; grid-template-columns:1fr 1fr; gap:0 .6rem; margin-top:.8rem; }

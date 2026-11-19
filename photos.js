@@ -124,6 +124,12 @@ export const photos = {
     "position": "50% 35%",
     "page": "https://commons.wikimedia.org/wiki/File:Bruce_Kulick.jpg"
   },
+  "carr-mask": {
+    "src": "assets/photos/carr-mask.jpg",
+    "title": "Eric Carr · The Fox",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 56%"
+  },
   "singer-mask": {
     "src": "assets/photos/singer-mask.jpg",
     "title": "Eric Singer · Catman, 2010",
