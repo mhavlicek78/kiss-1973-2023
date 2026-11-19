@@ -931,3 +931,34 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
 .ry-progress { width:min(100%,440px); height:6px; background:#222; }
 .ry-progress i { display:block; height:100%; width:0; background:linear-gradient(90deg,#8d9096,#f4f5f7); box-shadow:0 0 10px #fff8; transition:width .4s; }
 @media (prefers-reduced-motion:reduce) { .tl-card,.ng-board.solved .ng-cell.on,.ry-pad { animation:none !important; transition:none !important; } }
+/* ===== KISS v Česku ===== */
+.cz-stats { display:flex; flex-wrap:wrap; gap:.8rem; margin:1rem 0 .6rem; }
+.cz-stats div { min-width:6.5rem; padding:.7rem 1rem; border:1px solid #3a3a3d; background:linear-gradient(160deg,#ffffff12,#0000 50%),#0e0e10; }
+.cz-stats b { display:block; font:italic 700 2.1rem/1 var(--display); background:linear-gradient(180deg,#fff,#9ea2a8 60%,#e9ebee); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.cz-stats span { font:700 .7rem/1 var(--compact); letter-spacing:.22em; text-transform:uppercase; color:#8d9096; }
+.cz-cities { display:flex; flex-wrap:wrap; gap:.5rem; margin:0 0 1.6rem; }
+.cz-cities span { padding:.35rem .7rem; border:1px solid #3a3a3d; font-size:.85rem; color:#c9ccd1; }
+.cz-cities b { color:#fff; }
+.cz-list { margin:0; padding:0; list-style:none; display:grid; gap:1rem; position:relative; }
+.cz-ticket { display:grid; grid-template-columns:7.2rem 1fr; border:1px solid #3a3a3d; background:linear-gradient(180deg,#ffffff08,#0000),#111113; position:relative; overflow:hidden; }
+.cz-ticket::before { content:""; position:absolute; left:7.2rem; top:0; bottom:0; border-left:2px dashed #3a3a3d; }
+.cz-stub { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.2rem; padding:1rem .4rem; text-align:center; background:radial-gradient(circle at 50% 30%,#2a2a2e,#0c0c0d 75%); }
+.cz-day { font:italic 700 1.9rem/1 var(--display); color:#fff; }
+.cz-mon { font:700 .7rem/1 var(--compact); letter-spacing:.18em; text-transform:uppercase; color:#c9ccd1; }
+.cz-year { margin-top:.35rem; font:700 1.1rem/1 var(--compact); letter-spacing:.1em; background:linear-gradient(180deg,#fff,#8d9096); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.cz-body { padding:1rem 1.1rem 1.1rem 1.3rem; min-width:0; }
+.cz-city { margin:0; font:700 .74rem/1.2 var(--compact); letter-spacing:.22em; text-transform:uppercase; color:#ff6a4a; }
+.cz-city em { margin-left:.4rem; font-style:normal; letter-spacing:.12em; color:#f1c84a; }
+.cz-body h2 { margin:.3rem 0 .15rem; font:italic 700 clamp(1.15rem,4vw,1.5rem)/1.15 var(--display); color:#fff; }
+.cz-tour { margin:0 0 .6rem; font-weight:700; color:#c9ccd1; }
+.cz-text { margin:0 0 .8rem; line-height:1.55; color:#cfcac2; max-width:68ch; }
+.cz-facts { margin:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:.6rem 1.2rem; }
+.cz-facts dt { font:700 .66rem/1 var(--compact); letter-spacing:.2em; text-transform:uppercase; color:#8d9096; }
+.cz-facts dd { margin:.3rem 0 0; font-size:.9rem; color:#ecebe8; }
+.cz-facts small { display:block; color:#f1c84a; font-size:.75rem; }
+.cz-ticket.is-orig { border-color:#7a6430; }
+.cz-ticket.is-orig .cz-stub { background:radial-gradient(circle at 50% 30%,#4a3a12,#0c0b08 75%); }
+.cz-ticket.is-away .cz-city { color:#8fc4ff; }
+.cz-ticket.is-last { border-color:#c9ccd1; box-shadow:0 0 30px -12px #ffffff88; }
+.cz-note { margin:1.6rem 0 0; font-size:.8rem; color:#8d9096; }
+@media (max-width:560px) { .cz-ticket { grid-template-columns:5.4rem 1fr; } .cz-ticket::before { left:5.4rem; } .cz-day { font-size:1.5rem; } }
