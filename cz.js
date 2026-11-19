@@ -36,10 +36,7 @@ export const czConcerts = [
   {date:'2023-06-10', city:'Praha', venue:'O2 arena', tour:'End of the Road World Tour', lineup:czLate, support:'Dirty Honey', last:true,
    text:'Poslední koncert KISS v Česku. Praha zahajovala evropskou část rozlučkového turné. O necelého půl roku později kapela skončila v Madison Square Garden.',
    media:[{src:'assets/cz/2023-zacatek.jpg', cap:'Začátek show: zářící logo a laserová světla', kind:'Fotka'},
-          {src:'assets/cz/2023-paul-video.mp4', poster:'assets/cz/2023-paul-video.jpg', cap:'Paul Stanley na velkoplošné obrazovce', kind:'Video'},
-          {src:'assets/cz/2023-gene-video.mp4', poster:'assets/cz/2023-gene-video.jpg', cap:'Démon v plamenech', kind:'Video'},
           {src:'assets/cz/2023-paul.jpg', cap:'Paul na obrazovce nad publikem', kind:'Fotka'},
-          {src:'assets/cz/2023-ohnostroj-video.mp4', poster:'assets/cz/2023-ohnostroj-video.jpg', cap:'Finále s pyrotechnikou', kind:'Video'},
           {src:'assets/cz/2023-loves-prague.jpg', cap:'KISS LOVES YOU PRAGUE v barvách české vlajky', kind:'Fotka'},
           {src:'assets/cz/2023-plakat.jpg', cap:'Plakát koncertu 10. 6. 2023', kind:'Plakát'}]}
 ];
