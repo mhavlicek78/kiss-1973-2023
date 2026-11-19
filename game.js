@@ -83,7 +83,7 @@ export const rewards = [
 const cardSource = (no) => no <= 8 ? 'Dokonči level ' + no + ' pexesa' : no <= 16 ? 'Dokonči turné ' + (no - 8) : no <= 24 ? 'Vyřeš level ' + (no - 16) + ' Čtyř tváří' : 'Rozsviť level ' + (no - 24) + ' cedule';
 
 /* ---------- ukládání: účet Claude, jinak tento prohlížeč ---------- */
-let gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}};
+let gState = {done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}};
 const gListeners = [];
 export const onStore = (fn) => gListeners.push(fn);
 export const getStore = () => gState;
@@ -101,6 +101,8 @@ function gMerge(a, b) {
   const out = {done:{...a.done}, foil:{...a.foil}, best:{...a.best}, qbest:{...(a.qbest || {})}};
   for (const key of ['sbest', 'lbest']) { out[key] = {...(a[key] || {})}; for (const k in (b?.[key] || {})) { const x = b[key][k]; if (typeof x === 'number' && (out[key][k] == null || x < out[key][k])) out[key][k] = x; } }
   for (const k in (b?.qbest || {})) { const x = b.qbest[k]; if (x && (!out.qbest[k] || x.score > out.qbest[k].score)) out.qbest[k] = {score:x.score, correct:x.correct}; }
+  out.got = {...(a.got || {})};
+  for (const k in (b?.got || {})) { const x = b.got[k]; if (typeof x === 'number' && (out.got[k] == null || x < out.got[k])) out.got[k] = x; }
   for (const k in (b?.done || {})) if (b.done[k]) out.done[k] = true;
   for (const k in (b?.foil || {})) if (b.foil[k]) out.foil[k] = true;
   for (const k in (b?.best || {})) {
@@ -111,8 +113,14 @@ function gMerge(a, b) {
 }
 const local = gLoadLocal();
 if (local) gState = gMerge(gState, local);
+gStamp();
 
+function gStamp() {
+  gState.got = gState.got || {};
+  for (const k in gState.done) if (gState.done[k] && gState.got[k] == null) gState.got[k] = Date.now();
+}
 function gPersist() {
+  gStamp();
   gSaveLocal();
   if (!gRemote) return;
   const body = JSON.parse(JSON.stringify(gState));
@@ -137,7 +145,7 @@ function gConnect() {
     if (!res) return;
     gRemote = res.ref;
     gSync = 'cloud';
-    const remoteOnly = JSON.stringify(gMerge({done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}}, res.data || {}));
+    const remoteOnly = JSON.stringify(gMerge({done:{}, foil:{}, best:{}, qbest:{}, sbest:{}, lbest:{}, got:{}}, res.data || {}));
     gState = gMerge(gState, res.data || {});
     if (!res.data || JSON.stringify(gState) !== remoteOnly) gPersist();
     else gSaveLocal();
@@ -163,17 +171,72 @@ function cardArt(r) {
   return '<svg class="rc-glyph" viewBox="0 0 100 100">' + art[r.art] + (r.art === 'guitar' ? art.smoke : '') + '</svg>';
 }
 
+const cardRoman = (n) => [['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]].reduce((s, [k, v]) => { while (n >= v) { s += k; n -= v; } return s; }, '');
+const cardOrigin = (no) => no <= 8 ? 'Pexeso · level ' + no : no <= 16 ? 'Kvíz · turné ' + (no - 8) : no <= 24 ? 'Čtyři tváře · level ' + (no - 16) : 'Světelná cedule · level ' + (no - 24);
+const cardDate = (t) => { const d = new Date(t || Date.now()); return d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear(); };
+const cardNo = (no) => 'No. ' + String(no).padStart(2, '0') + ' / 32';
+
 export function rewardCard(r, opts = {}) {
   const owned = opts.force || gState.done[r.no];
   const foil = owned && gState.foil[r.no];
   if (!owned) {
-    return '<div class="rcard locked"><div class="rc-inner"><span class="rc-q">?</span><p class="rc-lock">' + cardSource(r.no) + '</p><p class="rc-no">No. ' + String(r.no).padStart(2,'0') + ' / 32</p></div></div>';
+    return '<div class="rcard locked' + (r.rarity === 'legend' ? ' tarot' : '') + '"><div class="rc-face rc-front"><div class="rc-inner"><span class="rc-q">?</span><p class="rc-lock">' + cardSource(r.no) + '</p><p class="rc-no">' + cardNo(r.no) + '</p></div></div></div>';
   }
-  return '<button type="button" class="rcard r-' + r.rarity + (foil ? ' foil' : '') + '" data-zoom="' + r.no + '" aria-label="' + gEsc(r.name) + ', ' + rarityLabel[r.rarity] + ' karta">'
-    + '<div class="rc-inner"><div class="rc-top"><span>' + rarityLabel[r.rarity] + '</span><span>' + gEsc(r.who) + '</span></div>'
-    + '<div class="rc-art">' + cardArt(r) + '</div>'
-    + '<h3 class="rc-name">' + gEsc(r.name) + '</h3><p class="rc-text">' + gEsc(r.text) + '</p>'
-    + '<p class="rc-no">No. ' + String(r.no).padStart(2,'0') + ' / 32' + (foil ? ' · Lesklá edice' : '') + '</p></div><span class="rc-shine"></span></button>';
+  const legend = r.rarity === 'legend';
+  const printed = cardDate(gState.got?.[r.no]);
+  const front = legend
+    ? '<i class="rc-corner c1"></i><i class="rc-corner c2"></i><i class="rc-corner c3"></i><i class="rc-corner c4"></i>'
+      + '<p class="rc-roman">' + cardRoman(r.no) + '</p>'
+      + '<div class="rc-arch"><div class="rc-art">' + cardArt(r) + '</div><span class="rc-fire"></span></div>'
+      + '<p class="rc-orn">✦ ✦ ✦</p><h3 class="rc-name rc-banner">' + gEsc(r.name) + '</h3>'
+      + '<p class="rc-no">' + rarityLabel[r.rarity] + ' · ' + cardNo(r.no) + '</p><p class="rc-print">Vytištěno ' + printed + '</p>'
+    : '<i class="rc-rivet a"></i><i class="rc-rivet b"></i><i class="rc-rivet c"></i><i class="rc-rivet d"></i>'
+      + '<div class="rc-top"><span>' + rarityLabel[r.rarity] + '</span><span>' + gEsc(r.who) + '</span></div>'
+      + '<span class="rc-rays"></span><div class="rc-art">' + cardArt(r) + '</div>'
+      + '<div class="rc-plate"><h3 class="rc-name">' + gEsc(r.name) + '</h3></div>'
+      + '<p class="rc-no">' + cardNo(r.no) + '</p><p class="rc-print">Vytištěno ' + printed + '</p><i class="rc-gem"></i>';
+  const back = '<div class="rc-binner"><p class="rc-bhead">KISS 1973–2023</p><p class="rc-bsub">Sběratelská karta</p>'
+    + '<div class="rc-medal"><span>' + String(r.no).padStart(2, '0') + '</span></div>'
+    + '<h3 class="rc-bname">' + gEsc(r.name) + '</h3><p class="rc-story">' + gEsc(r.text) + '</p>'
+    + '<dl class="rc-facts"><div><dt>Získáno</dt><dd>' + printed + '</dd></div><div><dt>Ze hry</dt><dd>' + cardOrigin(r.no) + '</dd></div>'
+    + '<div><dt>Vzácnost</dt><dd>' + rarityLabel[r.rarity] + '</dd></div><div><dt>Edice</dt><dd>' + (foil ? 'Lesklá' : 'Standardní') + '</dd></div></dl>'
+    + '<p class="rc-bfoot">' + cardNo(r.no) + '</p></div>';
+  return '<button type="button" class="rcard r-' + r.rarity + (legend ? ' tarot' : ' relic') + (foil ? ' foil' : '') + '" data-zoom="' + r.no + '" aria-label="' + gEsc(r.name) + ', ' + rarityLabel[r.rarity] + ' karta' + (foil ? ', lesklá edice' : '') + '">'
+    + '<div class="rc-flip"><div class="rc-face rc-front"><div class="rc-inner">' + front + (foil ? '<span class="rc-ribbon">Lesklá edice</span>' : '') + '</div><span class="rc-holo"></span><span class="rc-shine"></span></div>'
+    + '<div class="rc-face rc-back">' + back + '</div></div></button>';
+}
+
+/* otočení karty ve zvětšení, přeskočení rozbalení, náklon telefonu */
+let gOrient = false, gOrientFrame = 0;
+function gOrientStart() {
+  if (gOrient || typeof window === 'undefined' || !('DeviceOrientationEvent' in window)) return;
+  gOrient = true;
+  const root = document.documentElement;
+  const listen = () => window.addEventListener('deviceorientation', (e) => {
+    if (e.gamma == null || gOrientFrame) return;
+    gOrientFrame = requestAnimationFrame(() => {
+      gOrientFrame = 0;
+      const x = Math.max(-1, Math.min(1, e.gamma / 30)), y = Math.max(-1, Math.min(1, ((e.beta || 45) - 45) / 30));
+      root.style.setProperty('--ox', (50 + x * 50).toFixed(1) + '%');
+      root.style.setProperty('--oy', (50 + y * 50).toFixed(1) + '%');
+      root.style.setProperty('--orx', (-y * 10).toFixed(1) + 'deg');
+      root.style.setProperty('--ory', (x * 12).toFixed(1) + 'deg');
+      root.classList.add('has-tilt');
+    });
+  });
+  try {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') DeviceOrientationEvent.requestPermission().then((s) => { if (s === 'granted') listen(); }).catch(() => {});
+    else listen();
+  } catch {}
+}
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', (e) => {
+    const reveal = e.target.closest('.g-reveal.fresh');
+    if (reveal) { reveal.classList.remove('fresh'); reveal.classList.add('opened'); return; }
+    const c = e.target.closest('.g-modal .rcard:not(.locked)');
+    if (c) { gOrientStart(); c.classList.toggle('flipped'); }
+  });
+  document.addEventListener('pointerdown', (e) => { if (e.target.closest && e.target.closest('.rcard')) gOrientStart(); }, {passive:true});
 }
 
 export function gamePage() {
