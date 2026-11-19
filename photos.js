@@ -134,22 +134,15 @@ export const photos = {
   },
   "singer-mask": {
     "src": "assets/photos/singer-mask.jpg",
-    "title": "Eric Singer · Catman, 2010",
-    "author": "Alberto Cabello",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-    "position": "50% 26%",
-    "page": "https://commons.wikimedia.org/wiki/File:Eric_Singer_Kiss.jpeg"
+    "title": "Eric Singer · Catman",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 22%"
   },
   "singer-plain": {
     "src": "assets/photos/singer-plain.jpg",
-    "title": "Eric Singer a Tommy Thayer · Helsinky, 28. 5. 2008",
-    "author": "Ville Koivunen",
-    "license": "Volné dílo",
-    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-    "position": "50% 50%",
-    "page": "https://commons.wikimedia.org/wiki/File:Eric_Singer_Tommy_Thayer_DLX-music_helsinki.jpg",
-    "context": true
+    "title": "Eric Singer · bez masky",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 54%"
   },
   "tommy-mask": {
     "src": "assets/photos/tommy-mask.jpg",
