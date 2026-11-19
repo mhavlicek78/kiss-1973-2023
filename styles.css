@@ -816,3 +816,16 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
 .hub-state { margin:.3rem 0 0; font-size:.85rem; color:#9fd8ae; }
 .hub-synctext { margin:1rem 0 0; }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+/* znělka: tlačítko reproduktoru */
+.intro-btn { position:fixed; z-index:60; right:max(14px,env(safe-area-inset-right)); bottom:max(14px,env(safe-area-inset-bottom)); width:46px; height:46px; display:grid; place-items:center; padding:0; border-radius:50%; border:1px solid #6c6f75; background:radial-gradient(circle at 35% 30%,#4a4c52,#121214 70%); color:#e9ebee; cursor:pointer; box-shadow:0 8px 18px -6px #000,inset 0 1px 0 #ffffff33; -webkit-tap-highlight-color:transparent; }
+.intro-btn[hidden] { display:none; }
+.intro-btn svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.intro-btn .ib-spk { fill:currentColor; stroke:none; }
+.intro-btn .ib-off { display:none; }
+.intro-btn.is-off { color:#8d9096; }
+.intro-btn.is-off .ib-on { display:none; } .intro-btn.is-off .ib-off { display:inline; }
+.intro-btn.is-waiting { animation:ib-pulse 2.2s ease-in-out infinite; }
+.intro-btn.is-playing .ib-on { animation:ib-wave .9s ease-in-out infinite alternate; }
+@keyframes ib-pulse { 50% { box-shadow:0 8px 18px -6px #000,inset 0 1px 0 #ffffff33,0 0 0 8px #ffffff14; } }
+@keyframes ib-wave { to { opacity:.35; } }
+@media (prefers-reduced-motion:reduce) { .intro-btn { animation:none !important; } .intro-btn .ib-on { animation:none !important; } }

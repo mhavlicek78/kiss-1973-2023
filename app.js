@@ -13,6 +13,62 @@ const hubGames = [
   {href:'#/ctyri-tvare', name:'Čtyři tváře', sym:'claw', from:16, text:'Sudoku se symboly masek. Každý symbol jednou v řádku, sloupci i bloku. Od levelu 4 přibude liška a ankh.'},
   {href:'#/cedule', name:'Světelná cedule', sym:'bolt', from:24, text:'Ťukni na žárovku a přepneš i sousední. Rozsviť celou ceduli, hvězdu, blesk i netopýra.'}
 ];
+/* ===== Znělka na úvodní stránce: pustí se při prvním ťuknutí (prohlížeče nedovolí dřív) ===== */
+const INTRO_KEY = 'kiss-zvuk';
+let introAudio = null, introBtn = null, introOnHome = false;
+const introMuted = () => { try { return localStorage.getItem(INTRO_KEY) === 'off'; } catch { return false; } };
+const introPlayed = () => { try { return sessionStorage.getItem('kiss-zvuk-hral') === '1'; } catch { return false; } };
+function introUi() {
+  if (!introBtn) {
+    introBtn = document.createElement('button');
+    introBtn.type = 'button';
+    introBtn.className = 'intro-btn';
+    introBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="ib-spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="ib-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="ib-off" d="M16.5 9.5l5 5m0-5-5 5"/></svg>';
+    introBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (introMuted()) { try { localStorage.removeItem(INTRO_KEY); } catch {} introPlay(true); }
+      else { try { localStorage.setItem(INTRO_KEY, 'off'); } catch {} introStop(); }
+      introUi();
+    });
+    document.body.appendChild(introBtn);
+  }
+  const muted = introMuted(), playing = introAudio && !introAudio.paused;
+  introBtn.hidden = !introOnHome && !playing;
+  introBtn.classList.toggle('is-off', muted);
+  introBtn.classList.toggle('is-playing', !!playing);
+  introBtn.classList.toggle('is-waiting', !muted && !playing && !introPlayed());
+  introBtn.setAttribute('aria-label', muted ? 'Zapnout znělku' : playing ? 'Vypnout znělku' : 'Znělka zapnutá, ťukni kamkoli');
+  introBtn.title = introBtn.getAttribute('aria-label');
+}
+function introPlay(force) {
+  if (introMuted() || (!force && introPlayed())) return;
+  try { sessionStorage.setItem('kiss-zvuk-hral', '1'); } catch {}
+  if (!introAudio) {
+    introAudio = new Audio('assets/audio/znelka.mp3');
+    introAudio.preload = 'auto';
+    introAudio.addEventListener('ended', introUi);
+    introAudio.addEventListener('pause', introUi);
+    introAudio.addEventListener('playing', introUi);
+  }
+  introAudio.currentTime = 0;
+  introAudio.volume = 0.9;
+  introAudio.play().catch(() => { try { sessionStorage.removeItem('kiss-zvuk-hral'); } catch {} introUi(); });
+}
+function introStop() { if (introAudio) { introAudio.pause(); introAudio.currentTime = 0; } }
+function introGesture(e) {
+  if (!introOnHome || (introBtn && introBtn.contains(e.target))) return;
+  introPlay(false);
+}
+let introHooked = false;
+function introArm(onHome) {
+  introOnHome = onHome;
+  if (!introHooked) {
+    introHooked = true;
+    ['pointerup', 'touchend', 'keydown'].forEach((ev) => document.addEventListener(ev, introGesture, {passive:true}));
+  }
+  introUi();
+}
+
 let hubHooked = false;
 function hubPage() { return '<div class="shell page hub-page" id="hub-root"></div>'; }
 function hubSync() {
@@ -456,6 +512,7 @@ function render(isFirst = false) {
   document.title = page.section === 'home' ? page.title : page.title + ' — KISS 1973–2023';
   main.innerHTML = page.html;
   main.dataset.section = page.section || 'none';
+  introArm(page.section === 'home');
   main.dataset.member = page.member || '';
   if (page.mount) page.mount();
   const navSection = ['game', 'quiz', 'sudoku', 'lights', 'games'].includes(page.section) ? 'games' : page.section;
@@ -531,3 +588,4 @@ render(true);
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
+
