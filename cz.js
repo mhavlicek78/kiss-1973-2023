@@ -39,16 +39,19 @@ const czFmt = (iso, iso2) => {
 export function czPage() {
   const shows = czConcerts.reduce((n, c) => n + (c.date2 ? 2 : 1), 0);
   const cities = [...new Set(czConcerts.map((c) => c.city))];
+  const seen = czConcerts.filter((c) => c.city !== 'Ostrava').reduce((n, c) => n + (c.date2 ? 2 : 1), 0);
   const count = (city) => czConcerts.filter((c) => c.city === city).reduce((n, c) => n + (c.date2 ? 2 : 1), 0);
   return '<div class="shell page cz-page">'
     + '<header class="section-head"><p class="eyebrow">KISS v Česku</p><h1>Koncerty v Česku</h1>'
     + '<p class="lede">Od prvního reunion koncertu na pražském Výstavišti v prosinci 1996 až po rozlučku v O2 areně v červnu 2023. Všechny koncerty KISS v Česku na jednom místě.</p></header>'
-    + '<div class="cz-stats"><div><b>' + shows + '</b><span>koncertů</span></div><div><b>' + cities.length + '</b><span>města</span></div><div><b>27</b><span>let</span></div></div>'
+    + '<div class="cz-stats"><div><b>' + shows + '</b><span>koncertů</span></div><div><b>' + cities.length + '</b><span>města</span></div><div><b>27</b><span>let</span></div><div class="cz-seen"><b>' + seen + '</b><span>jsem viděl</span></div></div>'
     + '<p class="cz-cities">' + cities.map((c) => '<span>' + czEsc(c) + ' <b>' + count(c) + '×</b></span>').join('') + '</p>'
     + '<ol class="cz-list">' + czConcerts.map((c) => {
         const [y, m, d] = c.date.split('-').map(Number);
-        return '<li class="cz-ticket' + (c.orig ? ' is-orig' : '') + (c.city !== 'Praha' ? ' is-away' : '') + (c.last ? ' is-last' : '') + '">'
+        const was = c.city !== 'Ostrava';
+        return '<li class="cz-ticket' + (was ? ' was-there' : '') + (c.orig ? ' is-orig' : '') + (c.city !== 'Praha' ? ' is-away' : '') + (c.last ? ' is-last' : '') + '">'
           + '<div class="cz-stub"><span class="cz-day">' + d + (c.date2 ? '.–' + +c.date2.split('-')[2] : '') + '.</span><span class="cz-mon">' + czMonths[m - 1] + '</span><span class="cz-year">' + y + '</span></div>'
+          + (was ? '<span class="cz-stamp" aria-label="Byl jsem tam">Byl jsem<br>tam</span>' : '')
           + '<div class="cz-body"><p class="cz-city">' + czEsc(c.city) + (c.last ? ' <em>poslední koncert v Česku</em>' : '') + '</p>'
           + '<h2>' + czEsc(c.venue) + '</h2>'
           + '<p class="cz-tour">' + czEsc(c.tour) + '</p>'
@@ -56,6 +59,6 @@ export function czPage() {
           + '<dl class="cz-facts"><div><dt>Datum</dt><dd>' + czFmt(c.date, c.date2) + '</dd></div><div><dt>Sestava</dt><dd>' + czEsc(c.lineup) + (c.orig ? ' <small>původní čtveřice</small>' : '') + '</dd></div>'
           + (c.support ? '<div><dt>Předskokan</dt><dd>' + czEsc(c.support) + '</dd></div>' : '') + '</dl></div></li>';
       }).join('') + '</ol>'
-    + '<p class="cz-note">Prameny: ČT24, Deník, Novinky.cz, E15, Echo24, Expats.cz a archivy turné. Fotky z koncertů sem rád doplním, pokud máš vlastní.</p>'
+    + '<p class="cz-note">Prameny: ČT24, Deník, Novinky.cz, E15, Echo24, Expats.cz a archivy turné. Fotky z koncertů doplním z Martinova archivu.</p>'
     + '</div>';
 }

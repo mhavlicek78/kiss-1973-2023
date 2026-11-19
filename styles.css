@@ -962,3 +962,8 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
 .cz-ticket.is-last { border-color:#c9ccd1; box-shadow:0 0 30px -12px #ffffff88; }
 .cz-note { margin:1.6rem 0 0; font-size:.8rem; color:#8d9096; }
 @media (max-width:560px) { .cz-ticket { grid-template-columns:5.4rem 1fr; } .cz-ticket::before { left:5.4rem; } .cz-day { font-size:1.5rem; } }
+.cz-seen { border-color:#7a6430 !important; background:linear-gradient(160deg,#f1c84a22,#0000 60%),#0e0e10 !important; }
+.cz-seen b { background:linear-gradient(180deg,#fff3c4,#e7b84a 55%,#a8701a) !important; -webkit-background-clip:text !important; background-clip:text !important; }
+.cz-stamp { position:absolute; top:.7rem; right:.7rem; z-index:2; display:grid; place-items:center; width:4.6rem; height:4.6rem; border-radius:50%; border:3px double #d9454a; color:#e25a5e; font:700 .62rem/1.15 var(--compact); letter-spacing:.14em; text-transform:uppercase; text-align:center; transform:rotate(-14deg); opacity:.85; mix-blend-mode:screen; box-shadow:inset 0 0 0 2px #d9454a33; }
+.cz-ticket.was-there .cz-body { padding-right:5.4rem; }
+@media (max-width:560px) { .cz-stamp { width:3.7rem; height:3.7rem; font-size:.52rem; top:.5rem; right:.5rem; } .cz-ticket.was-there .cz-body { padding-right:4.2rem; } }
