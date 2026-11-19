@@ -6,6 +6,9 @@ import { quizPage, mountQuiz } from './quiz.js';
 import { sudokuPage, mountSudoku } from './sudoku.js';
 import { lightsPage, mountLights } from './lights.js';
 import { mysteryPage, mountMystery } from './mystery.js';
+import { timelinePage, mountTimeline } from './timeline.js';
+import { nonogramPage, mountNonogram } from './nonogram.js';
+import { rhythmPage, mountRhythm } from './rhythm.js';
 import { rewards, rewardCard, getStore, connectStore, onStore, tiltCard, syncText, syncAvailable, syncCode, syncStatus, suggestCode, connectCode, disconnectCode } from './game.js';
 
 const hubGames = [
@@ -13,7 +16,10 @@ const hubGames = [
   {href:'#/kviz', name:'Kvíz', sym:'bat', from:8, text:'Osm turné po deseti otázkách. Čím dál, tím méně času na odpověď.'},
   {href:'#/ctyri-tvare', name:'Čtyři tváře', sym:'claw', from:16, text:'Sudoku se symboly masek. Každý symbol jednou v řádku, sloupci i bloku. Od levelu 4 přibude liška a ankh.'},
   {href:'#/cedule', name:'Světelná cedule', sym:'bolt', from:24, text:'Ťukni na žárovku a přepneš i sousední. Rozsviť celou ceduli, hvězdu, blesk i netopýra.'},
-  {href:'#/zakulisi', name:'Backstage Mystery', sym:'burst', from:32, text:'Detektivní případy ze zákulisí. Z indicií zjisti, kdo co odnesl, kam a kdy. Někdy je to žertík samotné kapely.'}
+  {href:'#/zakulisi', name:'Backstage Mystery', sym:'burst', from:32, text:'Detektivní případy ze zákulisí. Z indicií zjisti, kdo co odnesl, kam a kdy. Někdy je to žertík samotné kapely.'},
+  {href:'#/kariera', name:'Seřaď kariéru', sym:'star', from:40, text:'Alba, velké momenty, změny sestavy a turné. Přetáhni karty do správného pořadí od nejstaršího.'},
+  {href:'#/masky', name:'Malované masky', sym:'bat', from:48, text:'Podle čísel vybarvuj mřížku, až se vynoří obrázek. Hvězda, netopýr, liška i Démonova maska.'},
+  {href:'#/rytmus', name:'Peterův rytmus', sym:'claw', from:56, text:'Bicí zahrají rytmus a ty ho zopakuješ. Každé kolo o úder delší a rychlejší. Se zvukem.'}
 ];
 /* ===== Znělka na úvodní stránce: pustí se při prvním ťuknutí (prohlížeče nedovolí dřív) ===== */
 const INTRO_KEY = 'kiss-zvuk';
@@ -98,7 +104,7 @@ function hubRender() {
   const st = getStore();
   const total = rewards.filter((r) => st.done[r.no]).length;
   root.innerHTML = '<header class="section-head"><p class="eyebrow">Hry</p><h1>Hry a sbírka karet</h1>'
-    + '<p class="lede">Pět her, každá s osmi levely a osmi sběratelskými kartami. Celkem ' + total + ' z ' + rewards.length + ' karet ve sbírce.</p></header>'
+    + '<p class="lede">' + hubGames.length + ' her, každá s osmi levely a osmi sběratelskými kartami. Celkem ' + total + ' z ' + rewards.length + ' karet ve sbírce.</p></header>'
     + hubSync()
     + '<div class="hub-grid">' + hubGames.map((g) => {
         const got = rewards.slice(g.from, g.from + 8).filter((r) => st.done[r.no]).length;
@@ -497,6 +503,9 @@ function route() {
     case 'ctyri-tvare': return {section:'sudoku', html:sudokuPage(), title:'Čtyři tváře', mount:mountSudoku};
     case 'cedule': return {section:'lights', html:lightsPage(), title:'Světelná cedule', mount:mountLights};
     case 'zakulisi': return {section:'mystery', html:mysteryPage(), title:'Backstage Mystery', mount:mountMystery};
+    case 'kariera': return {section:'timeline', html:timelinePage(), title:'Seřaď kariéru', mount:mountTimeline};
+    case 'masky': return {section:'nonogram', html:nonogramPage(), title:'Malované masky', mount:mountNonogram};
+    case 'rytmus': return {section:'rhythm', html:rhythmPage(), title:'Peterův rytmus', mount:mountRhythm};
     case 'hry': return {section:'games', html:hubPage(), title:'Hry', mount:mountHub};
   }
   return {section:'', title:'Stránka nenalezena', html:'<div class="shell page">' + sectionHead('KISS','Stránka nenalezena') + back('#/','Zpět na úvod') + '</div>'};
@@ -518,7 +527,7 @@ function render(isFirst = false) {
   introArm(page.section === 'home');
   main.dataset.member = page.member || '';
   if (page.mount) page.mount();
-  const navSection = ['game', 'quiz', 'sudoku', 'lights', 'mystery', 'games'].includes(page.section) ? 'games' : page.section;
+  const navSection = ['game', 'quiz', 'sudoku', 'lights', 'mystery', 'timeline', 'nonogram', 'rhythm', 'games'].includes(page.section) ? 'games' : page.section;
   for (const item of document.querySelectorAll('.header nav [data-section]')) {
     if (item.dataset.section === navSection) item.setAttribute('aria-current','page');
     else item.removeAttribute('aria-current');

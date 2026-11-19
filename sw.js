@@ -1,5 +1,5 @@
-const CACHE = 'kiss-archive-v49';
-const FILES = ['./', './index.html', './styles.css', './app.js', './data.js', './albums.js', './photos.js', './game.js', './quiz.js', './sudoku.js', './lights.js', './mystery.js', './manifest.webmanifest', './assets/fonts/zalando-sans-expanded-latin-700-italic.woff2', './assets/fonts/zalando-sans-expanded-latin-ext-700-italic.woff2', './assets/kiss-logo.png', './assets/icon-32.png', './assets/icon-180.png', './assets/icon-192.png', './assets/icon-512.png'];
+const CACHE = 'kiss-archive-v50';
+const FILES = ['./', './index.html', './styles.css', './app.js', './data.js', './albums.js', './photos.js', './game.js', './quiz.js', './sudoku.js', './lights.js', './mystery.js', './timeline.js', './nonogram.js', './rhythm.js', './manifest.webmanifest', './assets/fonts/zalando-sans-expanded-latin-700-italic.woff2', './assets/fonts/zalando-sans-expanded-latin-ext-700-italic.woff2', './assets/kiss-logo.png', './assets/icon-32.png', './assets/icon-180.png', './assets/icon-192.png', './assets/icon-512.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(FILES)));

@@ -6,11 +6,12 @@ const MAX = 32 * 1024;
 function merge(a, b) {
   a = a || {}; b = b || {};
   const out = {done:{...(a.done || {})}, foil:{...(a.foil || {})}, best:{...(a.best || {})}, qbest:{...(a.qbest || {})}};
-  for (const key of ['sbest', 'lbest', 'mbest', 'got']) {
+  for (const key of ['sbest', 'lbest', 'mbest', 'kbest', 'ngbest', 'rbest', 'got']) {
     out[key] = {...(a[key] || {})};
     for (const k in (b[key] || {})) { const x = b[key][k]; if (typeof x === 'number' && (out[key][k] == null || x < out[key][k])) out[key][k] = x; }
   }
   for (const k in (b.qbest || {})) { const x = b.qbest[k]; if (x && typeof x.score === 'number' && (!out.qbest[k] || x.score > out.qbest[k].score)) out.qbest[k] = {score:x.score, correct:x.correct}; }
+  out.rmax = Math.max(typeof a.rmax === 'number' ? a.rmax : 0, typeof b.rmax === 'number' ? b.rmax : 0);
   for (const k in (b.done || {})) if (b.done[k] === true) out.done[k] = true;
   for (const k in (b.foil || {})) if (b.foil[k] === true) out.foil[k] = true;
   for (const k in (b.best || {})) {
