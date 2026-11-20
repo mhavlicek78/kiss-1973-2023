@@ -1002,3 +1002,12 @@ html.cz-lock { overflow:hidden; }
 .listen-arrow { flex:none; font-size:1.4rem; font-weight:700; color:#8d9096; transition:color .3s; }
 .listen-cta:hover .listen-arrow { color:#e9ebee; }
 @media (prefers-reduced-motion:reduce) { .listen-cta:hover::after { transition:none; transform:translateX(-130%); } .listen-cta:hover .listen-ico { transform:none; } }
+/* časová osa: digitální avataři jako samostatný blok */
+.avatar-feature { display:grid; grid-template-columns:minmax(0,1.04fr) minmax(0,1fr); gap:clamp(1rem,3.8vw,3rem); align-items:center; margin:2.4rem 0 1.4rem; padding-top:2rem; border-top:1px solid #3a3a3d; }
+.avatar-photo { position:relative; margin:0; overflow:hidden; border:1px solid #3a3a3d; box-shadow:0 24px 50px -20px #000,0 0 40px -14px #4aa8ff66; }
+.avatar-photo img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+.avatar-photo::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,transparent 60%,#0008); }
+.avatar-feature h2 { margin:.25rem 0 .8rem; }
+.avatar-feature p:not(.eyebrow) { color:var(--muted); max-width:58ch; margin:0 0 1.4rem; }
+.avatar-feature .listen-cta { margin:0; max-width:30rem; }
+@media (max-width:760px) { .avatar-feature { grid-template-columns:1fr; } }

@@ -308,11 +308,20 @@ function timeline(active) {
     + eras.map((era) => '<section id="era-' + era.id + '" class="chapter"><div class="chapter-header">'
       + photoFrame(era.photo) + '<div><p class="eyebrow">' + era.years + '</p><h2 tabindex="-1">' + era.title + '</h2><p>' + esc(era.intro)
       + '</p><p class="lineup"><strong>Sestavy</strong><br>' + esc(era.lineup) + '</p></div></div>'
-      + '<ol class="milestones">' + era.events.map((event) => '<li' + (event.media ? ' class="milestone-media"' : '')
+      + '<ol class="milestones">' + era.events.filter((event) => !event.media).map((event) => '<li'
         + '><a href="#/milnik/' + event.id + '"><span class="event-date">' + event.date + '</span>'
         + '<span><strong>' + esc(event.title) + '</strong><small>' + esc(event.summary) + '</small></span>'
         + (event.media ? '<span class="milestone-action">Klip a poslech ' + right + '</span>' : arrow) + '</a></li>').join('')
-      + '</ol><a class="to-top quiet" href="#/casova-osa" data-top>Na začátek osy ' + up + '</a></section>').join('') + '</div>';
+      + '</ol>' + era.events.filter((event) => event.media).map(avatarFeature).join('') + '<a class="to-top quiet" href="#/casova-osa" data-top>Na začátek osy ' + up + '</a></section>').join('') + '</div>';
+}
+
+function avatarFeature(event) {
+  return '<section class="avatar-feature"><figure class="avatar-photo"><img src="assets/photos/avatars.jpg" alt="Digitální avataři KISS: Spaceman, Starchild, Démon s křídly a Catman" loading="lazy"></figure>'
+    + '<div><p class="eyebrow">' + event.date + ' · Madison Square Garden</p><h2>' + esc(event.title) + '</h2>'
+    + '<p>' + esc(event.summary) + ' Vytvořilo je studio Industrial Light & Magic podle pohybů a výrazů samotných hudebníků.</p>'
+    + '<a class="listen-cta" href="#/milnik/' + event.id + '">'
+    + '<span class="listen-ico" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><radialGradient id="pl-g" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fafbfc"/><stop offset=".35" stop-color="#b9bdc4"/><stop offset=".6" stop-color="#5d6168"/><stop offset=".8" stop-color="#c9ccd1"/><stop offset="1" stop-color="#3a3c40"/></radialGradient></defs><circle cx="50" cy="50" r="48" fill="url(#pl-g)"/><circle cx="50" cy="50" r="40" fill="#141416" stroke="#e9ebee" stroke-width="1.5"/><path d="M41 32l28 18-28 18z" fill="url(#pl-g)"/><path d="M18 30a40 40 0 0 1 22-16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/></svg></span>'
+    + '<span class="listen-txt"><small>Oficiální klip a skladba z premiéry</small>Klip a poslech</span><span class="listen-arrow" aria-hidden="true">→</span></a></div></section>';
 }
 
 function eventPage(era, event) {
