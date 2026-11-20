@@ -430,7 +430,7 @@ function morphBlock(member) {
     + ' data-src="' + m.src + '" aria-label="' + esc(member.name) + ' v letech ' + first + '–' + last + '"></video>'
     + '<button class="morph-toggle" type="button" aria-label="Pozastavit">❚❚</button></figure>'
     + '<div class="morph-copy"><p class="eyebrow">Proměna</p><h2>' + first + '–' + last + '</h2>'
-    + '<ol class="morph-stops">' + m.stops.map(([t, year, title], i) =>
+    + '<ol class="morph-stops" style="--cols:' + Math.max(6, Math.ceil(m.stops.length / 3)) + '">' + m.stops.map(([t, year, title], i) =>
       '<li><button type="button" data-t="' + t + '" data-i="' + i + '" aria-label="' + year + ' ' + esc(title) + '">' + year + '</button></li>').join('')
     + '</ol><div class="morph-detail" aria-live="polite"><span class="morph-year">' + first + '</span><h3 class="morph-title">' + esc(m.stops[0][2]) + '</h3>'
     + '<p class="morph-text">' + esc(m.stops[0][3]) + '</p></div></div></section>';

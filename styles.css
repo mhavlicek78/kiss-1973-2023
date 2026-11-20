@@ -1027,7 +1027,7 @@ html.cz-lock { overflow:hidden; }
 .morph-video video { display:block; width:100%; height:100%; object-fit:cover; }
 .morph-toggle { position:absolute; right:.75rem; bottom:.75rem; width:2.4rem; height:2.4rem; border-radius:50%; border:1px solid rgba(255,255,255,.25); background:rgba(10,10,12,.55); color:#fff; font-size:.75rem; cursor:pointer; backdrop-filter:blur(6px); }
 .morph-copy h2 { margin:.2rem 0 1.2rem; }
-.morph-stops { list-style:none; margin:0 0 1.4rem; padding:0; display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.4rem; }
+.morph-stops { list-style:none; margin:0 0 1.4rem; padding:0; display:grid; grid-template-columns:repeat(var(--cols,6),minmax(0,1fr)); gap:.4rem; }
 .morph-stops button { width:100%; padding:.55rem 0; background:rgba(255,255,255,.03); border:1px solid #2c2c30; color:#8d8b86; font:inherit; font-weight:700; font-size:.92rem; letter-spacing:.02em; cursor:pointer; transition:color .25s ease, border-color .25s ease, background .25s ease; }
 .morph-stops button:hover { color:#e8e6e0; border-color:#4a4a50; }
 .morph-stops .is-active { color:#fff; background:color-mix(in srgb, var(--person, #ff695d) 22%, transparent); border-color:var(--person, #ff695d); }
