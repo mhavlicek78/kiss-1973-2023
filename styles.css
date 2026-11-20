@@ -1040,3 +1040,5 @@ html.cz-lock { overflow:hidden; }
   .morph-detail { min-height:7.5rem; }
   .morph-video { max-width:28rem; width:100%; margin:0 auto; }
 }
+.morph-stops button { white-space:nowrap; }
+@media (max-width:760px) { .morph-stops button { font-size:clamp(.7rem,3.2vw,.92rem); letter-spacing:0; } }

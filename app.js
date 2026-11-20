@@ -424,7 +424,7 @@ function persona(id) {
 }
 
 function morphBlock(member) {
-  const m = member.morph, first = m.stops[0][1], last = m.stops[m.stops.length - 1][1];
+  const m = member.morph, first = m.stops[0][1].slice(0, 4), last = m.stops[m.stops.length - 1][1];
   return '<section class="morph" aria-label="Proměna ' + esc(member.name) + ' ' + first + '–' + last + '">'
     + '<figure class="morph-video"><video muted playsinline loop preload="none" poster="' + m.src + '-poster.webp" width="' + m.w + '" height="' + m.h + '"'
     + ' data-src="' + m.src + '" aria-label="' + esc(member.name) + ' v letech ' + first + '–' + last + '"></video>'
