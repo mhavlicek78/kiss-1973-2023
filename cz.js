@@ -19,9 +19,11 @@ export const czConcerts = [
    text:'Oslava 35 let kapely, poprvé v Česku s Tommym Thayerem a Ericem Singerem. Hrálo se pro zhruba 15 000 diváků a každý koncert turné se natáčel a vycházel jako limitovaná edice na CD.',
    media:[{src:'assets/cz/2008-plakat.jpg', cap:'Grafika turné Alive 35', kind:'Plakát'}]},
   {date:'2010-05-21', city:'Ostrava', venue:'ČEZ Aréna', tour:'Sonic Boom Over Europe Tour', lineup:czLate, missed:true,
-   text:'Jediný koncert KISS v Ostravě, vyprodaný. Po skončení nad pódiem ještě dlouho svítil nápis KISS LOVES YOU OSTRAVA.'},
+   text:'Jediný koncert KISS v Ostravě, vyprodaný. Po skončení nad pódiem ještě dlouho svítil nápis KISS LOVES YOU OSTRAVA.',
+   media:[{src:'assets/cz/2010-plakat.jpg', cap:'Plakát Sonic Boom Over Europe 2010 se seznamem měst včetně Ostravy a Prahy', kind:'Plakát'}]},
   {date:'2010-05-23', city:'Praha', venue:'O2 arena', tour:'Sonic Boom Over Europe Tour', lineup:czLate,
-   text:'O dva dny později vyprodaná O2 arena. Turné k albu Sonic Boom, prvnímu studiovému albu kapely po jedenácti letech.'},
+   text:'O dva dny později vyprodaná O2 arena. Turné k albu Sonic Boom, prvnímu studiovému albu kapely po jedenácti letech.',
+   media:[{src:'assets/cz/2010-plakat.jpg', cap:'Plakát Sonic Boom Over Europe 2010 se seznamem měst včetně Ostravy a Prahy', kind:'Plakát'}]},
   {date:'2013-06-14', city:'Praha', venue:'O2 arena', tour:'Monster World Tour', lineup:czLate,
    text:'Turné k albu Monster. Nad pódiem se vznášel obří světélkující pavouk s ohňostroji.'},
   {date:'2015-06-08', city:'Praha', venue:'O2 arena', tour:'40th Anniversary World Tour', lineup:czLate, support:'The Dead Daisies',
@@ -44,6 +46,8 @@ export const czConcerts = [
           {src:'assets/cz/2023-loves-prague.jpg', cap:'KISS LOVES YOU PRAGUE v barvách české vlajky', kind:'Fotka'},
           {src:'assets/cz/2023-plakat.jpg', cap:'Plakát koncertu 10. 6. 2023', kind:'Plakát'}]}
 ];
+
+const czThumb = (src) => src.replace('assets/cz/', 'assets/cz/t/').replace(/\.jpe?g$/, '.webp');
 
 const czFmt = (iso, iso2) => {
   const [y, m, d] = iso.split('-').map(Number);
@@ -74,7 +78,7 @@ export function czPage() {
           + '<dl class="cz-facts"><div><dt>Datum</dt><dd>' + czFmt(c.date, c.date2) + '</dd></div><div><dt>Sestava</dt><dd>' + czEsc(c.lineup) + (c.orig ? ' <small>původní čtveřice</small>' : '') + '</dd></div>'
           + (c.support ? '<div><dt>' + (c.support.includes(',') ? 'Předskokani' : 'Předskokan') + '</dt><dd>' + czEsc(c.support) + '</dd></div>' : '') + '</dl>'
           + (c.media ? '<div class="cz-gallery">' + c.media.map((m, k) => '<button type="button" class="cz-thumb' + (m.poster ? ' is-video' : '') + '" data-cz="' + i + '-' + k + '" aria-label="' + czEsc(m.kind + ': ' + m.cap) + '">'
-              + '<img src="' + (m.poster || m.src) + '" alt="" loading="lazy"><span>' + czEsc(m.kind) + '</span></button>').join('') + '</div>' : '')
+              + '<img src="' + (m.poster || czThumb(m.src)) + '" alt="" loading="lazy" decoding="async"><span>' + czEsc(m.kind) + '</span></button>').join('') + '</div>' : '')
           + '</div></li>';
       }).join('') + '</ol>'
     + '<div class="cz-lightbox" hidden role="dialog" aria-modal="true" aria-label="Galerie"></div>'
