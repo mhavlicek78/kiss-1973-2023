@@ -43,8 +43,9 @@ export const czConcerts = [
    text:'Koncert byl kvůli covidu dvakrát odložen, z 1. 7. 2020 a 10. 7. 2021. Verunku jsem kvůli koncertu přivezl rovnou z tábora. Po koncertě mám ale takové smíšené pocity. Show skvělá, řekl bych že asi nejdokonalejší světelná paráda, jakou na jejich koncertech pamatuju. Pro mě ale navždy budou KISS Paul, Gene, Ace a Peter.',
    media:[{src:'assets/cz/2022-selfie.jpg', cap:'S Verunkou v O2 areně pod sochami Demona a Catmana', kind:'Fotka'},{src:'assets/cz/2022-plakat.jpg', cap:'Plakát koncertu 13. 7. 2022', kind:'Plakát'}]},
   {date:'2023-06-10', city:'Praha', venue:'O2 arena', tour:'End of the Road World Tour', lineup:czLate, support:'Dirty Honey', last:true,
-   text:'Poslední koncert KISS v Česku. Praha zahajovala evropskou část rozlučkového turné. O necelého půl roku později kapela skončila v Madison Square Garden.',
-   media:[{src:'assets/cz/2023-zacatek.jpg', cap:'Začátek show: zářící logo a laserová světla', kind:'Fotka'},
+   text:'Tak jo, tahle rozlučka s KISS už je definitivně poslední. Ale povedlo se to, bylo to naprosto vynikající. Pro mě koncert číslo 12, pro Verunku 3. Verunka na konci plakala, což mě úplně odrovnalo. Pánové, díky moc za těch 35 let co vás poslouchám, udělali jste můj život skutečně krásnější. I LOVE YOU FOREVER ♥️',
+   media:[{src:'assets/cz/2023-verunka.jpg', cap:'Verunka s programem Countdown: End of the Road', kind:'Fotka'},
+          {src:'assets/cz/2023-zacatek.jpg', cap:'Začátek show: zářící logo a laserová světla', kind:'Fotka'},
           {src:'assets/cz/2023-paul.jpg', cap:'Paul na obrazovce nad publikem', kind:'Fotka'},
           {src:'assets/cz/2023-loves-prague.jpg', cap:'KISS LOVES YOU PRAGUE v barvách české vlajky', kind:'Fotka'},
           {src:'assets/cz/2023-plakat.jpg', cap:'Plakát koncertu 10. 6. 2023', kind:'Plakát'}]}
