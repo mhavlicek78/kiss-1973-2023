@@ -52,7 +52,7 @@ export const photos = {
   },
   "gene-mask": {
     "src": "assets/photos/gene-mask.jpg",
-    "title": "Gene Simmons · The Demon živě",
+    "title": "Gene Simmons · Demon živě",
     "author": "dodal Martin Havlíček",
     "position": "50% 25%"
   },
@@ -128,7 +128,7 @@ export const photos = {
   },
   "carr-mask": {
     "src": "assets/photos/carr-mask.jpg",
-    "title": "Eric Carr · The Fox",
+    "title": "Eric Carr · Fox",
     "author": "dodal Martin Havlíček",
     "position": "50% 56%"
   },

@@ -22,7 +22,7 @@ const tlItems = [
   {id:'m-tiger', type:'moment', title:'Reunion v maskách na Tiger Stadium v Detroitu', year:1996},
   {id:'m-hof', type:'moment', title:'Uvedení do Rock & Roll Hall of Fame', year:2014},
   {id:'m-final', type:'moment', title:'Poslední koncert v Madison Square Garden', year:2023},
-  {id:'p-carr', type:'member', title:'Za bicí usedá Eric Carr (The Fox)', year:1980},
+  {id:'p-carr', type:'member', title:'Za bicí usedá Eric Carr (Fox)', year:1980},
   {id:'p-vinnie', type:'member', title:'Sólovou kytaru přebírá Vinnie Vincent', year:1982},
   {id:'p-kulick', type:'member', title:'Do kapely přichází Bruce Kulick', year:1984},
   {id:'p-singer', type:'member', title:'Za bicí poprvé usedá Eric Singer', year:1991},
