@@ -14,6 +14,23 @@ export const sources = {
   archives: ['uDiscover Music · archiv živých nahrávek', 'https://www.udiscovermusic.com/news/kiss-off-soundboard-des-moines-1977/'],
   landlocked: ['People · KISS Kruise: Landlocked 2025', 'https://people.com/kiss-returns-to-the-stage-for-the-first-time-since-ace-frehleys-death-11850427'],
   iphone: ['Apple · webová aplikace na ploše iPhonu', 'https://support.apple.com/guide/iphone/bookmark-a-website-iph42ab2f3a7/ios'],
+  kissarmy: ['Wikipedia · KISS Army', 'https://en.wikipedia.org/wiki/Kiss_Army'],
+  kisshistory: ['KISSonline · chronologie kapely', 'https://www.kissonline.com/history'],
+  comic: ['Wikipedia · komiksy KISS od Marvelu', 'https://en.wikipedia.org/wiki/Kiss_(comics)'],
+  phantom: ['Wikipedia · KISS Meets the Phantom of the Park', 'https://en.wikipedia.org/wiki/Kiss_Meets_the_Phantom_of_the_Park'],
+  members: ['Wikipedia · seznam členů KISS', 'https://en.wikipedia.org/wiki/List_of_Kiss_members'],
+  stjohn: ['Wikipedia · Mark St. John', 'https://en.wikipedia.org/wiki/Mark_St._John'],
+  drc: ['Wikipedia · Detroit Rock City (film)', 'https://en.wikipedia.org/wiki/Detroit_Rock_City_(film)'],
+  singer: ['Ultimate Classic Rock · Eric Singer nahrazuje Petera Crisse', 'https://ultimateclassicrock.com/kiss-eric-singer-replaces-peter-criss/'],
+  olympics: ['Olympics.com · KISS na olympiádě 2002', 'https://olympics.com/en/news/inside-kiss-legendary-performance-at-salt-lake-city-2002'],
+  tommy: ['Ultimate Classic Rock · první koncert Tommyho Thayera', 'https://ultimateclassicrock.com/tommy-thayer-first-kiss-show/'],
+  rtn: ['Ultimate Classic Rock · první turné poslední sestavy', 'https://ultimateclassicrock.com/kiss-current-lineup-first-tour/'],
+  dubai: ['Blabbermouth · KISS 2020 Goodbye a Guinnessovy rekordy', 'https://blabbermouth.net/news/kisss-nye-pay-per-view-breaks-guinness-records-for-highest-flame-projection-most-flame-projections-in-music-concert'],
+  sale: ['CBS News · prodej katalogu a značky Pophouse', 'https://www.cbsnews.com/news/kiss-sells-music-catalog-300-million'],
+  kennedy: ['Kennedy Center · 48. Kennedy Center Honors', 'https://www.kennedy-center.org/news-room/press-release-landing-page/48th-annual-kennedy-center-honors/'],
+  shof: ['Blabbermouth · Songwriters Hall of Fame 2026', 'https://blabbermouth.net/news/kisss-paul-stanley-and-gene-simmons-to-be-inducted-into-songwriters-hall-of-fame'],
+  newsong: ['Louder · KISS znovu ve studiu', 'https://www.loudersound.com/music/kiss-back-in-the-studio'],
+  forever: ['Pollstar · KISS Forever v Las Vegas', 'https://news.pollstar.com/2026/04/13/kiss-wanna-virtually-rock-and-roll-all-nite-the-gods-of-thunder-avatars-find-eternal-life-with-pophouse/'],
   discs: ['KISS Concert History Online · vydání a kredity', 'https://kissconcerthistory.com/discography/']
 };
 
@@ -134,9 +151,14 @@ export const eras = [
     'Naživo zněli větší, hlučnější a přesvědčivější. Alive! přeneslo festivalovou energii na desku a Destroyer ukázal, kam až se ten zvuk dá posunout.',
     'Paul Stanley · Gene Simmons · Ace Frehley · Peter Criss',[
       event('alive-prulom','10. 9. 1975','Alive! mění všechno','Koncertní dvojalbum dostává energii show do obýváků.','Sestřih z více koncertů pořídila kapela na turné k Dressed to Kill. Živá verze „Rock and Roll All Nite“ se stala hitem a ve stejném období vyrůstá organizované fanouškovské hnutí KISS Army.',['alive','dressed-to-kill']),
+      event('kiss-army','21. 11. 1975','Rodí se KISS Army','Fanoušci z Terre Haute vymyslí jméno, které nese celá armáda příznivců.','Dva teenageři z Indiany, Bill Starkey a Jay Evans, bombardovali místní rádio WVTS, aby hrálo KISS, a podepisovali se jako „KISS Army“. Na vyprodaném koncertě v Terre Haute dostal Starkey od kapely na pódiu plaketu čestného člena. Z jejich nápadu se stal oficiální fanklub.',[],['kissarmy']),
       event('destroyer-beth','1976','Destroyer a „Beth“','Bob Ezrin přidává orchestrální barvy i filmový úvod k „Detroit Rock City“.','S baladou „Beth“ se Peter Criss dostal do popových rádií. Výrazný kontrast mezi baladou a tvrdými koncertními čísly pomohl albu oslovit širší publikum.',['destroyer']),
+      event('msg-1977','18. 2. 1977','Poprvé hlavní hvězdou v Madison Square Garden','KISS vyprodávají nejslavnější newyorskou halu.','Kapela, která o čtyři roky dřív hrála v podkrovních klubech, poprvé zaplnila Madison Square Garden jako headliner. Do stejné haly se vrátila i na úplně poslední koncert v roce 2023.',[],['kisshistory']),
+      event('komiks-krev','1977','Komiks vytištěný krví','Marvel vydává KISS jako superhrdiny a do červené barvy přidává krev členů kapely.','Krev všem čtyřem odebrala zdravotní sestra 21. února 1977 v zákulisí Nassau Coliseum, za přítomnosti notáře. Pak ji kapela vlila do kádí s červenou barvou v tiskárně Marvelu v Depew u Buffala. Na obálce stálo „Printed in real KISS blood“ a komiks se stal hitem.',[],['comic','kisshistory']),
+      event('gallup-1977','22. 6. 1977','Nejpopulárnější kapela Ameriky','Gallupův průzkum vyhlašuje KISS kapelou číslo jedna v USA.','Vrchol kissmánie: vyprodané arény a obchody plné panenek, triček a dalšího zboží s maskami. O týden později vychází album Love Gun.',['love-gun'],['kisshistory']),
       event('budokan','1977','Show míří do japonského Budokanu','KISS hrají sérii koncertů v Tokiu.','Japonské publikum přijalo americkou pódiovou show naplno. V témže roce vycházejí Love Gun a Alive II.',['love-gun','alive-ii'],['history','concert']),
-      event('ctyri-solo','18. 9. 1978','Čtyři sólovky v jeden den','Stejný výtvarný formát, čtyři výrazně odlišné desky.','Casablanca uvedla alba všech členů současně. Gene zkouší pop a orchestr, Paul rockové melodie, Ace staví na kytaře a Peter se obrací k soulu.',['paul-solo','gene-solo','ace-solo','peter-solo'])
+      event('ctyri-solo','18. 9. 1978','Čtyři sólovky v jeden den','Stejný výtvarný formát, čtyři výrazně odlišné desky.','Casablanca uvedla alba všech členů současně. Gene zkouší pop a orchestr, Paul rockové melodie, Ace staví na kytaře a Peter se obrací k soulu.',['paul-solo','gene-solo','ace-solo','peter-solo']),
+      event('phantom','28. 10. 1978','KISS Meets the Phantom of the Park','Televizní film NBC z dílny Hanna-Barbera dělá z kapely superhrdiny.','KISS v něm svými superschopnostmi zachraňují kalifornský zábavní park před šíleným vynálezcem. Film patřil k nejsledovanějším pořadům NBC roku 1978, ale kapele přilepil dětskou image, které se zbavovala roky. Jeho členové se za něj dlouho styděli; v Evropě běžel v kinech jako Attack of the Phantoms.',[],['phantom'])
     ]),
   era('promena','Proměna sestavy','Proměna','1979–1983','late70',
     'Po globálním hitu „I Was Made for Lovin’ You“ přišly první odchody i dvě velmi rozdílná alba. KISS chvíli hledali nový zvuk a vrátili se k tvrdým kytarám.',
@@ -144,14 +166,18 @@ export const eras = [
       event('dynasty-hit','1979','Dynasty míří do tanečních rádií','„I Was Made for Lovin’ You“ spojuje riff s diskotékovým pulsem.','Původní čtveřice je stále na obalu. Většinu bicích na desce však nahrál Anton Fig. Peter Criss bubnuje na své skladbě „Dirty Livin’“.',['dynasty']),
       event('prichod-carr','1980','Za bicí usedá Fox','Eric Carr přebírá místo po Peteru Crissovi.','První koncert s Carrem patří do období Unmasked. Na studiovém albu Unmasked hrál na bicí Anton Fig.',['unmasked'],['history','lineup','discs']),
       event('elder','1981','Výprava do The Elder','Kapela zkouší koncepční rockové album s Bobem Ezrinem.','Příběhový formát a orchestrální zvuk předběhly to, co tehdejší publikum od KISS čekalo. V kontrastu s následující deskou jde o jednu z nejodvážnějších odboček katalogu.',['the-elder']),
+      event('ace-odchod','1982','Ace odchází, přichází Ankh Warrior','Druhý z původní čtveřice opouští kapelu.','Svůj poslední koncert prvního působení odehrál Ace už 3. prosince 1980 na Novém Zélandu, formálně odešel v roce 1982 a založil Frehley’s Comet. Kytary se ujal Vinnie Vincent v nové masce Ankh Warrior s egyptským symbolem ankh.',[],['members','lineup']),
       event('creatures','1982–1983','Tvrdý návrat s Creatures of the Night','Eric Carr za bicími a setmělý zvuk vracejí kapele tah.','Ace Frehley je na původním obalu, na nahrávce však nehraje. Na sólech se podíleli Vinnie Vincent, Bob Kulick, Steve Farris a další. Vinnie s kapelou následně vyjel na turné.',['creatures-of-the-night'],['catalog','discs','history'])
     ]),
   era('bez-masek','Éra bez masek','Bez masek','1983–1996','unmasked-era',
     'Kamery MTV poprvé uviděly KISS bez pódiových tváří. Během třinácti let se proměnil zvuk, móda i obsazení a kapela se znovu opřela o živé hraní.',
     'Paul Stanley a Gene Simmons · Vinnie Vincent → Mark St. John → Bruce Kulick · Eric Carr → Eric Singer',[
       event('mtv-odhaleni','18. 9. 1983','Odhalení na MTV','KISS ukazují tváře a vydávají Lick It Up.','V éře hudební televize šla kapela před kamery s vlastními tvářemi. Z původních členů u odhalení zůstali Paul a Gene, s nimi Eric Carr a Vinnie Vincent.',['lick-it-up']),
-      event('animalize-tour','1984','Animalize a změny u kytary','Mark St. John nahrává album, na turné nastupuje Bruce Kulick.','Markův krátký návrat na pódium dokumentuje koncert v Poughkeepsie. Bruce poté ve skupině zůstal až do reunionu.',['animalize'],['history','archives','lineup']),
-      event('revenge','1991–1993','Ztráta Erica Carra a období Revenge','Po Carrově smrti se bubeníkem kapely stává Eric Singer.','Revenge s producentem Bobem Ezrinem přitvrdilo. Už v následujícím roce na něj navázalo Alive III z koncertů turné Revenge.',['revenge','alive-iii'],['history','bio','discs']),
+      event('mark-st-john','1984','Kytaru přebírá Mark St. John','Po Vinniem Vincentovi přichází třetí sólový kytarista kapely.','Mark St. John nahrál album Animalize, na turné ho ale zastavily zdravotní potíže. S kapelou odehrál jen jeden celý koncert a části několika dalších.',['animalize'],['stjohn','members']),
+      event('animalize-tour','1984','Animalize na pódiu','Turné k albu Animalize patří k vrcholům éry bez masek.','Markův krátký návrat na pódium dokumentuje koncert v Poughkeepsie, vydaný později v sérii Off the Soundboard.',['animalize'],['history','archives','lineup']),
+      event('bruce-kulick','prosinec 1984','Natrvalo nastupuje Bruce Kulick','Bruce Kulick se stává stálým kytaristou KISS.','Za Marka St. Johna zaskakoval už během turné. Ve skupině pak zůstal dvanáct let, až do reunionu původní sestavy, a jeho éra patřila k nejstabilnějším v historii kapely.',[],['members','lineup']),
+      event('carr-umrti','24. 11. 1991','Odchází Eric Carr','Fox umírá ve 41 letech na následky rakoviny srdce.','Eric Carr byl bubeníkem KISS od roku 1980, tedy jedenáct let. Zemřel ve stejný den jako Freddie Mercury. Na albu Revenge ho kvůli nemoci zastoupil Eric Singer.',[],['members','bio']),
+      event('revenge','1992–1993','Revenge a Alive III','Bubeníkem kapely se stává Eric Singer.','Revenge s producentem Bobem Ezrinem přitvrdilo. Už v následujícím roce na něj navázalo Alive III z koncertů turné Revenge.',['revenge','alive-iii'],['history','bio','discs']),
       event('mtv-unplugged','9. 8. 1995','MTV Unplugged','Na konci akustického setu přicházejí Ace Frehley a Peter Criss.','Vedle kapely s Brucem Kulickem a Ericem Singerem si zahráli oba bývalí členové. Speciál dal fanouškům první veřejný záblesk blížícího se reunionu.',['kiss-unplugged'],['history','concert'])
     ]),
   era('reunion','Návrat originální sestavy','Reunion','1996–2004','reunion',
@@ -159,16 +185,27 @@ export const eras = [
     'Paul Stanley · Gene Simmons · Ace Frehley → Tommy Thayer · Peter Criss ↔ Eric Singer',[
       event('tiger-stadium','28. 6. 1996','Reunion na Tiger Stadium','Původní čtveřice zahajuje turné v Detroitu.','Návrat make-upu, kostýmů a starého repertoáru se stal událostí pro pamětníky i fanoušky, kteří v sedmdesátých letech ještě na KISS nemohli.',[],['history','concert']),
       event('psycho-circus','1998','Psycho Circus','Původní čtveřice je znovu na obalu studiového alba.','Na desce se vedle původních členů podíleli další hudebníci. Čtyři známé tváře patří k vizuálu alba i turné, studiové kredity mají vlastní historii.',['psycho-circus'],['history','discs']),
+      event('detroit-rock-city','13. 8. 1999','Film Detroit Rock City','Čtyři kluci z revivalové kapely se snaží dostat na koncert KISS.','Komedie se odehrává v Detroitu roku 1978 a nese jméno slavné písně. Producentem byl Gene Simmons, původní čtveřice se objevuje v závěrečné koncertní scéně. V kinech film propadl, mezi fanoušky ale zlidověl.',['destroyer'],['drc']),
       event('farewell-2000','2000','První Farewell Tour','Kapela vyráží na turné prezentované jako rozloučení.','Dva odchody, návrat Petera Crisse a převzetí kytary Tommym Thayerem proměnily sestavu v následujících letech. Z přelomu tisíciletí pochází i koncert vydaný jako Alive! The Millennium Concert.',['millennium'],['history','lineup']),
+      event('singer-catman','9. 3. 2001','Eric Singer poprvé jako Catman','Peter Criss odchází, za bicí se v jeho masce vrací Eric Singer.','Peter se s kapelou nedohodl na smlouvě pro japonskou a australskou část rozlučkového turné. Eric Singer, bubeník z éry bez masek, poprvé vystoupil v masce Catmana v japonské Jokohamě.',[],['singer','members']),
+      event('olympiada-2002','24. 2. 2002','Olympiáda a Aceův poslední koncert s KISS','KISS uzavírají zimní olympijské hry v Salt Lake City.','Píseň „Rock and Roll All Nite“ při závěrečném ceremoniálu sledovaly v televizi asi tři miliardy diváků. Pro Ace Frehleyho to bylo poslední vystoupení s KISS.',[],['olympics','kisshistory']),
+      event('tommy-spaceman','6. 3. 2002','Spacemanem se stává Tommy Thayer','Nový kytarista v masce Spacemana poprvé na pódiu.','Tommy Thayer debutoval na soukromém koncertě na Jamajce. S kapelou spolupracoval už od devadesátých let a brzy se stal jejím stálým sólovým kytaristou.',[],['tommy','members']),
       event('melbourne','28. 2. 2003','KISS s melbournským orchestrem','V Melbourne hrají s orchestrem v make-upu.','Koncert staví vedle sebe komornější prostřední část a plnou kapelu se symfonickým orchestrem. Na bicí hraje Peter Criss, na sólovou kytaru Tommy Thayer.',['alive-iv'],['concert','discs'])
     ]),
   era('end-of-the-road','Poslední sestava','Poslední sestava','2004–2023','last-lineup',
     'Paul, Gene, Tommy a Eric udrželi show v chodu další dvě dekády. Natočili dvě desky a rozlučkové turné uzavřeli tam, kde příběh začal: v New Yorku.',
     'Paul Stanley · Gene Simmons · Tommy Thayer · Eric Singer',[
+      event('rock-the-nation','8. 5. 2004','Začíná poslední sestava','Paul, Gene, Tommy a Eric poprvé společně vyrážejí na turné.','Turné Rock the Nation začalo v australském Perthu. Peter Criss se po krátkém návratu v letech 2002–2004 s kapelou rozešel natrvalo a Eric Singer usedl za bicí potřetí – tentokrát na zbytek kariéry KISS.',[],['rtn','members']),
+      event('st-john-umrti','5. 4. 2007','Umírá Mark St. John','Bývalý kytarista KISS umírá v 51 letech.','Mark St. John hrál v KISS jen od dubna do listopadu 1984, přesto patří do příběhu kapely jako její třetí sólový kytarista. Zemřel na mozkové krvácení.',['animalize'],['stjohn']),
       event('sonic-monster','2009–2012','Dvě nové desky','Poslední sestava nahrává Sonic Boom a Monster.','První z dvojice se obrací k jednoduchým kytarovým riffům a skupinovému zpěvu. Monster se stalo posledním novým studiovým albem kapely.',['sonic-boom','monster'],['catalog','discs']),
       {...event('hall-of-fame','10. 4. 2014','Rock & Roll Hall of Fame','Do Síně slávy vstupuje původní čtveřice KISS.','Při slavnostním uvedení vystoupil s projevem Tom Morello. Ocenění získali Paul Stanley, Gene Simmons, Ace Frehley a Peter Criss.',[],['hall']), image:{src:'assets/events/hall-of-fame-2014', w:1280, h:720, alt:'Paul Stanley, Peter Criss, Ace Frehley a Gene Simmons s cenami Rock & Roll Hall of Fame', caption:'Původní sestava – Uvedení do Rock & Roll Hall of Fame, Brooklyn 2014'}},
       event('posledni-turne','31. 1. 2019','Start End of the Road','Rozlučkové turné začíná ve Vancouveru.','KISS postavili koncertní program na skladbách z víc než čtyř dekád. Turné nakonec pokračovalo do roku 2023.',[],['history','concert']),
-      {...event('finale-2023','2. 12. 2023','Závěrečný koncert turné','Padesátiletou cestu uzavírá večer v Madison Square Garden.','Na posledním večeru End of the Road stáli na pódiu Paul Stanley, Gene Simmons, Tommy Thayer a Eric Singer. Živý set uzavřela „Rock and Roll All Nite“. Po odchodu kapely se na obrazovkách objevily její digitální podoby.',[],['finale','avatars']), image:{src:'assets/events/finale-2023', w:4000, h:2493, alt:'Gene Simmons, Eric Singer, Paul Stanley a Tommy Thayer se drží za ruce na pódiu Madison Square Garden', caption:'Závěrečná děkovačka, Madison Square Garden 2023'}},
+      event('dubaj-2020','31. 12. 2020','KISS 2020 Goodbye v Dubaji','Silvestrovský livestream s Guinnessovými rekordy.','Uprostřed pandemie odehráli KISS koncert u hotelu Atlantis v Dubaji a vysílali ho po celém světě. Pyrotechnika za milion dolarů přinesla dva rekordy: nejvyšší plamen na koncertě (35 metrů) a nejvíc plamenů odpálených najednou (73).',[],['dubai']),
+      {...event('finale-2023','2. 12. 2023','Závěrečný koncert turné','Padesátiletou cestu uzavírá večer v Madison Square Garden.','Na posledním večeru End of the Road stáli na pódiu Paul Stanley, Gene Simmons, Tommy Thayer a Eric Singer. Živý set uzavřela „Rock and Roll All Nite“. Po odchodu kapely se na obrazovkách objevily její digitální podoby.',[],['finale','avatars']), image:{src:'assets/events/finale-2023', w:4000, h:2493, alt:'Gene Simmons, Eric Singer, Paul Stanley a Tommy Thayer se drží za ruce na pódiu Madison Square Garden', caption:'Závěrečná děkovačka, Madison Square Garden 2023'}}
+    ]),
+  era('navzdy','Navždy','Navždy','2023–','forever',
+    'Poslední koncert neznamenal konec. KISS žijí dál jako avataři, značka i nová hudba. Do stejných let patří i rozloučení s Acem Frehleym a nejvyšší ocenění v historii kapely.',
+    'Paul Stanley · Gene Simmons · Tommy Thayer · Eric Singer',[
       {
         ...event('avatary-2023','2. 12. 2023','A New Era Begins','Po finále v Madison Square Garden se na obrazovkách objevují digitální podoby kapely.','Industrial Light & Magic vytvořilo avatary ve spolupráci s KISS a Pophouse Entertainment. Tým zaznamenal pohyby a výrazy samotných hudebníků technologií motion capture a přenesl je na digitální postavy. Při premiéře digitální čtveřice zahrála „God Gave Rock ’n’ Roll to You II“.',['revenge'],['avatars','pophouse']),
         media: {
@@ -183,6 +220,12 @@ export const eras = [
             embed:'https://embed.music.apple.com/us/album/the-very-best-of-kiss/1440658055?i=1440659186'
           }
         }
-      }
+      },
+      event('pophouse-2024','4. 4. 2024','Značka KISS v nových rukou','Katalog, jméno i slavné masky kupuje švédský Pophouse.','Firma spoluzaložená Björnem Ulvaeusem z ABBA zaplatila podle odhadů přes 300 milionů dolarů. Chce kapelu představit novým generacím: plánuje film o KISS, dokument a show s avatary.',[],['sale','pophouse']),
+      event('ace-umrti','16. 10. 2025','Umírá Ace Frehley','Spaceman umírá v 74 letech po pádu doma.','Zemřel v kruhu rodiny v Morristownu v New Jersey, šest týdnů po svém posledním koncertě. Až do konce pracoval na albu Origins Vol. 3.',[],['ace']),
+      event('kennedy-2025','7. 12. 2025','Kennedy Center Honors','KISS dostávají jedno z nejvyšších amerických kulturních ocenění.','Medaile převzali Paul Stanley, Gene Simmons a Peter Criss, za Ace jeho dcera Monique. Původní trojice se tak sešla necelé dva měsíce po Aceově smrti.',[],['kennedy']),
+      event('shof-2026','2026','Paul a Gene v Síni slávy skladatelů','Songwriters Hall of Fame oceňuje autorskou dvojici, která stojí za většinou repertoáru KISS.','Po Rock & Roll Hall of Fame (2014) a Kennedy Center Honors (2025) přichází ocenění přímo za psaní písní, třeba „Rock and Roll All Nite“.',[],['shof']),
+      event('nova-pisen-2026','2026','KISS znovu ve studiu','Gene potvrzuje nahrávání nové písně od Paula.','Je to první nová hudba KISS po více než deseti letech. Nové skladby mají zaznít v připravované show s avatary.',[],['newsong']),
+      event('kiss-forever','2028','Výhled: KISS Forever v Las Vegas','Show s avatary má odstartovat v roce 2028.','Pophouse ji připravuje podle vzoru úspěšné ABBA Voyage. Zazní klasiky ze všech let i nové písně.',[],['forever','pophouse'])
     ])
 ];

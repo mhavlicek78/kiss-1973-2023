@@ -1,4 +1,10 @@
 export const photos = {
+  "forever": {
+    "src": "assets/events/finale-2023-1280.webp",
+    "title": "Závěrečná děkovačka, Madison Square Garden 2023",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 40%"
+  },
   "last-lineup": {
     "src": "assets/photos/last-lineup.jpg",
     "title": "KISS · Tommy Thayer, Gene Simmons, Paul Stanley a Eric Singer",
