@@ -1,5 +1,5 @@
 import { albums, types, musicPaths, covers } from './albums.js';
-import { eras, members, sources } from './data.js';
+import { eras, members, sources, eventFilters } from './data.js';
 import { photos } from './photos.js';
 import { gamePage, mountGame } from './game.js';
 import { quizPage, mountQuiz } from './quiz.js';
@@ -305,14 +305,46 @@ function timeline(active) {
     + '<nav class="era-jump" aria-label="Přeskočit na éru">' + eras.map((era) =>
     '<a href="#/casova-osa/' + era.id + '"' + (active === era.id ? ' aria-current="location"' : '')
     + '><span>' + era.years + '</span>' + era.short + '</a>').join('') + '</nav>'
+    + '<div class="tl-filters" role="group" aria-label="Filtrovat milníky">' + eventFilters.map(([key, label]) => {
+      const count = key === 'all' ? eras.reduce((n, era) => n + era.events.length, 0) : eras.reduce((n, era) => n + era.events.filter((e) => e.kinds.includes(key)).length, 0);
+      return '<button type="button" data-k="' + key + '" aria-pressed="false">' + (key === 'memoriam' ? '† ' : '') + label + ' <span>' + count + '</span></button>';
+    }).join('') + '</div>'
     + eras.map((era) => '<section id="era-' + era.id + '" class="chapter"><div class="chapter-header">'
       + photoFrame(era.photo) + '<div><p class="eyebrow">' + era.years + '</p><h2 tabindex="-1">' + era.title + '</h2><p>' + esc(era.intro)
       + '</p><p class="lineup"><strong>Sestavy</strong><br>' + esc(era.lineup) + '</p></div></div>'
-      + '<ol class="milestones">' + era.events.filter((event) => !event.media).map((event) => '<li'
+      + '<ol class="milestones">' + era.events.filter((event) => !event.media).map((event) => '<li data-k="' + event.kinds.join(' ') + '"'
         + '><a href="#/milnik/' + event.id + '"><span class="event-date">' + event.date + '</span>'
-        + '<span><strong>' + esc(event.title) + '</strong><small>' + esc(event.summary) + '</small></span>'
+        + '<span><strong>' + esc(event.title) + (event.kinds.includes('memoriam') ? '<i class="tl-mark tl-dagger" aria-label="In memoriam">†</i>' : event.kinds.includes('award') ? '<i class="tl-mark tl-star" aria-label="Ocenění">★</i>' : '') + '</strong><small>' + esc(event.summary) + '</small></span>'
         + (event.media ? '<span class="milestone-action">Klip a poslech ' + right + '</span>' : arrow) + '</a></li>').join('')
-      + '</ol>' + era.events.filter((event) => event.media).map(avatarFeature).join('') + '<a class="to-top quiet" href="#/casova-osa" data-top>Na začátek osy ' + up + '</a></section>').join('') + '</div>';
+      + '</ol>' + era.events.filter((event) => event.media).map((event) => avatarFeature(event).replace('<section class="avatar-feature"', '<section class="avatar-feature" data-k="' + event.kinds.join(' ') + '"')).join('') + '<a class="to-top quiet" href="#/casova-osa" data-top>Na začátek osy ' + up + '</a></section>').join('') + '</div>';
+}
+
+let timelineFilter = 'all';
+
+function mountTimelineFilters() {
+  const bar = document.querySelector('.tl-filters');
+  if (!bar) return;
+  const apply = (key) => {
+    timelineFilter = key;
+    bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.k === key)));
+    document.querySelectorAll('.chapter').forEach((chapter) => {
+      let shown = 0;
+      chapter.querySelectorAll('[data-k]').forEach((item) => {
+        const ok = key === 'all' || item.dataset.k.split(' ').includes(key);
+        item.hidden = !ok;
+        if (ok) shown++;
+      });
+      chapter.hidden = shown === 0;
+      const link = document.querySelector('.era-jump a[href="#/casova-osa/' + chapter.id.slice(4) + '"]');
+      if (link) link.classList.toggle('is-empty', shown === 0);
+    });
+  };
+  bar.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    apply(b.dataset.k === timelineFilter && b.dataset.k !== 'all' ? 'all' : b.dataset.k);
+  });
+  apply(timelineFilter);
 }
 
 function avatarFeature(event) {
@@ -566,7 +598,7 @@ function route() {
   const params = new URLSearchParams(query);
   switch (group) {
     case undefined: return {section:'home', html:home(), title:'KISS 1973–2023'};
-    case 'casova-osa': return {section:'timeline', html:timeline(id), title:'Časová osa', jump:id ? 'era-' + id : null};
+    case 'casova-osa': return {section:'timeline', html:timeline(id), title:'Časová osa', jump:id ? 'era-' + id : null, mount:mountTimelineFilters};
     case 'clenove': {
       const profile = profiles.get(id);
       if (profile) return {section:'members', member:profile.id, html:memberPage(profile), title:profile.name, mount:profile.morph ? () => mountMorph(profile) : undefined};

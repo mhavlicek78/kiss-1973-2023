@@ -229,3 +229,18 @@ export const eras = [
       event('kiss-forever','2028','Výhled: KISS Forever v Las Vegas','Show s avatary má odstartovat v roce 2028.','Pophouse ji připravuje podle vzoru úspěšné ABBA Voyage. Zazní klasiky ze všech let i nové písně.',[],['forever','pophouse'])
     ])
 ];
+
+const eventKinds = {
+  'prvni-koncert':'live', debut:'music', hotter:'music', 'alive-prulom':'music live', 'kiss-army':'pop',
+  'destroyer-beth':'music', 'msg-1977':'live', 'komiks-krev':'pop', 'gallup-1977':'pop award', budokan:'live',
+  'ctyri-solo':'music', phantom:'pop', 'dynasty-hit':'music', 'prichod-carr':'lineup', elder:'music',
+  'ace-odchod':'lineup', creatures:'music', 'mtv-odhaleni':'pop', 'mark-st-john':'lineup', 'animalize-tour':'music live',
+  'bruce-kulick':'lineup', 'carr-umrti':'memoriam lineup', revenge:'music', 'mtv-unplugged':'live',
+  'tiger-stadium':'live lineup', 'psycho-circus':'music', 'detroit-rock-city':'pop', 'farewell-2000':'live',
+  'singer-catman':'lineup', 'olympiada-2002':'live lineup', 'tommy-spaceman':'lineup', melbourne:'live music',
+  'rock-the-nation':'lineup live', 'st-john-umrti':'memoriam', 'sonic-monster':'music', 'hall-of-fame':'pop award',
+  'posledni-turne':'live', 'dubaj-2020':'live', 'finale-2023':'live', 'avatary-2023':'pop', 'pophouse-2024':'pop',
+  'ace-umrti':'memoriam', 'kennedy-2025':'pop award', 'shof-2026':'pop award', 'nova-pisen-2026':'music', 'kiss-forever':'pop'
+};
+for (const era of eras) for (const event of era.events) event.kinds = (eventKinds[event.id] || '').split(' ').filter(Boolean);
+export const eventFilters = [['all','Vše'],['music','Hudba'],['lineup','Sestava'],['live','Koncerty'],['pop','Popkultura'],['memoriam','In memoriam']];
