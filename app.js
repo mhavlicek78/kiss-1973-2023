@@ -302,9 +302,9 @@ function home() {
 function timeline(active) {
   return '<div class="shell page"><div id="zacatek">' + sectionHead('1973—2023','Časová osa',
     'Od klubových začátků přes roky bez masek a reunion až po digitální premiéru v Madison Square Garden.') + '</div>'
-    + '<nav class="era-jump" aria-label="Přeskočit na éru">' + eras.map((era) =>
+    + '<div class="tl-sentinel" aria-hidden="true"></div><div class="tl-nav"><nav class="era-jump" aria-label="Přeskočit na éru">' + eras.map((era) =>
     '<a href="#/casova-osa/' + era.id + '"' + (active === era.id ? ' aria-current="location"' : '')
-    + '><span>' + era.years + '</span>' + era.short + '</a>').join('') + '</nav>'
+    + '><span>' + era.years + '</span>' + era.short + '</a>').join('') + '</nav></div>'
     + '<div class="tl-filters" role="group" aria-label="Filtrovat milníky">' + eventFilters.map(([key, label]) => {
       const count = key === 'all' ? eras.reduce((n, era) => n + era.events.length, 0) : eras.reduce((n, era) => n + era.events.filter((e) => e.kinds.includes(key)).length, 0);
       return '<button type="button" data-k="' + key + '" aria-pressed="false">' + (key === 'memoriam' ? '† ' : '') + label + ' <span>' + count + '</span></button>';
@@ -345,6 +345,60 @@ function mountTimelineFilters() {
     apply(b.dataset.k === timelineFilter && b.dataset.k !== 'all' ? 'all' : b.dataset.k);
   });
   apply(timelineFilter);
+  mountTimelineNav();
+}
+
+function mountTimelineNav() {
+  const nav = document.querySelector('.tl-nav'), sentinel = document.querySelector('.tl-sentinel'), header = document.querySelector('.header');
+  if (!nav || !sentinel || !('IntersectionObserver' in window)) return;
+  const hdr = () => header ? header.getBoundingClientRect().height : 68;
+  nav.style.setProperty('--hdr', hdr() + 'px');
+  const links = [...nav.querySelectorAll('.era-jump a')];
+  const setCurrent = (id) => links.forEach((a) => {
+    if (a.getAttribute('href') === '#/casova-osa/' + id) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+    if (a.getAttribute('href') === '#/casova-osa/' + id && nav.classList.contains('is-stuck')) {
+      const bar = a.parentElement;
+      if (bar.scrollWidth > bar.clientWidth) bar.scrollTo({left: a.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2, behavior: 'smooth'});
+    }
+  });
+  let h0 = 0;
+  const stick = new IntersectionObserver(([entry]) => {
+    if (!document.body.contains(nav)) { stick.disconnect(); return; }
+    const stuck = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+    if (stuck === nav.classList.contains('is-stuck')) return;
+    if (stuck) {
+      h0 = nav.offsetHeight;
+      nav.style.setProperty('--hdr', hdr() + 'px');
+      nav.classList.add('is-stuck');
+      nav.style.marginBottom = 'calc(var(--tl-gap) + ' + Math.max(0, h0 - nav.offsetHeight) + 'px)';
+    } else {
+      nav.classList.remove('is-stuck');
+      nav.style.marginBottom = '';
+    }
+  }, {rootMargin: '-' + Math.round(hdr()) + 'px 0px 0px 0px'});
+  stick.observe(sentinel);
+  const chapters = [...document.querySelectorAll('.chapter')];
+  let ticking = false;
+  const spy = () => {
+    if (!document.body.contains(nav)) { window.removeEventListener('scroll', onScroll); return; }
+    ticking = false;
+    const line = hdr() + nav.offsetHeight + 40;
+    let current = null;
+    chapters.forEach((c) => { if (!c.hidden && c.getBoundingClientRect().top <= line) current = c; });
+    if (current) setCurrent(current.id.slice(4));
+    else if (!nav.classList.contains('is-stuck')) links.forEach((a) => a.removeAttribute('aria-current'));
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } };
+  window.addEventListener('scroll', onScroll, {passive: true});
+  links.forEach((a) => a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href').split('/').pop(), target = document.getElementById('era-' + id);
+    if (!target || target.hidden) return;
+    e.preventDefault();
+    const navH = nav.classList.contains('is-stuck') ? nav.offsetHeight : 56;
+    window.scrollTo({top: target.getBoundingClientRect().top + window.scrollY - hdr() - navH - 16, behavior: 'smooth'});
+    history.replaceState(null, '', '#/casova-osa/' + id);
+    setCurrent(id);
+  }));
 }
 
 function avatarFeature(event) {
