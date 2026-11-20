@@ -1,4 +1,4 @@
-const CACHE = 'kiss-archive-v76';
+const CACHE = 'kiss-archive-v77';
 const FILES = ['./', './index.html', './styles.css', './app.js', './data.js', './albums.js', './photos.js', './game.js', './quiz.js', './sudoku.js', './lights.js', './mystery.js', './timeline.js', './nonogram.js', './rhythm.js', './cz.js', './manifest.webmanifest', './assets/fonts/zalando-sans-expanded-latin-700-italic.woff2', './assets/fonts/zalando-sans-expanded-latin-ext-700-italic.woff2', './assets/kiss-logo.png', './assets/icon-32.png', './assets/icon-180.png', './assets/icon-192.png', './assets/icon-512.png'];
 
 self.addEventListener('install', (event) => {
