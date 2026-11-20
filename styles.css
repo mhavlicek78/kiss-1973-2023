@@ -256,18 +256,20 @@ figcaption a:hover,.era-card-credit a:hover { text-decoration:underline; }
 .filters a span { color:var(--red); font-size:.72rem; margin-left:.27rem; }
 .album-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
 .album-card { background:linear-gradient(180deg,#1b1919,#0f0e0e); border:1px solid #3e3c3c; min-width:0; box-shadow:0 1px 0 #ffffff14 inset; transition:transform .25s,border-color .25s,box-shadow .25s; }
-.album-card:hover { transform:translateY(-3px); border-color:#9a9ca1; box-shadow:0 1px 0 #ffffff22 inset,0 0 30px -6px #ff4b37aa; }
+.album-card:hover { border-color:#c9ccd1; }
 .record { aspect-ratio:1; background:linear-gradient(142deg,color-mix(in srgb,var(--sleeve) 77%,#12100f),#1b1615 82%); display:flex; flex-direction:column; justify-content:end; align-items:start; gap:.5rem; padding:.85rem; overflow:hidden; isolation:isolate; position:relative; }
 .record-grooves { position:absolute; z-index:-1; width:100%; aspect-ratio:1; border-radius:50%; inset:-16% -20% auto auto; background:repeating-radial-gradient(circle, #201817 0 3px,#29201c 3px 4px); border:1px solid #8a74694d; opacity:.91; box-shadow:-7px 8px 18px #1209045f; transition:transform .25s; }
 .record-grooves::after { content:""; position:absolute; inset:35%; border-radius:50%; border:2px solid #281912; background:radial-gradient(circle,#1d1310 0 10%,var(--sleeve) 11% 100%); }
-.album-card:hover .record-grooves { transform:translateX(3%); }
+.album-card:hover .record-grooves { transform:none; }
 .record.has-cover { padding:0; background:#050404; }
 .record.has-cover .record-grooves { inset:4% 4% auto auto; width:92%; z-index:0; transform:translateX(0); transition:transform .45s cubic-bezier(.2,.7,.2,1); }
-.cover-img { position:relative; z-index:1; display:block; width:100%; height:100%; object-fit:cover; box-shadow:10px 0 24px -6px #000; transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .3s; }
-.record.has-cover::after { content:""; position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(115deg,transparent 35%,#ffffff2e 48%,transparent 60%); transform:translateX(-120%); transition:transform .7s ease; }
-.album-card:hover .record.has-cover::after { transform:translateX(120%); }
-.album-card:hover .has-cover .cover-img { transform:translateX(-14%); filter:brightness(1.08) saturate(1.1); }
-.album-card:hover .has-cover .record-grooves { transform:translateX(10%) rotate(40deg); }
+.cover-img { position:relative; z-index:1; display:block; width:100%; height:100%; object-fit:cover; transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .5s; }
+.record.has-cover::after { content:""; position:absolute; z-index:3; inset:0; pointer-events:none; background:linear-gradient(115deg,transparent 30%,#ffffff10 42%,#ffffffa8 50%,#cfd6e0 52%,#ffffff1c 58%,transparent 70%); transform:translateX(-130%); }
+.record.has-cover::before { content:""; position:absolute; z-index:2; inset:0; pointer-events:none; box-shadow:inset 0 0 0 0 transparent; transition:box-shadow .5s; }
+.album-card:hover .record.has-cover::after { transform:translateX(130%); transition:transform .9s cubic-bezier(.3,.6,.3,1); }
+.album-card:hover .record.has-cover::before { box-shadow:inset 0 0 0 3px #e9ebee,inset 0 0 0 5px #55585e,inset 0 0 0 6px #c9ccd1,inset 0 0 40px #000a; }
+.album-card:hover .has-cover .cover-img { transform:scale(1.08); filter:brightness(1.07) contrast(1.05); }
+.album-card:hover .has-cover .record-grooves { transform:none; }
 .album-top .record.has-cover { box-shadow:0 30px 60px -24px #000,0 0 50px -12px #ff4b3766; }
 .record-name { color:#fff3e6; font:800 clamp(1.3rem,3vw,2.65rem)/.95 var(--compact); text-wrap:balance; text-shadow:0 2px 12px #180a08; }
 .record-date { font:600 .71rem var(--body); color:#f6e0cf; letter-spacing:.1em; }
@@ -985,3 +987,5 @@ main[data-member=peter-criss] .profile { --p-acc:#4ee38a; --p-glow:#2fd06a80; --
 .cz-lb-nav.prev { left:0; } .cz-lb-nav.next { right:0; }
 .cz-lb-count { position:absolute; bottom:0; left:50%; transform:translateX(-50%); margin:0; font:700 .75rem/1 var(--compact); letter-spacing:.2em; color:#8d9096; }
 html.cz-lock { overflow:hidden; }
+
+@media (prefers-reduced-motion:reduce) { .album-card:hover .has-cover .cover-img { transform:none; } .album-card:hover .record.has-cover::after { transition:none; transform:translateX(-130%); } }
