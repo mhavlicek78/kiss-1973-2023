@@ -18,10 +18,10 @@ export const sources = {
 };
 
 export const members = [
-  {id:'paul-stanley', morph:{src:'assets/morph/paul-stanley-foto', w:1080, h:1350, stops:[
-    [0,'1973','První měsíce Starchilda','Kapela zkouší v podkroví na Bleecker Street v New Yorku. Starchildova hvězda se teprve rodí.'],
+  {id:'paul-stanley', morph:{src:'assets/morph/paul-stanley-v3', w:1080, h:1350, stops:[
+    [0,'1974','Red Room','Leden 1974, New York. Pár týdnů před vydáním debutového alba.'],
     [1.8,'1975','V zákulisí','Rok alba Alive!, které kapelu konečně prorazilo.'],
-    [3.25,'1976','Destroyer Tour','Turné k albu Destroyer, tady ve Winnipeg Areně v Kanadě. Oheň, kouř a pyrotechnika.'],
+    [3.25,'1976','Destroyer Tour','Turné k albu Destroyer, tady v hale The Summit v Houstonu. Oheň, kouř a pyrotechnika.'],
     [4.85,'1977','Starchild','Vrchol první éry: Love Gun, Alive II a vyprodané arény.'],
     [6.75,'1978','Sólové album','Všichni čtyři vydávají sólová alba. Paulovo nese singl „Hold Me, Touch Me“.'],
     [8.35,'1979','Dynasty','Disco hit „I Was Made for Lovin’ You“, Paulova píseň, a nejbarevnější kostýmy kapely.'],
@@ -30,7 +30,7 @@ export const members = [
     [13.45,'1990','Hot in the Shade','Poslední turné s Ericem Carrem.'],
     [15.05,'1992','Revenge','Tvrdší návrat k syrovému rocku, za bicími Eric Singer.'],
     [16.6,'1996','Návrat v masce','Reunion původní čtveřice. Starchild je po třinácti letech zpět v líčení.'],
-    [18.4,'2000','Farewell Tour','Ohlášená rozlučka, která nakonec přišla až o 23 let později.'],
+    [18.4,'2000','Farewell Tour','Ohlášená rozlučka, tady v montrealském Molson Centre. Nakonec přišla až o 23 let později.'],
     [19.95,'2004','Rock the Nation','Turné v sestavě s Tommym Thayerem a Ericem Singerem.'],
     [21.5,'2006','Chumash Casino','Rok druhého Paulova sólového alba Live to Win.'],
     [22.95,'2010','Sonic Boom','Turné k prvnímu studiovému albu po jedenácti letech.'],
