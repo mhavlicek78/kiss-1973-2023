@@ -447,16 +447,15 @@ function albumPage(album, filter) {
     + '<div class="album-top">' + record(album,true) + '<div>' + sectionHead(typeLabels[album.type],esc(album.title),esc(album.context))
     + '<dl class="facts album-facts"><div><dt>První vydání</dt><dd>' + date + '</dd></div>'
     + (album.recorded ? '<div><dt>Nahráno</dt><dd>' + esc(album.recorded) + '</dd></div>' : '')
-    + (album.credits ? '<div><dt>Účinkující</dt><dd>' + esc(album.credits) + '</dd></div>' : '') + '</dl>'
+    + (album.credits ? '<div><dt>Line-up</dt><dd>' + esc(album.credits) + '</dd></div>' : '') + '</dl>'
     + (album.member ? '<a class="quiet" href="#/clenove/' + album.member + '">Profil: ' + profiles.get(album.member).name + ' ' + right + '</a>' : '')
     + '</div></div><div class="article-grid album-details"><section><h2>Skladby</h2>'
     + '<ol class="tracklist">' + album.tracks.map((track) => '<li>' + esc(track) + '</li>').join('') + '</ol>'
     + (album.edition ? '<p class="edition">' + esc(album.edition) + '</p>' : '')
-    + '</section><aside><h2>Obal a poslech</h2><p class="player-link"><a class="button secondary" href="' + links.listen
-    + '" target="_blank" rel="noopener noreferrer">' + (musicPath ? 'Otevřít v Apple Music' : 'Otevřít na Qobuz') + ' ' + arrow + '</a></p>'
-    + (links.embed ? playerToggle({id:'album-player', embed:links.embed, title:'Náhled alba v Apple Music',
-        show:'Zobrazit náhled a obal →', hide:'Skrýt náhled a obal', kind:'audio'})
-      + '<div id="album-player" class="audio-player"></div>' : '')
+    + '</section><aside><a class="listen-cta" href="' + links.listen + '" target="_blank" rel="noopener noreferrer">'
+    + '<span class="listen-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>'
+    + '<span class="listen-txt"><small>Pusť si album</small>' + (musicPath ? 'Poslechnout v Apple Music' : 'Poslechnout na Qobuz') + '</span>'
+    + '<span class="listen-arrow" aria-hidden="true">↗</span></a>'
     + '<h2>Zdroje</h2>' + sourceLinks(['discs','catalog']) + '</aside></div></div>';
 }
 
