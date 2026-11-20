@@ -1061,7 +1061,7 @@ html.cz-lock { overflow:hidden; }
 .chapter[hidden], .milestones li[hidden], .avatar-feature[hidden] { display:none !important; }
 .tl-nav { --tl-gap:2.55rem; position:sticky; top:var(--hdr,68px); z-index:4; margin-bottom:var(--tl-gap); }
 .tl-nav .era-jump { margin-bottom:0; }
-.tl-nav.is-stuck { padding:.45rem 0; background:#0d0c0cf7; box-shadow:0 0 0 100vmax #0d0c0cf7; clip-path:inset(0 -100vmax); border-bottom:1px solid #2c2925; }
+.tl-nav.is-stuck { padding:.45rem 0; background:#0d0c0c; box-shadow:0 0 0 100vmax #0d0c0c; clip-path:inset(0 -100vmax); border-bottom:1px solid #2c2925; }
 .tl-nav.is-stuck .era-jump { gap:.3rem; }
 .tl-nav.is-stuck .era-jump a { padding:.38rem .55rem .42rem; font-size:clamp(.88rem,1.2vw,1.02rem); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .tl-nav.is-stuck .era-jump a span { display:none; }

@@ -350,7 +350,7 @@ function mountTimelineFilters() {
 
 function mountTimelineNav() {
   const nav = document.querySelector('.tl-nav'), sentinel = document.querySelector('.tl-sentinel'), header = document.querySelector('.header');
-  if (!nav || !sentinel || !('IntersectionObserver' in window)) return;
+  if (!nav || !sentinel) return;
   const hdr = () => header ? header.getBoundingClientRect().height : 68;
   nav.style.setProperty('--hdr', hdr() + 'px');
   const links = [...nav.querySelectorAll('.era-jump a')];
@@ -362,9 +362,8 @@ function mountTimelineNav() {
     }
   });
   let h0 = 0;
-  const stick = new IntersectionObserver(([entry]) => {
-    if (!document.body.contains(nav)) { stick.disconnect(); return; }
-    const stuck = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+  const updateStick = () => {
+    const stuck = sentinel.getBoundingClientRect().top < hdr() - 1;
     if (stuck === nav.classList.contains('is-stuck')) return;
     if (stuck) {
       h0 = nav.offsetHeight;
@@ -375,13 +374,14 @@ function mountTimelineNav() {
       nav.classList.remove('is-stuck');
       nav.style.marginBottom = '';
     }
-  }, {rootMargin: '-' + Math.round(hdr()) + 'px 0px 0px 0px'});
-  stick.observe(sentinel);
+  };
+  updateStick();
   const chapters = [...document.querySelectorAll('.chapter')];
   let ticking = false;
   const spy = () => {
-    if (!document.body.contains(nav)) { window.removeEventListener('scroll', onScroll); return; }
+    if (!document.body.contains(nav)) { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); return; }
     ticking = false;
+    updateStick();
     const line = hdr() + nav.offsetHeight + 40;
     let current = null;
     chapters.forEach((c) => { if (!c.hidden && c.getBoundingClientRect().top <= line) current = c; });
@@ -390,6 +390,7 @@ function mountTimelineNav() {
   };
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } };
   window.addEventListener('scroll', onScroll, {passive: true});
+  window.addEventListener('resize', onScroll);
   links.forEach((a) => a.addEventListener('click', (e) => {
     const id = a.getAttribute('href').split('/').pop(), target = document.getElementById('era-' + id);
     if (!target || target.hidden) return;
