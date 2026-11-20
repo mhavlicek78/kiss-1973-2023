@@ -25,16 +25,13 @@ export const czConcerts = [
    text:'O dva dny později vyprodaná O2 arena. Turné k albu Sonic Boom, prvnímu studiovému albu kapely po jedenácti letech.',
    media:[{src:'assets/cz/2010-plakat.jpg', cap:'Plakát Sonic Boom Over Europe 2010 se seznamem měst včetně Ostravy a Prahy', kind:'Plakát'}]},
   {date:'2013-06-14', city:'Praha', venue:'O2 arena', tour:'Monster World Tour', lineup:czLate,
-   text:'Turné k albu Monster. Nad pódiem se vznášel obří světélkující pavouk s ohňostroji.',
-   diary:'Byl to zážitek, měl jsem výborný místo na sezení, kousek od pódia. Show samozřejmě spektakulární, nic jiného se ani nečekalo.',
+   text:'Turné k albu Monster. Nad pódiem se vznášel obří světélkující pavouk s ohňostroji. Byl to zážitek, měl jsem výborný místo na sezení, kousek od pódia. Show samozřejmě spektakulární, nic jiného se ani nečekalo.',
    media:[{src:'assets/cz/2013-plakat.jpg', cap:'Plakát Monster Tour 2013', kind:'Plakát'}]},
   {date:'2015-06-08', city:'Praha', venue:'O2 arena', tour:'40th Anniversary World Tour', lineup:czLate, support:'The Dead Daisies',
-   text:'Oslava 40 let kapely, s plnou arénou a pyrotechnikou.',
-   diary:'Tohle se muselo líbit i Andree, která viděla před asi sedmi lety Alive 35 (které bylo dle mého názoru nejslabší). Dneska to byla naprosto bombastická show, až z toho mrazilo.',
+   text:'Oslava 40 let kapely, s plnou arénou a pyrotechnikou. Tohle se muselo líbit i Andree, která viděla před asi sedmi lety Alive 35 (které bylo dle mého názoru nejslabší). Dneska to byla naprosto bombastická show, až z toho mrazilo.',
    media:[{src:'assets/cz/2015-plakat-praha.jpg', cap:'Plakát koncertu 8. 6. 2015 v pražské O2 areně', kind:'Plakát'}]},
   {date:'2017-05-20', city:'Brno', venue:'Výstaviště BVV', tour:'Kissworld Tour', lineup:czLate, support:'RavenEye',
-   text:'Jediný koncert KISS v Brně. Turné tehdy Prahu vynechalo a kapela se na něm vrátila ke kostýmům z éry Creatures of the Night.',
-   diary:'Jinak ale mám rozporuplné pocity. Začalo se za světla, což výrazně znehodnotilo atmosféru. Začátek byl strašně rychlý, uspěchaný a odbytý. Z písniček mi největší radost udělala Flaming Youth z alba Destroyer, která byla doplněna starými videy a fotkami a slyšel jsem ji poprvé naživo.',
+   text:'Jediný koncert KISS v Brně. Turné tehdy Prahu vynechalo a kapela se na něm vrátila ke kostýmům z éry Creatures of the Night. Jinak ale mám rozporuplné pocity. Začalo se za světla, což výrazně znehodnotilo atmosféru. Začátek byl strašně rychlý, uspěchaný a odbytý. Z písniček mi největší radost udělala Flaming Youth z alba Destroyer, která byla doplněna starými videy a fotkami a slyšel jsem ji poprvé naživo.',
    media:[{src:'assets/cz/2017-plakat.jpg', cap:'Plakát koncertu 20. 5. 2017 na brněnském výstavišti', kind:'Plakát'}]},
   {date:'2019-06-19', city:'Praha', venue:'Eden Aréna (stadion Slavie)', tour:'End of the Road World Tour', lineup:czLate, support:'ZZ Top, BSP',
    text:'Rozlučkové turné pod širým nebem v rámci přehlídky Prague Rocks. Před KISS hráli ZZ Top a čeští BSP.',
@@ -81,7 +78,6 @@ export function czPage() {
           + '<h2>' + czEsc(c.venue) + '</h2>'
           + '<p class="cz-tour">' + czEsc(c.tour) + '</p>'
           + '<p class="cz-text">' + czEsc(c.text) + '</p>'
-          + (c.diary ? '<blockquote class="cz-diary"><span>Z mého deníku</span>' + czEsc(c.diary) + '</blockquote>' : '')
           + '<dl class="cz-facts"><div><dt>Datum</dt><dd>' + czFmt(c.date, c.date2) + '</dd></div><div><dt>Sestava</dt><dd>' + czEsc(c.lineup) + (c.orig ? ' <small>původní čtveřice</small>' : '') + '</dd></div>'
           + (c.support ? '<div><dt>' + (c.support.includes(',') ? 'Předskokani' : 'Předskokan') + '</dt><dd>' + czEsc(c.support) + '</dd></div>' : '') + '</dl>'
           + (c.media ? '<div class="cz-gallery">' + c.media.map((m, k) => '<button type="button" class="cz-thumb' + (m.poster ? ' is-video' : '') + '" data-cz="' + i + '-' + k + '" aria-label="' + czEsc(m.kind + ': ' + m.cap) + '">'
