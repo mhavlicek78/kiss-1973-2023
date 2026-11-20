@@ -325,7 +325,7 @@ function avatarFeature(event) {
 }
 
 function eventImage(image) {
-  return '<figure class="photo photo-landscape event-photo"><div class="photo-frame"><img class="photo-img" src="' + image.src + '" alt="' + esc(image.alt) + '" loading="lazy"></div><figcaption>Rané klubové vystoupení, 1973</figcaption></figure>';
+  return '<figure class="photo photo-landscape event-photo"><div class="photo-frame"><img class="photo-img" src="' + image.src + '" alt="' + esc(image.alt) + '" loading="lazy"></div>' + (image.caption ? '<figcaption>' + esc(image.caption) + '</figcaption>' : '') + '</figure>';
 }
 
 function eventCovers(ids) {

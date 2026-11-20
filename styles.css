@@ -1012,7 +1012,7 @@ html.cz-lock { overflow:hidden; }
 .avatar-feature .listen-cta { margin:0; max-width:30rem; }
 .avatar-feature > :last-child > :last-child { margin-bottom:0; }
 @media (max-width:760px) { .avatar-feature { grid-template-columns:1fr; } }
-.event-photo .photo-frame { aspect-ratio:auto; height:auto; } .event-photo .photo-frame > .photo-img { position:static; display:block; width:100%; height:auto; aspect-ratio:742/413; object-fit:cover; }
+.event-photo .photo-frame { aspect-ratio:auto; height:auto; } .event-photo .photo-frame > .photo-img { position:static; display:block; width:100%; height:auto; object-fit:cover; }
 .event-cover { display:block; margin:0 0 1.4rem; color:var(--muted); text-decoration:none; }
 .event-cover img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border:1px solid #3a3a3d; box-shadow:0 24px 50px -20px #000; transition:transform .3s ease; }
 .event-cover:hover img { transform:scale(1.02); }
