@@ -18,7 +18,15 @@ export const sources = {
 };
 
 export const members = [
-  {id:'paul-stanley', name:'Paul Stanley', character:'Starchild', role:'Zpěv · rytmická kytara', born:'1952-01-20', years:'1973–2023', masked:'paul-mask', plain:'paul-plain', accent:'#ff695d', solo:'paul-solo', sources:['hall','bio','catalog'],
+  {id:'paul-stanley', morph:{src:'assets/morph/paul-stanley', w:1080, h:1350, stops:[
+    [0,'1973','The Daisy','Klub v Amityville na Long Islandu, kde mladá kapela hrála svoje první koncerty. Hvězda přes oko je zatím jednoduchá.'],
+    [2.75,'1977','Love Gun','Vrchol první éry. Stříbrné flitry, plné líčení a vyprodané arény po celých Spojených státech.'],
+    [5.25,'1983','Lick It Up','Masky padají. Paul se poprvé ukazuje bez líčení a stává se tváří kapely osmdesátých let.'],
+    [7.75,'1992','Revenge','Tvrdší zvuk a návrat k syrovému rocku. Pořád bez make-upu, za bicími nově Eric Singer.'],
+    [10.25,'1996','Návrat Starchilda','Reunion původní čtveřice začíná v Tiger Stadium v Detroitu. Starchild je po třinácti letech zpět v líčení.'],
+    [12.75,'2009','Sonic Boom','První studiové album po jedenácti letech a turné Alive 35.'],
+    [15.25,'2023','Poslední koncert','2. prosince 2023, Madison Square Garden. Poslední show po padesáti letech na pódiu.']]},
+  name:'Paul Stanley', character:'Starchild', role:'Zpěv · rytmická kytara', born:'1952-01-20', years:'1973–2023', masked:'paul-mask', plain:'paul-plain', accent:'#ff695d', solo:'paul-solo', sources:['hall','bio','catalog'],
    intro:'Hlas a tvář, která dokázala strhnout i poslední řadu stadionu. Paul držel melodickou linku a dával velkým refrénům jejich tvar.',
    details:[['Hlas, který vedl show','Na scéně vedl publikum, ve studiu propojoval tvrdé riffy a melodie. Od „Black Diamond“ přes „Detroit Rock City“ až po „I Was Made for Lovin’ You“ je slyšet jeho cit pro dramatický nástup a refrén.'],['Hvězda nad pravým okem','Starchild postavil svůj vzhled na jednoduché černé hvězdě. Když KISS v roce 1983 odložili make-up, Paul zůstal jejich hlavním pódiovým mluvčím. Hvězda se s reunionem vrátila na stadionové pódium.'],['Paul mimo čtveřici','Jeho album z roku 1978 stojí na melodickém hard rocku. „Tonight You Belong to Me“ otevírá desku akusticky, než se rozjede naplno.']],
    tracks:['Detroit Rock City','Love Gun','I Was Made for Lovin’ You','Lick It Up','Heaven’s on Fire'], related:['alive','destroyer','love-gun','lick-it-up','crazy-nights']},

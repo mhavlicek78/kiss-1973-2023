@@ -423,11 +423,67 @@ function persona(id) {
   return scenes[id] ? '<div class="persona persona-' + id + '" aria-hidden="true">' + scenes[id] + '</div>' : '';
 }
 
+function morphBlock(member) {
+  const m = member.morph, first = m.stops[0][1], last = m.stops[m.stops.length - 1][1];
+  return '<section class="morph" aria-label="Proměna ' + esc(member.name) + ' ' + first + '–' + last + '">'
+    + '<figure class="morph-video"><video muted playsinline loop preload="none" poster="' + m.src + '-poster.webp" width="' + m.w + '" height="' + m.h + '"'
+    + ' data-src="' + m.src + '" aria-label="' + esc(member.name) + ' v letech ' + first + '–' + last + '"></video>'
+    + '<button class="morph-toggle" type="button" aria-label="Pozastavit">❚❚</button></figure>'
+    + '<div class="morph-copy"><p class="eyebrow">Proměna</p><h2>' + first + '–' + last + '</h2>'
+    + '<ol class="morph-stops">' + m.stops.map(([t, year, title, text], i) =>
+      '<li><button type="button" data-t="' + t + '" data-i="' + i + '"><span class="morph-year">' + year + '</span>'
+      + '<span class="morph-title">' + esc(title) + '</span><span class="morph-text">' + esc(text) + '</span></button></li>').join('')
+    + '</ol></div></section>';
+}
+
+function mountMorph() {
+  const box = document.querySelector('.morph');
+  if (!box) return;
+  const video = box.querySelector('video'), buttons = [...box.querySelectorAll('.morph-stops button')], toggle = box.querySelector('.morph-toggle');
+  const times = buttons.map((b) => Number(b.dataset.t));
+  let userPaused = false, loaded = false, current = -1;
+  const load = () => {
+    if (loaded) return;
+    loaded = true;
+    video.src = video.dataset.src + (window.innerWidth >= 760 && (window.devicePixelRatio || 1) * video.clientWidth > 760 ? '-1080.mp4' : '-720.mp4');
+  };
+  const mark = () => {
+    const t = video.currentTime;
+    let i = 0;
+    times.forEach((s, k) => { if (t >= s - 0.35) i = k; });
+    if (i === current) return;
+    current = i;
+    buttons.forEach((b, k) => b.classList.toggle('is-active', k === i));
+  };
+  const play = () => { load(); const p = video.play(); if (p) p.catch(() => {}); };
+  video.addEventListener('timeupdate', mark);
+  video.addEventListener('play', () => { toggle.textContent = '❚❚'; toggle.setAttribute('aria-label', 'Pozastavit'); });
+  video.addEventListener('pause', () => { toggle.textContent = '▶'; toggle.setAttribute('aria-label', 'Přehrát'); });
+  toggle.addEventListener('click', () => { if (video.paused) { userPaused = false; play(); } else { userPaused = true; video.pause(); } });
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    load();
+    const go = () => { video.currentTime = Number(b.dataset.t) + 0.05; mark(); if (!userPaused) play(); };
+    if (window.innerWidth < 760) { const r = video.getBoundingClientRect(); if (r.top < 60 || r.bottom > window.innerHeight) video.scrollIntoView({behavior:'smooth', block:'center'}); }
+    if (video.readyState >= 1) go(); else video.addEventListener('loadedmetadata', go, {once:true});
+  }));
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) userPaused = true;
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(([e]) => {
+      if (!document.body.contains(box)) { io.disconnect(); return; }
+      if (e.isIntersecting) { if (!userPaused) play(); else load(); } else if (!video.paused) video.pause();
+    }, {threshold:0.35});
+    io.observe(box);
+  } else { load(); }
+  buttons[0].classList.add('is-active');
+}
+
 function memberPage(member) {
   return persona(member.id) + '<div class="shell page profile" style="--person:' + member.accent + '">' + back(parentRoutes.members,'Zpět na členy')
     + '<div class="profile-top">' + memberPhoto(member,true) + '<div class="profile-copy">' + (emblems[member.id] ? sym(emblems[member.id],'profile-emblem') : '')
     + sectionHead(member.character,member.name,esc(member.intro)) + facts(member)
     + '<a class="button secondary" href="#/album/' + member.solo + '">Sólové album z roku 1978 ' + right + '</a></div></div>'
+    + (member.morph ? morphBlock(member) : '')
     + '<div class="article-grid profile-article"><div>' + member.details.map(([title,description]) =>
       '<section><h2>' + esc(title) + '</h2><p class="article-copy">' + esc(description) + '</p></section>').join('')
     + '</div><aside><h2>Skladby, které zpívá</h2><ol class="tracklist">' + member.tracks.map((track) => '<li>' + esc(track) + '</li>').join('')
@@ -506,7 +562,7 @@ function route() {
     case 'casova-osa': return {section:'timeline', html:timeline(id), title:'Časová osa', jump:id ? 'era-' + id : null};
     case 'clenove': {
       const profile = profiles.get(id);
-      if (profile) return {section:'members', member:profile.id, html:memberPage(profile), title:profile.name};
+      if (profile) return {section:'members', member:profile.id, html:memberPage(profile), title:profile.name, mount:profile.morph ? mountMorph : undefined};
       return {section:'members', html:memberList(), title:'Členové', jump:id ? 'roster-' + id : null};
     }
     case 'diskografie': return {section:'albums', html:albumList(safeType(params.get('typ'))), title:'Diskografie'};
