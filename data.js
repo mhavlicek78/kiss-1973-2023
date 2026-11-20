@@ -18,14 +18,25 @@ export const sources = {
 };
 
 export const members = [
-  {id:'paul-stanley', morph:{src:'assets/morph/paul-stanley', w:1080, h:1350, stops:[
-    [0,'1973','The Daisy','Klub v Amityville na Long Islandu, kde mladá kapela hrála svoje první koncerty. Hvězda přes oko je zatím jednoduchá.'],
-    [2.75,'1977','Love Gun','Vrchol první éry. Stříbrné flitry, plné líčení a vyprodané arény po celých Spojených státech.'],
-    [5.25,'1983','Lick It Up','Masky padají. Paul se poprvé ukazuje bez líčení a stává se tváří kapely osmdesátých let.'],
-    [7.75,'1992','Revenge','Tvrdší zvuk a návrat k syrovému rocku. Pořád bez make-upu, za bicími nově Eric Singer.'],
-    [10.25,'1996','Návrat Starchilda','Reunion původní čtveřice začíná v Tiger Stadium v Detroitu. Starchild je po třinácti letech zpět v líčení.'],
-    [12.75,'2009','Sonic Boom','První studiové album po jedenácti letech a turné Alive 35.'],
-    [15.25,'2023','Poslední koncert','2. prosince 2023, Madison Square Garden. Poslední show po padesáti letech na pódiu.']]},
+  {id:'paul-stanley', morph:{src:'assets/morph/paul-stanley-foto', w:1080, h:1350, stops:[
+    [0,'1973','První měsíce Starchilda','Kapela zkouší v podkroví na Bleecker Street v New Yorku. Starchildova hvězda se teprve rodí.'],
+    [1.8,'1975','V zákulisí','Rok alba Alive!, které kapelu konečně prorazilo.'],
+    [3.25,'1976','Destroyer Tour','Turné k albu Destroyer, tady ve Winnipeg Areně v Kanadě. Oheň, kouř a pyrotechnika.'],
+    [4.85,'1977','Starchild','Vrchol první éry: Love Gun, Alive II a vyprodané arény.'],
+    [6.75,'1978','Sólové album','Všichni čtyři vydávají sólová alba. Paulovo nese singl „Hold Me, Touch Me“.'],
+    [8.35,'1979','Dynasty','Disco hit „I Was Made for Lovin’ You“, Paulova píseň, a nejbarevnější kostýmy kapely.'],
+    [10,'1980','Unmasked Tour','Turné k albu Unmasked hlavně po Evropě a Austrálii, poprvé s Ericem Carrem za bicími.'],
+    [11.85,'1985','Animalize Tour','Éra bez masek. Paul je hlavní tváří a hlasem kapely.'],
+    [13.45,'1990','Hot in the Shade','Poslední turné s Ericem Carrem.'],
+    [15.05,'1992','Revenge','Tvrdší návrat k syrovému rocku, za bicími Eric Singer.'],
+    [16.6,'1996','Návrat v masce','Reunion původní čtveřice. Starchild je po třinácti letech zpět v líčení.'],
+    [18.4,'2000','Farewell Tour','Ohlášená rozlučka, která nakonec přišla až o 23 let později.'],
+    [19.95,'2004','Rock the Nation','Turné v sestavě s Tommym Thayerem a Ericem Singerem.'],
+    [21.5,'2006','Chumash Casino','Rok druhého Paulova sólového alba Live to Win.'],
+    [22.95,'2010','Sonic Boom','Turné k prvnímu studiovému albu po jedenácti letech.'],
+    [24.6,'2015','40. výročí KISS','Oslava čtyřiceti let kapely, tady v Madridu.'],
+    [26.15,'2019','End of the Road','Rozlučkové turné začíná, tady v polském Krakově.'],
+    [27.7,'2023','Poslední koncert','2. prosince 2023, Madison Square Garden. Poslední show po padesáti letech na pódiu.']]},
   name:'Paul Stanley', character:'Starchild', role:'Zpěv · rytmická kytara', born:'1952-01-20', years:'1973–2023', masked:'paul-mask', plain:'paul-plain', accent:'#ff695d', solo:'paul-solo', sources:['hall','bio','catalog'],
    intro:'Hlas a tvář, která dokázala strhnout i poslední řadu stadionu. Paul držel melodickou linku a dával velkým refrénům jejich tvar.',
    details:[['Hlas, který vedl show','Na scéně vedl publikum, ve studiu propojoval tvrdé riffy a melodie. Od „Black Diamond“ přes „Detroit Rock City“ až po „I Was Made for Lovin’ You“ je slyšet jeho cit pro dramatický nástup a refrén.'],['Hvězda nad pravým okem','Starchild postavil svůj vzhled na jednoduché černé hvězdě. Když KISS v roce 1983 odložili make-up, Paul zůstal jejich hlavním pódiovým mluvčím. Hvězda se s reunionem vrátila na stadionové pódium.'],['Paul mimo čtveřici','Jeho album z roku 1978 stojí na melodickém hard rocku. „Tonight You Belong to Me“ otevírá desku akusticky, než se rozjede naplno.']],

@@ -430,13 +430,13 @@ function morphBlock(member) {
     + ' data-src="' + m.src + '" aria-label="' + esc(member.name) + ' v letech ' + first + '–' + last + '"></video>'
     + '<button class="morph-toggle" type="button" aria-label="Pozastavit">❚❚</button></figure>'
     + '<div class="morph-copy"><p class="eyebrow">Proměna</p><h2>' + first + '–' + last + '</h2>'
-    + '<ol class="morph-stops">' + m.stops.map(([t, year, title, text], i) =>
-      '<li><button type="button" data-t="' + t + '" data-i="' + i + '"><span class="morph-year">' + year + '</span>'
-      + '<span class="morph-title">' + esc(title) + '</span><span class="morph-text">' + esc(text) + '</span></button></li>').join('')
-    + '</ol></div></section>';
+    + '<ol class="morph-stops">' + m.stops.map(([t, year, title], i) =>
+      '<li><button type="button" data-t="' + t + '" data-i="' + i + '" aria-label="' + year + ' ' + esc(title) + '">' + year + '</button></li>').join('')
+    + '</ol><div class="morph-detail" aria-live="polite"><span class="morph-year">' + first + '</span><h3 class="morph-title">' + esc(m.stops[0][2]) + '</h3>'
+    + '<p class="morph-text">' + esc(m.stops[0][3]) + '</p></div></div></section>';
 }
 
-function mountMorph() {
+function mountMorph(member) {
   const box = document.querySelector('.morph');
   if (!box) return;
   const video = box.querySelector('video'), buttons = [...box.querySelectorAll('.morph-stops button')], toggle = box.querySelector('.morph-toggle');
@@ -454,6 +454,10 @@ function mountMorph() {
     if (i === current) return;
     current = i;
     buttons.forEach((b, k) => b.classList.toggle('is-active', k === i));
+    const st = member.morph.stops[i];
+    box.querySelector('.morph-detail .morph-year').textContent = st[1];
+    box.querySelector('.morph-detail .morph-title').textContent = st[2];
+    box.querySelector('.morph-detail .morph-text').textContent = st[3];
   };
   const play = () => { load(); const p = video.play(); if (p) p.catch(() => {}); };
   video.addEventListener('timeupdate', mark);
@@ -562,7 +566,7 @@ function route() {
     case 'casova-osa': return {section:'timeline', html:timeline(id), title:'Časová osa', jump:id ? 'era-' + id : null};
     case 'clenove': {
       const profile = profiles.get(id);
-      if (profile) return {section:'members', member:profile.id, html:memberPage(profile), title:profile.name, mount:profile.morph ? mountMorph : undefined};
+      if (profile) return {section:'members', member:profile.id, html:memberPage(profile), title:profile.name, mount:profile.morph ? () => mountMorph(profile) : undefined};
       return {section:'members', html:memberList(), title:'Členové', jump:id ? 'roster-' + id : null};
     }
     case 'diskografie': return {section:'albums', html:albumList(safeType(params.get('typ'))), title:'Diskografie'};
