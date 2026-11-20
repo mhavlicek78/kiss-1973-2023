@@ -453,7 +453,7 @@ function albumPage(album, filter) {
     + '<ol class="tracklist">' + album.tracks.map((track) => '<li>' + esc(track) + '</li>').join('') + '</ol>'
     + (album.edition ? '<p class="edition">' + esc(album.edition) + '</p>' : '')
     + '</section><aside><a class="listen-cta" href="' + links.listen + '" target="_blank" rel="noopener noreferrer">'
-    + '<span class="listen-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>'
+    + '<span class="listen-ico" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><radialGradient id="lp-g" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fafbfc"/><stop offset=".35" stop-color="#b9bdc4"/><stop offset=".6" stop-color="#5d6168"/><stop offset=".8" stop-color="#c9ccd1"/><stop offset="1" stop-color="#3a3c40"/></radialGradient></defs><circle cx="50" cy="50" r="48" fill="url(#lp-g)"/><g fill="none" stroke="#0007" stroke-width=".8"><circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="37"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="27"/></g><path d="M18 30a40 40 0 0 1 22-16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><circle cx="50" cy="50" r="17" fill="#141416" stroke="#e9ebee" stroke-width="1.5"/><circle cx="50" cy="50" r="12" fill="none" stroke="#8d9096" stroke-width=".8"/><circle cx="50" cy="50" r="3.2" fill="#e9ebee"/></svg></span>'
     + '<span class="listen-txt"><small>Pusť si album</small>' + (musicPath ? 'Poslechnout v Apple Music' : 'Poslechnout na Qobuz') + '</span>'
     + '<span class="listen-arrow" aria-hidden="true">↗</span></a>'
     + '<h2>Zdroje</h2>' + sourceLinks(['discs','catalog']) + '</aside></div></div>';
