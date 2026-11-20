@@ -329,10 +329,11 @@ function eventImage(image) {
 }
 
 function eventCovers(ids) {
-  return knownAlbums(ids).filter((id) => covers[id]).map((id) => {
+  const list = knownAlbums(ids).filter((id) => covers[id]);
+  return '<div class="event-covers' + (list.length > 1 ? ' multi' : '') + '">' + list.map((id) => {
     const album = albumById.get(id);
     return '<a class="event-cover" href="#/album/' + id + '"><img src="' + covers[id] + '" alt="Obal alba ' + esc(album.title) + '" loading="lazy"><span>' + esc(album.title) + ' · ' + album.date.slice(0,4) + ' ' + right + '</span></a>';
-  }).join('');
+  }).join('') + '</div>';
 }
 
 function eventPage(era, event) {
@@ -343,7 +344,7 @@ function eventPage(era, event) {
     + '<div><p class="article-copy">' + esc(event.detail) + '</p>'
     + (knownAlbums(event.albums).length ? '<h2>Alba z této kapitoly</h2>' + albumLinks(event.albums) : '')
     + '<h2>Zdroje</h2>' + sourceLinks(event.sources) + '</div><aside>'
-    + (event.media ? '' : event.image ? eventImage(event.image) : event.showCovers ? eventCovers(event.albums) : photoFrame(era.photo)) + '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>'
+    + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo)) + '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>'
     + '<h2>Členové v této éře</h2><ul class="text-links">' + roster.map((member) =>
       '<li><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></li>').join('')
     + '</ul></aside></div></div>';

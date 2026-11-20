@@ -1019,3 +1019,6 @@ html.cz-lock { overflow:hidden; }
 .event-cover span { display:flex; align-items:center; gap:.45rem; margin-top:.6rem; font-size:.85rem; }
 .event-cover span svg { width:1em; height:1em; flex:none; }
 .event-cover:hover span { color:var(--text, #fff); }
+.event-covers.multi { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-bottom:1.4rem; }
+.event-covers.multi .event-cover { margin:0; }
+.event-covers.multi .event-cover span { font-size:.78rem; }
