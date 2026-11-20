@@ -325,7 +325,11 @@ function avatarFeature(event) {
 }
 
 function eventImage(image) {
-  return '<figure class="photo photo-landscape event-photo"><div class="photo-frame"><img class="photo-img" src="' + image.src + '" alt="' + esc(image.alt) + '" loading="lazy"></div>' + (image.caption ? '<figcaption>' + esc(image.caption) + '</figcaption>' : '') + '</figure>';
+  const big = Math.min(1280, image.w);
+  return '<figure class="photo photo-landscape event-photo"><div class="photo-frame"><img class="photo-img" src="' + image.src + '-1280.webp"'
+    + ' srcset="' + image.src + '-640.webp 640w, ' + image.src + '-1280.webp ' + big + 'w" sizes="(max-width:760px) 100vw, 40vw"'
+    + ' width="' + image.w + '" height="' + image.h + '" alt="' + esc(image.alt) + '" loading="lazy" decoding="async"></div>'
+    + (image.caption ? '<figcaption>' + esc(image.caption) + '</figcaption>' : '') + '</figure>';
 }
 
 function eventCovers(ids) {
