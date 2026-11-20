@@ -92,7 +92,7 @@ export const eras = [
       event('posledni-turne','31. 1. 2019','Start End of the Road','Rozlučkové turné začíná ve Vancouveru.','KISS postavili koncertní program na skladbách z víc než čtyř dekád. Turné nakonec pokračovalo do roku 2023.',[],['history','concert']),
       event('finale-2023','2. 12. 2023','Závěrečný koncert turné','Padesátiletou cestu uzavírá večer v Madison Square Garden.','Na posledním večeru End of the Road stáli na pódiu Paul Stanley, Gene Simmons, Tommy Thayer a Eric Singer. Živý set uzavřela „Rock and Roll All Nite“. Po odchodu kapely se na obrazovkách objevily její digitální podoby.',[],['finale','avatars']),
       {
-        ...event('avatary-2023','2. 12. 2023','Digitální avataři KISS','Po finále v Madison Square Garden se na obrazovkách objevují digitální podoby kapely.','Industrial Light & Magic vytvořilo avatary ve spolupráci s KISS a Pophouse Entertainment. Tým zaznamenal pohyby a výrazy samotných hudebníků technologií motion capture a přenesl je na digitální postavy. Při premiéře digitální čtveřice zahrála „God Gave Rock ’n’ Roll to You II“.',['revenge'],['avatars','pophouse']),
+        ...event('avatary-2023','2. 12. 2023','New Era Begins','Po finále v Madison Square Garden se na obrazovkách objevují digitální podoby kapely.','Industrial Light & Magic vytvořilo avatary ve spolupráci s KISS a Pophouse Entertainment. Tým zaznamenal pohyby a výrazy samotných hudebníků technologií motion capture a přenesl je na digitální postavy. Při premiéře digitální čtveřice zahrála „God Gave Rock ’n’ Roll to You II“.',['revenge'],['avatars','pophouse']),
         media: {
           video: {
             title:'KISS – A New Era Begins',
