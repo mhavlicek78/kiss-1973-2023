@@ -531,7 +531,8 @@ function route() {
     case 'kariera': return {section:'timeline', html:timelinePage(), title:'Seřaď kariéru', mount:mountTimeline};
     case 'masky': return {section:'nonogram', html:nonogramPage(), title:'Malované masky', mount:mountNonogram};
     case 'rytmus': return {section:'rhythm', html:rhythmPage(), title:'Peterův rytmus', mount:mountRhythm};
-    case 'cesko': return {section:'cz', html:czPage(), title:'KISS v Česku', mount:czMount};
+    case 'ja-a-kiss':
+    case 'cesko': return {section:'cz', html:czPage(), title:'Já & KISS', mount:czMount};
     case 'hry': return {section:'games', html:hubPage(), title:'Hry', mount:mountHub};
   }
   return {section:'', title:'Stránka nenalezena', html:'<div class="shell page">' + sectionHead('KISS','Stránka nenalezena') + back('#/','Zpět na úvod') + '</div>'};
