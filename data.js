@@ -48,7 +48,7 @@ export const eras = [
   era('zrozeni','Zrození KISS','Zrození','1973–1974','early',
     'Ze zkušebny na Manhattanu do klubů v Queensu. Čtyři hudebníci si během roku našli zvuk i vzhled, který už z dálky vypadal jako KISS.',
     'Paul Stanley · Gene Simmons · Ace Frehley · Peter Criss',[
-      event('prvni-koncert','30. 1. 1973','První koncert v Coventry','Čtyři začínající hudebníci hrají v klubu v newyorském Queensu.','Po konci Wicked Lester se Paul a Gene spojili s Peterem a Acem. Na raných koncertech teprve ladili make-up, kostýmy i pódiový pohyb.',[],['history','concert']),
+      {...event('prvni-koncert','30. 1. 1973','První koncert v Coventry','Čtyři začínající hudebníci hrají v klubu v newyorském Queensu.','Po konci Wicked Lester se Paul a Gene spojili s Peterem a Acem. Na raných koncertech teprve ladili make-up, kostýmy i pódiový pohyb.',[],['history','concert']), image:{src:'assets/photos/coventry-1973.jpg', alt:'KISS na rané klubové show v roce 1973: Gene Simmons, Peter Criss za bicími, Paul Stanley a Ace Frehley'}},
       event('debut','1974','Debut KISS','Na první desce už jsou „Deuce“, „Strutter“ a „Black Diamond“.','Casablanca vydala debut na začátku roku 1974. Kapela ještě hledala širší publikum, ale řada skladeb zůstala v koncertním repertoáru celé dekády.',['kiss']),
       event('hotter','1974','Druhá deska ještě téhož roku','Hotter Than Hell zachycuje syrový zvuk prvních turné.','Kapela stihla druhé studiové album ještě během roku vydání debutu. „Parasite“ napsal Ace Frehley, na nahrávce ji zpívá Gene.',['hotter-than-hell'])
     ]),

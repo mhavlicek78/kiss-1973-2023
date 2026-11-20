@@ -1012,3 +1012,4 @@ html.cz-lock { overflow:hidden; }
 .avatar-feature .listen-cta { margin:0; max-width:30rem; }
 .avatar-feature > :last-child > :last-child { margin-bottom:0; }
 @media (max-width:760px) { .avatar-feature { grid-template-columns:1fr; } }
+.event-photo .photo-frame { aspect-ratio:auto; height:auto; } .event-photo .photo-frame > .photo-img { position:static; display:block; width:100%; height:auto; aspect-ratio:742/413; object-fit:cover; }
