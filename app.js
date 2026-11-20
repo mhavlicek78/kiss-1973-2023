@@ -464,9 +464,12 @@ function mountMorph(member) {
   video.addEventListener('play', () => { toggle.textContent = '❚❚'; toggle.setAttribute('aria-label', 'Pozastavit'); });
   video.addEventListener('pause', () => { toggle.textContent = '▶'; toggle.setAttribute('aria-label', 'Přehrát'); });
   toggle.addEventListener('click', () => { if (video.paused) { userPaused = false; play(); } else { userPaused = true; video.pause(); } });
-  buttons.forEach((b) => b.addEventListener('click', () => {
+  buttons.forEach((b, k) => b.addEventListener('click', () => {
     load();
-    const go = () => { video.currentTime = Number(b.dataset.t) + 0.05; mark(); if (!userPaused) play(); };
+    userPaused = true;
+    video.pause();
+    const next = k + 1 < times.length ? times[k + 1] : times[k] + 1.6;
+    const go = () => { video.currentTime = (times[k] + next) / 2; current = -1; mark(); };
     if (window.innerWidth < 760) { const r = video.getBoundingClientRect(); if (r.top < 60 || r.bottom > window.innerHeight) video.scrollIntoView({behavior:'smooth', block:'center'}); }
     if (video.readyState >= 1) go(); else video.addEventListener('loadedmetadata', go, {once:true});
   }));
