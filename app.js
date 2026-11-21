@@ -437,10 +437,10 @@ function eventPage(era, event) {
     + (event.media ? avatarMedia(event.media) : '') + '<div class="article-grid">'
     + '<div><p class="article-copy">' + esc(event.detail) + '</p>'
     + (knownAlbums(event.albums).length ? '<h2>Alba z této kapitoly</h2>' + albumLinks(event.albums) : '')
-    + membersBlock
     + '<h2>Zdroje</h2>' + sourceLinks(event.sources) + '</div><aside>'
     + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo))
     + (era.lineup ? '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>' : '')
+    + membersBlock
     + '</aside></div></div>';
 }
 

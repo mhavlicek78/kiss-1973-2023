@@ -186,7 +186,7 @@ export const eras = [
       event('mtv-unplugged','9. 8. 1995','MTV Unplugged','Na konci akustického setu přicházejí Ace Frehley a Peter Criss.','Vedle kapely s Brucem Kulickem a Ericem Singerem si zahráli oba bývalí členové. Speciál dal fanouškům první veřejný záblesk blížícího se reunionu.',['kiss-unplugged'],['history','concert'])
     ]),
   era('reunion','Návrat originální sestavy','Reunion','1996–2004','reunion',
-    'Hvězda, démon, vesmírný kytarista a kočičí tvář se potkali na stejném pódiu. Reunion znovu postavil do středu příběhu původní koncertní show.',
+    'Starchild, Demon, Spaceman a Catman znovu na stejném pódiu. Reunion znovu postavil do středu příběhu původní koncertní show.',
     'Paul Stanley · Gene Simmons · Ace Frehley → Tommy Thayer · Peter Criss ↔ Eric Singer',[
       event('tiger-stadium','28. 6. 1996','Reunion na Tiger Stadium','Původní čtveřice zahajuje turné v Detroitu.','Návrat make-upu, kostýmů a starého repertoáru se stal událostí pro pamětníky i fanoušky, kteří v sedmdesátých letech ještě na KISS nemohli.',[],['history','concert']),
       event('psycho-circus','1998','Psycho Circus','Původní čtveřice je znovu na obalu studiového alba.','Na desce se vedle původních členů podíleli další hudebníci. Čtyři známé tváře patří k vizuálu alba i turné, studiové kredity mají vlastní historii.',['psycho-circus'],['history','discs']),
