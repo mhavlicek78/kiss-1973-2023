@@ -429,16 +429,18 @@ function eventCovers(ids) {
 }
 
 function eventPage(era, event) {
-  const roster = members.filter((member) => era.lineup.includes(member.name) || event.detail.includes(member.name));
+  const roster = era.lineup ? members.filter((member) => era.lineup.includes(member.name) || event.detail.includes(member.name)) : [];
+  const membersBlock = roster.length ? '<h2>Členové v této éře</h2><ul class="text-links">' + roster.map((member) =>
+      '<li><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></li>').join('') + '</ul>' : '';
   return '<div class="shell page article-page">' + back('#/casova-osa/' + era.id,'Zpět na časovou osu')
     + sectionHead(event.date,esc(event.title),esc(event.summary))
     + (event.media ? avatarMedia(event.media) : '') + '<div class="article-grid">'
     + '<div><p class="article-copy">' + esc(event.detail) + '</p>'
     + (knownAlbums(event.albums).length ? '<h2>Alba z této kapitoly</h2>' + albumLinks(event.albums) : '')
+    + membersBlock
     + '<h2>Zdroje</h2>' + sourceLinks(event.sources) + '</div><aside>'
-    + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo)) + (era.lineup ? '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>' : '')
-    + (era.id === 'navzdy' ? '' : '<h2>Členové v této éře</h2><ul class="text-links">' + roster.map((member) =>
-      '<li><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></li>').join('') + '</ul>')
+    + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo))
+    + (era.lineup ? '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>' : '')
     + '</aside></div></div>';
 }
 
