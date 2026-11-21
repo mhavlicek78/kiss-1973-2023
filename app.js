@@ -304,11 +304,11 @@ function timeline(active) {
     'Od klubových začátků přes roky bez masek a reunion až po digitální premiéru v Madison Square Garden.') + '</div>'
     + '<div class="tl-sentinel" aria-hidden="true"></div><div class="tl-nav"><nav class="era-jump" aria-label="Přeskočit na éru">' + eras.map((era) =>
     '<a href="#/casova-osa/' + era.id + '"' + (active === era.id ? ' aria-current="location"' : '')
-    + '><span>' + era.years + '</span>' + era.short + '</a>').join('') + '</nav></div>'
+    + '><span>' + era.years + '</span>' + era.short + '</a>').join('') + '</nav>'
     + '<div class="tl-filters" role="group" aria-label="Filtrovat milníky">' + eventFilters.map(([key, label]) => {
       const count = key === 'all' ? eras.reduce((n, era) => n + era.events.length, 0) : eras.reduce((n, era) => n + era.events.filter((e) => e.kinds.includes(key)).length, 0);
       return '<button type="button" data-k="' + key + '" aria-pressed="false">' + (key === 'memoriam' ? '† ' : '') + label + ' <span>' + count + '</span></button>';
-    }).join('') + '</div>'
+    }).join('') + '</div>' + '</div>'
     + eras.map((era) => '<section id="era-' + era.id + '" class="chapter"><div class="chapter-header">'
       + photoFrame(era.photo) + '<div><p class="eyebrow">' + era.years + '</p><h2 tabindex="-1">' + era.title + '</h2><p>' + esc(era.intro)
       + '</p><p class="lineup"><strong>Sestavy</strong><br>' + esc(era.lineup) + '</p></div></div>'
@@ -395,7 +395,7 @@ function mountTimelineNav() {
     const id = a.getAttribute('href').split('/').pop(), target = document.getElementById('era-' + id);
     if (!target || target.hidden) return;
     e.preventDefault();
-    const navH = nav.classList.contains('is-stuck') ? nav.offsetHeight : 56;
+    const navH = window.innerWidth < 760 && !nav.classList.contains('is-stuck') ? 56 : nav.offsetHeight;
     window.scrollTo({top: target.getBoundingClientRect().top + window.scrollY - hdr() - navH - 16, behavior: 'smooth'});
     history.replaceState(null, '', '#/casova-osa/' + id);
     setCurrent(id);
