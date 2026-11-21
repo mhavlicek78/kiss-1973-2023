@@ -437,9 +437,9 @@ function eventPage(era, event) {
     + (knownAlbums(event.albums).length ? '<h2>Alba z této kapitoly</h2>' + albumLinks(event.albums) : '')
     + '<h2>Zdroje</h2>' + sourceLinks(event.sources) + '</div><aside>'
     + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo)) + '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>'
-    + '<h2>Členové v této éře</h2><ul class="text-links">' + roster.map((member) =>
-      '<li><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></li>').join('')
-    + '</ul></aside></div></div>';
+    + (era.id === 'navzdy' ? '' : '<h2>Členové v této éře</h2><ul class="text-links">' + roster.map((member) =>
+      '<li><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></li>').join('') + '</ul>')
+    + '</aside></div></div>';
 }
 
 function playerToggle({id, embed, title, show, hide, kind, buttonClass = 'quiet player-toggle'}) {
