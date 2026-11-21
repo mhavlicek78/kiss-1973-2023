@@ -6,8 +6,8 @@ const czLate = 'Stanley · Simmons · Thayer · Singer';
 const czMonths = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
 
 export const czConcerts = [
-  {date:'1996-12-14', date2:'1996-12-15', city:'Praha', venue:'Sportovní hala, Výstaviště', tour:'Alive/Worldwide Tour', lineup:czOrig, orig:true, support:'The Verve Pipe', seenOnce:true,
-   text:'Úplně první koncerty KISS v Česku, hned dva večery po sobě. Původní čtveřice v maskách přivezla reunion turné, které se v roce 1996 stalo nejvýdělečnějším turné roku. Vstupenka v předprodeji stála 599 Kč. Já jsem byl na jednom z obou večerů.',
+  {date:'1996-12-14', city:'Praha', venue:'Sportovní hala, Výstaviště', tour:'Alive/Worldwide Tour', lineup:czOrig, orig:true, support:'The Verve Pipe',
+   text:'Úplně první koncert KISS v Česku. Původní čtveřice v maskách přivezla reunion turné, které se v roce 1996 stalo nejvýdělečnějším turné roku. Vstupenka v předprodeji stála 599 Kč.',
    media:[{src:'assets/cz/1996-plakat.jpg', cap:'Plakát Interkoncerts: „v původní sestavě, původní image“', kind:'Plakát'}]},
   {date:'1997-06-07', city:'Praha', venue:'Fotbalový stadion Juliska', tour:'Alive/Worldwide Tour', lineup:czOrig, orig:true, support:'Waltari, Satisfucktion',
    text:'Původní sestava se do Prahy vrátila už po půl roce, tentokrát pod širým nebem. Na vstupence stálo „Once Just Wasn’t Enough“ (jednou to nestačilo) a místo na stání vyšlo v předprodeji na 450 + 50 Kč.',
@@ -18,12 +18,9 @@ export const czConcerts = [
   {date:'2008-06-06', city:'Praha', venue:'Sazka Arena (dnes O2 arena)', tour:'Alive 35 World Tour', lineup:czLate,
    text:'Oslava 35 let kapely, poprvé v Česku s Tommym Thayerem a Ericem Singerem. Hrálo se pro zhruba 15 000 diváků a každý koncert turné se natáčel a vycházel jako limitovaná edice na CD.',
    media:[{src:'assets/cz/2008-plakat.jpg', cap:'Grafika turné Alive 35', kind:'Plakát'}]},
-  {date:'2010-05-21', city:'Ostrava', venue:'ČEZ Aréna', tour:'Sonic Boom Over Europe Tour', lineup:czLate, missed:true,
-   text:'Jediný koncert KISS v Ostravě, vyprodaný. Po skončení nad pódiem ještě dlouho svítil nápis KISS LOVES YOU OSTRAVA.',
-   media:[{src:'assets/cz/2010-plakat.jpg', cap:'Plakát Sonic Boom Over Europe 2010 se seznamem měst včetně Ostravy a Prahy', kind:'Plakát'}]},
   {date:'2010-05-23', city:'Praha', venue:'O2 arena', tour:'Sonic Boom Over Europe Tour', lineup:czLate,
-   text:'O dva dny později vyprodaná O2 arena. Turné k albu Sonic Boom, prvnímu studiovému albu kapely po jedenácti letech.',
-   media:[{src:'assets/cz/2010-plakat.jpg', cap:'Plakát Sonic Boom Over Europe 2010 se seznamem měst včetně Ostravy a Prahy', kind:'Plakát'}]},
+   text:'Vyprodaná O2 arena. Turné k albu Sonic Boom, prvnímu studiovému albu kapely po jedenácti letech.',
+   media:[{src:'assets/cz/2010-plakat.jpg', cap:'Plakát Sonic Boom Over Europe 2010', kind:'Plakát'}]},
   {date:'2013-06-14', city:'Praha', venue:'O2 arena', tour:'Monster World Tour', lineup:czLate,
    text:'Turné k albu Monster. Nad pódiem se vznášel obří světélkující pavouk s ohňostroji. Byl to zážitek, měl jsem výborný místo na sezení, kousek od pódia. Show samozřejmě spektakulární, nic jiného se ani nečekalo.',
    media:[{src:'assets/cz/2013-plakat.jpg', cap:'Plakát Monster Tour 2013', kind:'Plakát'}]},
@@ -66,7 +63,6 @@ export function czPage() {
   const count = (city) => czConcerts.filter((c) => c.city === city).reduce((n, c) => n + (c.date2 ? 2 : 1), 0);
   return '<div class="shell page cz-page">'
     + '<header class="section-head"><p class="eyebrow">Já &amp; KISS</p><h1>Moje koncerty KISS</h1>'
-    + '<p class="lede">Všechny koncerty KISS v Česku, od prvního reunion koncertu na pražském Výstavišti v prosinci 1996 až po rozlučku v O2 areně v červnu 2023. K tomu koncerty, za kterými jsem vyrazil do zahraničí. Razítko „Byl jsem tam“ znamená, že jsem stál v publiku.</p></header>'
     + '<div class="cz-stats"><div><b>' + shows + '</b><span>koncertů</span></div><div><b>' + cities.length + '</b><span>města</span></div><div><b>27</b><span>let</span></div><div class="cz-seen"><b>' + seen + '</b><span>jsem viděl</span></div></div>'
     + '<p class="cz-cities">' + cities.map((c) => '<span>' + czEsc(c) + ' <b>' + count(c) + '×</b></span>').join('') + '</p>'
     + '<ol class="cz-list">' + czConcerts.map((c, i) => {

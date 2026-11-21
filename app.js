@@ -201,9 +201,9 @@ function credit(id) {
     + esc(item.licenseUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(item.license) + '</a>' : source;
 }
 
-function photoFrame(id, layout = 'landscape', eager = false) {
+function photoFrame(id, layout = 'landscape', eager = false, caption = true) {
   return '<figure class="photo photo-' + layout + (photos[id]?.context ? ' photo-context' : '') + '"><div class="photo-frame">' + picture(id,eager)
-    + '</div>' + (credit(id) ? '<figcaption>' + credit(id) + '</figcaption>' : '') + '</figure>';
+    + '</div>' + (caption && credit(id) ? '<figcaption>' + credit(id) + '</figcaption>' : '') + '</figure>';
 }
 
 function currentPhoto(member) {
@@ -223,7 +223,7 @@ function photoControls(member, active) {
 function memberPhoto(member, isProfile = false) {
   const {mode,id} = currentPhoto(member);
   return '<div data-photo-panel="' + member.id + '" data-layout="' + (isProfile ? 'profile' : 'portrait') + '">'
-    + photoFrame(id,isProfile ? 'profile' : 'portrait',isProfile) + photoControls(member,mode) + '</div>';
+    + photoFrame(id,isProfile ? 'profile' : 'portrait',isProfile,false) + photoControls(member,mode) + '</div>';
 }
 
 const emblems = { 'paul-stanley':'star', 'gene-simmons':'bat', 'ace-frehley':'bolt', 'peter-criss':'claw' };
@@ -236,7 +236,7 @@ function sym(name, cls = '') {
 function founderCard(member, showProfileDetails) {
   return '<article class="founder-card" style="--person:' + member.accent + '">'
     + (emblems[member.id] ? sym(emblems[member.id],'emblem') : '')
-    + (showProfileDetails ? memberPhoto(member) : photoFrame(member.solo,'sleeve'))
+    + (showProfileDetails ? memberPhoto(member) : photoFrame(member.solo,'sleeve',false,false))
     + '<div class="founder-meta"><p class="character">' + member.character + '</p>'
     + '<h3><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></h3>'
     + (showProfileDetails ? facts(member) : '') + '</div></article>';
