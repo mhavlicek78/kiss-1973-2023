@@ -311,7 +311,7 @@ function timeline(active) {
     }).join('') + '</div>' + '</div>'
     + eras.map((era) => '<section id="era-' + era.id + '" class="chapter"><div class="chapter-header">'
       + photoFrame(era.photo) + '<div><p class="eyebrow">' + era.years + '</p><h2 tabindex="-1">' + era.title + '</h2><p>' + esc(era.intro)
-      + '</p><p class="lineup"><strong>Sestavy</strong><br>' + esc(era.lineup) + '</p></div></div>'
+      + '</p>' + (era.lineup ? '<p class="lineup"><strong>Sestavy</strong><br>' + esc(era.lineup) + '</p>' : '') + '</div></div>'
       + '<ol class="milestones">' + era.events.filter((event) => !event.media).map((event) => '<li data-k="' + event.kinds.join(' ') + '"'
         + '><a href="#/milnik/' + event.id + '"><span class="event-date">' + event.date + '</span>'
         + '<span><strong>' + esc(event.title) + (event.kinds.includes('memoriam') ? '<i class="tl-mark tl-dagger" aria-label="In memoriam">†</i>' : event.kinds.includes('award') ? '<i class="tl-mark tl-star" aria-label="Ocenění">★</i>' : '') + '</strong><small>' + esc(event.summary) + '</small></span>'
@@ -436,7 +436,7 @@ function eventPage(era, event) {
     + '<div><p class="article-copy">' + esc(event.detail) + '</p>'
     + (knownAlbums(event.albums).length ? '<h2>Alba z této kapitoly</h2>' + albumLinks(event.albums) : '')
     + '<h2>Zdroje</h2>' + sourceLinks(event.sources) + '</div><aside>'
-    + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo)) + '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>'
+    + (event.media ? '' : event.image ? eventImage(event.image) : knownAlbums(event.albums).some((id) => covers[id]) ? eventCovers(event.albums) : photoFrame(era.photo)) + (era.lineup ? '<p class="lineup"><strong>' + era.title + '</strong><br>' + esc(era.lineup) + '</p>' : '')
     + (era.id === 'navzdy' ? '' : '<h2>Členové v této éře</h2><ul class="text-links">' + roster.map((member) =>
       '<li><a href="#/clenove/' + member.id + '">' + member.name + right + '</a></li>').join('') + '</ul>')
     + '</aside></div></div>';

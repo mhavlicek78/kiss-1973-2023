@@ -205,7 +205,7 @@ export const eras = [
     ]),
   era('navzdy','Navždy','Navždy','2023–','forever',
     'Poslední koncert neznamenal konec. KISS žijí dál jako avataři, značka i nová hudba. Do stejných let patří i rozloučení s Acem Frehleym a nejvyšší ocenění v historii kapely.',
-    'Paul Stanley · Gene Simmons · Tommy Thayer · Eric Singer',[
+    '',[
       {
         ...event('avatary-2023','2. 12. 2023','A New Era Begins','Po finále v Madison Square Garden se na obrazovkách objevují digitální podoby kapely.','Industrial Light & Magic vytvořilo avatary ve spolupráci s KISS a Pophouse Entertainment. Tým zaznamenal pohyby a výrazy samotných hudebníků technologií motion capture a přenesl je na digitální postavy. Při premiéře digitální čtveřice zahrála „God Gave Rock ’n’ Roll to You II“.',['revenge'],['avatars','pophouse']),
         media: {
