@@ -1073,3 +1073,4 @@ html.cz-lock { overflow:hidden; }
   .tl-nav.is-stuck .era-jump::-webkit-scrollbar { display:none; }
   .tl-nav.is-stuck .era-jump a { flex:none; overflow:visible; }
 }
+.event-photo + .event-photo { margin-top:1rem; }

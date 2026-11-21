@@ -412,6 +412,7 @@ function avatarFeature(event) {
 }
 
 function eventImage(image) {
+  if (Array.isArray(image)) return image.map(eventImage).join('');
   const big = Math.min(1280, image.w);
   return '<figure class="photo photo-landscape event-photo"><div class="photo-frame"><img class="photo-img" src="' + image.src + '-1280.webp"'
     + ' srcset="' + image.src + '-640.webp 640w, ' + image.src + '-1280.webp ' + big + 'w" sizes="(max-width:760px) 100vw, 40vw"'
