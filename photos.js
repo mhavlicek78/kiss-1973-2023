@@ -124,12 +124,9 @@ export const photos = {
   },
   "bruce-plain": {
     "src": "assets/photos/bruce-plain.jpg",
-    "title": "Bruce Kulick · portrét, 1. 5. 2013",
-    "author": "Ja Fryta",
-    "license": "CC BY-SA 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-    "position": "50% 35%",
-    "page": "https://commons.wikimedia.org/wiki/File:Bruce_Kulick.jpg"
+    "title": "Bruce Kulick · bez masky",
+    "author": "dodal Martin Havlíček",
+    "position": "50% 22%"
   },
   "carr-mask": {
     "src": "assets/photos/carr-mask.jpg",
