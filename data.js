@@ -177,7 +177,7 @@ export const eras = [
   era('bez-masek','Éra bez masek','Bez masek','1983–1996','unmasked-era',
     'Kamery MTV poprvé uviděly KISS bez pódiových tváří. Během třinácti let se proměnil zvuk, móda i obsazení a kapela se znovu opřela o živé hraní.',
     'Paul Stanley a Gene Simmons · Vinnie Vincent → Mark St. John → Bruce Kulick · Eric Carr → Eric Singer',[
-      event('mtv-odhaleni','18. 9. 1983','Odhalení na MTV','KISS ukazují tváře a vydávají Lick It Up.','V éře hudební televize šla kapela před kamery s vlastními tvářemi. Z původních členů u odhalení zůstali Paul a Gene, s nimi Eric Carr a Vinnie Vincent.',['lick-it-up']),
+      {...event('mtv-odhaleni','18. 9. 1983','Odhalení na MTV','KISS ukazují tváře a vydávají Lick It Up.','V éře hudební televize šla kapela před kamery s vlastními tvářemi. Z původních členů u odhalení zůstali Paul a Gene, s nimi Eric Carr a Vinnie Vincent.',['lick-it-up']), image:{src:'assets/events/mtv-1983', w:554, h:554, alt:'Eric Carr, moderátor MTV, Gene Simmons, Vinnie Vincent a Paul Stanley bez masek ve studiu MTV', caption:'Odhalení na MTV, 18. září 1983'}},
       event('mark-st-john','1984','Kytaru přebírá Mark St. John','Po Vinniem Vincentovi přichází třetí sólový kytarista kapely.','Mark St. John nahrál album Animalize, na turné ho ale zastavily zdravotní potíže. S kapelou odehrál jen jeden celý koncert a části několika dalších.',['animalize'],['stjohn','members']),
       event('animalize-tour','1984','Animalize na pódiu','Turné k albu Animalize patří k vrcholům éry bez masek.','Markův krátký návrat na pódium dokumentuje koncert v Poughkeepsie, vydaný později v sérii Off the Soundboard.',['animalize'],['history','archives','lineup']),
       event('bruce-kulick','prosinec 1984','Natrvalo nastupuje Bruce Kulick','Bruce Kulick se stává stálým kytaristou KISS.','Za Marka St. Johna zaskakoval už během turné. Ve skupině pak zůstal dvanáct let, až do reunionu původní sestavy, a jeho éra patřila k nejstabilnějším v historii kapely.',[],['members','lineup']),
@@ -256,3 +256,6 @@ for (const era of eras) for (const event of era.events) {
   if (eventDetails[event.id]) event.detail = eventDetails[event.id];
   for (const key of eventExtraSources[event.id] || []) if (!event.sources.includes(key)) event.sources.push(key);
 }
+
+const eventPhotos = {"prichod-carr": "carr-mask", "carr-umrti": "carr-plain", "mark-st-john": "mark-plain", "st-john-umrti": "mark-plain", "bruce-kulick": "bruce-plain", "ace-odchod": "vinnie-mask", "singer-catman": "singer-mask", "tommy-spaceman": "tommy-mask", "ace-umrti": "ace-plain", "revenge": "singer-plain"};
+for (const era of eras) for (const event of era.events) if (eventPhotos[event.id] && !event.image) event.photo = eventPhotos[event.id];
