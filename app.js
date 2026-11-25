@@ -622,7 +622,7 @@ function albumPage(album, filter) {
     : {listen:'https://www.qobuz.com/us-en/album/mtv-unplugged-kiss/0060254706479'};
   const date = dateLabel(album.date);
   return '<div class="shell page article-page' + (covers[album.id] ? ' has-cover-bg" style="--cover:url(\'' + covers[album.id] + '\')' : '') + '">' + back(parentRoutes.albums + (filter === 'all' ? '' : '?typ=' + filter),'Zpět na diskografii')
-    + '<div class="album-top">' + record(album,true) + '<div>' + sectionHead(typeLabels[album.type],esc(album.title),esc(album.context))
+    + '<div class="album-top">' + record(album,true) + '<div>' + sectionHead(typeLabels[album.type],esc(album.title),albumDetails[album.id] ? '' : esc(album.context))
     + '<dl class="facts album-facts"><div><dt>První vydání</dt><dd>' + date + '</dd></div>'
     + (album.recorded ? '<div><dt>Nahráno</dt><dd>' + esc(album.recorded) + '</dd></div>' : '')
     + (album.credits ? '<div><dt>Line-up</dt><dd>' + esc(album.credits) + '</dd></div>' : '') + '</dl>'
