@@ -1,4 +1,4 @@
-import { albums, types, musicPaths, covers } from './albums.js';
+import { albums, types, musicPaths, covers, albumDetails } from './albums.js';
 import { eras, members, sources, eventFilters } from './data.js';
 import { photos } from './photos.js';
 import { gamePage, mountGame } from './game.js';
@@ -627,7 +627,7 @@ function albumPage(album, filter) {
     + (album.recorded ? '<div><dt>Nahráno</dt><dd>' + esc(album.recorded) + '</dd></div>' : '')
     + (album.credits ? '<div><dt>Line-up</dt><dd>' + esc(album.credits) + '</dd></div>' : '') + '</dl>'
     + (album.member ? '<a class="quiet" href="#/clenove/' + album.member + '">Profil: ' + profiles.get(album.member).name + ' ' + right + '</a>' : '')
-    + '</div></div><div class="article-grid album-details"><section><h2>Skladby</h2>'
+    + '</div></div><div class="article-grid album-details"><section>' + (albumDetails[album.id] ? '<h2>O albu</h2><p class="article-copy">' + esc(albumDetails[album.id]) + '</p>' : '') + '<h2>Skladby</h2>'
     + '<ol class="tracklist">' + album.tracks.map((track) => '<li>' + esc(track) + '</li>').join('') + '</ol>'
     + (album.edition ? '<p class="edition">' + esc(album.edition) + '</p>' : '')
     + '</section><aside><a class="listen-cta" href="' + links.listen + '" target="_blank" rel="noopener noreferrer">'
